@@ -1,0 +1,2621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Priyanshu Dutta — SIP Final Report — EIL EngSUI</title>
+<style>
+  /* ------------------------------------------------------------------
+     PRINT SETUP — A4, mirrored margins (Top 1" / Bottom 1" / Inside 1.5" / Outside 1")
+     Times New Roman 12pt, 1.5 line, double-side print, hard-bound
+     Page numbers: Roman for pre-content + appendices; Arabic for main body
+     ------------------------------------------------------------------ */
+  @page {
+    size: A4;
+    @bottom-center {
+      content: counter(page, decimal);
+      font-family: "Times New Roman", Times, serif;
+      font-size: 10pt;
+    }
+  }
+  /* Mirrored margins — gutter on inside (binding edge) */
+  @page :left  { margin: 1in 1.5in 1in 1in; }
+  @page :right { margin: 1in 1in 1in 1.5in; }
+  @page :first { margin: 1in; @bottom-center { content: ""; } }
+
+  /* Named pages: Roman for front-matter and appendices */
+  @page roman-page {
+    @bottom-center {
+      content: counter(page, lower-roman);
+      font-family: "Times New Roman", Times, serif;
+      font-size: 10pt;
+    }
+  }
+  @page roman-page :left  { margin: 1in 1.5in 1in 1in; }
+  @page roman-page :right { margin: 1in 1in 1in 1.5in; }
+
+  .front-matter { page: roman-page; }
+  .appendix-block { page: roman-page; }
+
+  html, body {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 12pt;
+    line-height: 1.5;
+    color: #000;
+    text-align: justify;
+  }
+  body { margin: 0; padding: 0; }
+
+  h1, h2, h3, h4 {
+    font-family: "Times New Roman", Times, serif;
+    color: #000;
+    page-break-after: avoid;
+    text-align: left;
+  }
+  h1 {
+    font-size: 16pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin: 0 0 18pt 0;
+    page-break-before: always;
+  }
+  h1.no-break { page-break-before: avoid; }
+  h2 { font-size: 14pt; font-weight: bold; margin: 18pt 0 9pt 0; }
+  h3 { font-size: 12pt; font-weight: bold; margin: 14pt 0 6pt 0; }
+  h4 { font-size: 12pt; font-style: italic; font-weight: bold; margin: 10pt 0 4pt 0; }
+
+  p {
+    margin: 0 0 12pt 0;
+    text-indent: 0.5in;
+    orphans: 3; widows: 3;
+  }
+  p.no-indent { text-indent: 0; }
+  p.lead { text-indent: 0; font-style: italic; }
+
+  ul, ol { margin: 4pt 0 12pt 0; padding-left: 0.4in; }
+  li { margin-bottom: 4pt; text-align: justify; }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 8pt 0 14pt 0;
+    font-size: 11pt;
+    page-break-inside: avoid;
+  }
+  th, td {
+    border: 0.5pt solid #000;
+    padding: 4pt 6pt;
+    vertical-align: top;
+    text-align: left;
+  }
+  th { background: #e8e8e8; font-weight: bold; }
+  td.num, th.num { text-align: right; }
+  td.center, th.center { text-align: center; }
+  caption {
+    font-size: 11pt;
+    font-style: normal;
+    text-align: left;
+    margin-bottom: 4pt;
+    caption-side: top;
+    font-weight: normal;
+  }
+  caption .tnum { font-weight: bold; }
+
+  .title-page {
+    page-break-after: always;
+    text-align: center;
+    padding-top: 0.75in;
+  }
+  .title-page .program { font-size: 14pt; letter-spacing: 0.15em; margin-bottom: 8pt; }
+  .title-page .doctype { font-size: 18pt; font-style: italic; margin-bottom: 28pt; }
+  .title-page .logo-box {
+    width: 120pt; height: 120pt; border: 1pt solid #000;
+    margin: 0 auto 28pt auto;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10pt; font-style: italic;
+  }
+  .title-page .project-title {
+    font-size: 18pt; font-weight: bold;
+    margin: 24pt 1.5in; line-height: 1.3;
+  }
+  .title-page .block { margin: 16pt 0; font-size: 12pt; }
+  .title-page .block strong { font-size: 13pt; }
+  .title-page .footer-block {
+    margin-top: 44pt; font-size: 11pt; line-height: 1.4;
+  }
+
+  .full-page { page-break-after: always; }
+  .signature-grid {
+    display: flex; justify-content: space-around;
+    margin-top: 56pt; font-size: 11pt;
+  }
+  .signature-grid .sig { width: 30%; border-top: 0.5pt solid #000; padding-top: 4pt; text-align: center; }
+
+  .toc { line-height: 1.7; }
+  .toc-entry { display: flex; justify-content: space-between; border-bottom: 0.5pt dotted #999; padding: 1pt 0; }
+  .toc-entry .label { flex: 1; }
+  .toc-entry .pn { padding-left: 12pt; font-variant-numeric: tabular-nums; }
+  .toc-chapter { font-weight: bold; margin-top: 8pt; }
+
+  .callout {
+    border-left: 3pt solid #000;
+    padding: 6pt 12pt;
+    margin: 10pt 0 14pt 0;
+    background: #f5f5f5;
+    page-break-inside: avoid;
+  }
+  .callout p { text-indent: 0; margin-bottom: 6pt; }
+  .callout p:last-child { margin-bottom: 0; }
+
+  .figure {
+    page-break-inside: avoid;
+    margin: 14pt 0;
+    text-align: center;
+  }
+  .figure .caption {
+    font-size: 11pt; font-style: italic;
+    margin-top: 4pt; text-align: center;
+  }
+
+  .ascii {
+    font-family: "Courier New", Courier, monospace;
+    font-size: 9pt;
+    line-height: 1.3;
+    white-space: pre;
+    margin: 8pt 0 14pt 0;
+    padding: 8pt;
+    border: 0.5pt solid #888;
+    page-break-inside: avoid;
+  }
+
+  .chapter-header { page-break-before: always; }
+  .chapter-num { font-size: 11pt; letter-spacing: 0.2em; text-transform: uppercase; }
+
+  .footnote-refs { font-size: 10pt; line-height: 1.4; }
+  .footnote-refs li { margin-bottom: 6pt; }
+
+  .pagebreak { page-break-before: always; }
+  .avoid-break { page-break-inside: avoid; }
+</style>
+</head>
+<body>
+
+<!-- ===================================================================
+     TITLE PAGE — exact template per SIP Final Report Guidelines (p.12)
+=================================================================== -->
+<section class="title-page">
+  <div class="program">SUMMER INTERNSHIP PROGRAM</div>
+  <div class="doctype">Final Project Report</div>
+  <div class="logo-box">[ IIM NAGPUR LOGO<br/>paste official logo<br/>before binding ]</div>
+  <div class="project-title">
+    Commercialisation Readiness and Valuation Framework for EIL's EngSUI Deep-Tech Portfolio
+  </div>
+  <div class="block">
+    Submitted by<br/>
+    <strong>Priyanshu Dutta</strong><br/>
+    MBA 2025–27 &nbsp;·&nbsp; Roll No. P25230<br/>
+    Indian Institute of Management Nagpur
+  </div>
+  <div class="block">
+    Project Mentor —<br/>
+    <strong>Mr. Sanjeev Singhal</strong><br/>
+    Senior General Manager (R&amp;D)
+  </div>
+  <div class="footer-block">
+    Submitted on: 6 June 2026<br/><br/>
+    Engineers India Limited<br/>
+    EIL Office Complex, Sector-16 (on NH-8), Gurugram, Haryana – 122001
+  </div>
+</section>
+
+<!-- Front-matter wrapper: Roman numerals start here -->
+<div class="front-matter">
+
+<!-- ===================================================================
+     CERTIFICATE
+=================================================================== -->
+<section class="full-page">
+  <h1 class="no-break" style="text-align:center; page-break-before:auto;">Certificate</h1>
+  <p class="no-indent">
+    This is to certify that <strong>Mr. Priyanshu Dutta</strong>, a student of the MBA
+    (General Management) 2025-27 batch at the Indian Institute of Management Nagpur,
+    has successfully completed his Summer Internship at <strong>Engineers India Limited
+    (EIL), Gurugram</strong>, from 6th April 2026 to 6th June 2026.
+  </p>
+  <p>
+    The final report titled <em>"Commercialisation Readiness and Valuation Framework
+    for EIL's EngSUI Deep-Tech Portfolio"</em> is a bonafide record of the work carried
+    out by him during this period. The project was executed under the primary guidance
+    of Mr. Sanjeev Singhal, SGM (R&amp;D), and the direct supervision of Mr. Vijay
+    Thakare, Manager (R&amp;D).
+  </p>
+  <p>
+    During his tenure, Mr. Dutta displayed a high degree of professionalism, analytical
+    rigour, and technical competence. His contribution toward developing a structured
+    deep-tech startup evaluation framework, an accompanying digital platform, and the
+    calibration of both against eight live startup transactions is a substantive
+    addition to the EngSUI initiative's decision-support systems.
+  </p>
+  <p>
+    We wish him continued success in his academic and professional pursuits.
+  </p>
+  <div class="signature-grid">
+    <div class="sig">
+      Mr. Sanjeev Singhal<br/>
+      SGM (R&amp;D)<br/>
+      Engineers India Limited
+    </div>
+    <div class="sig">
+      Mr. Vijay Thakare<br/>
+      Manager (R&amp;D)<br/>
+      Engineers India Limited
+    </div>
+    <div class="sig">
+      Prof. Rakesh Gupta<br/>
+      Faculty Guide<br/>
+      IIM Nagpur
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================================
+     ACKNOWLEDGEMENTS
+=================================================================== -->
+<section class="full-page">
+  <h1 class="no-break" style="text-align:center; page-break-before:auto;">Acknowledgements</h1>
+  <p>
+    I am profoundly grateful to <strong>Engineers India Limited (EIL)</strong> for
+    extending the opportunity to work on a project of significant strategic relevance
+    to the organisation's R&amp;D and EngSUI initiative. The two months at EIL have
+    materially shaped my understanding of how public-sector enterprises evaluate,
+    underwrite, and integrate deep-tech innovation into national infrastructure
+    programmes.
+  </p>
+  <p>
+    My deepest thanks to <strong>Mr. Sanjeev Singhal, SGM (R&amp;D)</strong>, for the
+    intellectual generosity and strategic clarity with which he framed the project
+    brief. His expectation — that the deliverable should be defensible to EIL's
+    investment committee, not merely academically interesting — was the single most
+    important constraint shaping the framework's design.
+  </p>
+  <p>
+    I am deeply thankful to <strong>Mr. Vijay Thakare, Manager (R&amp;D)</strong>,
+    for the constant supervisory presence, weekly technical reviews, and the
+    discipline of converting consulting frameworks into auditable engineering
+    artefacts. His insistence on grounded assumptions over elegant abstractions has
+    visibly improved every iteration of the Commercialisation Readiness Scorecard.
+  </p>
+  <p>
+    I gratefully acknowledge <strong>Mr. Saurabh Agarwal</strong> for day-to-day
+    coordination, document access, and for connecting me with the EngSUI startup
+    founders whose interviews form the primary research backbone of Chapter 5.
+  </p>
+  <p>
+    The founders and senior personnel of <strong>Fermentech Labs, Powerzest Energy
+    Solutions, Aquafront Infrastructure, E-Spin Nanotech, VayuJal Technologies,</strong>
+    and <strong>Alt Carbon</strong> were generous with their time and candid about
+    their commercialisation barriers. Without their participation, the calibration
+    layer of this report would not exist.
+  </p>
+  <p>
+    I sincerely thank <strong>Prof. Rakesh Gupta</strong> of IIM Nagpur for academic
+    guidance throughout the internship — particularly for steering Chapter 5's
+    methodology section toward rigour rather than novelty.
+  </p>
+  <p>
+    Finally, I thank my cohort at IIM Nagpur for sharpening this work through
+    informal critique, and my family for the unwavering encouragement that made
+    eight weeks of focused work possible.
+  </p>
+  <p style="text-align:right; margin-top:36pt;">
+    <strong>Priyanshu Dutta</strong><br/>
+    Roll No. P25230 — IIM Nagpur<br/>
+    June 2026
+  </p>
+</section>
+
+<!-- ===================================================================
+     ABSTRACT
+=================================================================== -->
+<section class="full-page">
+  <h1 class="no-break" style="text-align:center; page-break-before:auto;">Abstract</h1>
+  <p>
+    Engineers India Limited (EIL), through its EngSUI initiative, deploys grant and
+    equity capital across deep-tech energy startups but has historically relied on
+    external Transaction Consultant (TC) reports for valuation and on case-by-case
+    judgment for investment rationale. This dependency produces inconsistent
+    comparisons across the portfolio, opaque audit trails, and slow turnaround for
+    investment committee decisions. The problem this internship addressed is the
+    absence of an internal, repeatable framework that quantifies commercial
+    readiness and ties it to a defensible valuation range and a specific engagement
+    pathway.
+  </p>
+  <p>
+    The deliverable is a three-layer framework — the <strong>Commercialisation
+    Readiness Scorecard (CRS)</strong>, the <strong>Dynamic Weight Calibration
+    System (DWCS)</strong>, and a stage-aware <strong>Scenario Valuation Model</strong>
+    — supported by an interactive browser-based platform deployed at
+    <em>engsui-evaluator.netlify.app</em>. The CRS distributes 120 points across
+    seven evaluation modules: Technology Readiness (25), IP &amp; Patents (15),
+    Team &amp; Leadership (20), Market Validation (20), Adoption Feasibility (15),
+    Business Model (15), and EIL Strategic Fit (10). DWCS adjusts module weights by
+    TRL stage, sector maturity, policy environment, IP strength, team credibility,
+    and competitive intensity. The valuation layer auto-selects among Berkus,
+    Scorecard, VC Method, Revenue Multiple, Peer Multiple, and risk-adjusted DCF,
+    and renders Bull / Base / Bear scenarios.
+  </p>
+  <p>
+    The framework was calibrated against eight live transactions — Alt Carbon, Miko
+    Technologies, E-Spin Nanotech, Log9 Materials, Aquafront Infrastructure,
+    Fermentech Labs, VayuJal, and Powerzest Energy — with five of eight cases
+    landing inside a ±20% variance band against disclosed market valuations. A
+    deliberately included negative case (Miko Technologies) was correctly rejected
+    by the EIL Strategic Fit hard floor despite scoring 79% on the general CRS,
+    validating the EngSUI-specific filter. Calibration revealed three sector
+    multiples requiring adjustment (CCUS, nano, wind) and prompted introduction of
+    an "embryonic" DCF tier for pre-revenue moonshots — both now reflected in the
+    production tool.
+  </p>
+  <p>
+    Five recommendations are offered to EIL: (i) formally adopt the CRS platform as
+    the standard pre-screen for EngSUI applications; (ii) make DPIIT recognition a
+    prerequisite for Direct Equity tracks; (iii) embed pro-rata participation and
+    information rights in all future MOAs; (iv) institute mandatory IP-counsel review
+    above ₹5 Cr commitment; and (v) build a lightweight API bridge to MCA21 and the
+    Startup India portal for automated compliance verification. The framework,
+    platform, and calibration corpus together constitute a transferable internal
+    capability that reduces TC dependency, improves cross-portfolio comparability,
+    and creates an auditable decision trail aligned with the constraints of a
+    Navratna PSU investor.
+  </p>
+</section>
+
+<!-- ===================================================================
+     TABLE OF CONTENTS
+=================================================================== -->
+<section class="full-page">
+  <h1 class="no-break" style="text-align:center; page-break-before:auto;">Table of Contents</h1>
+  <div class="toc">
+    <div class="toc-entry"><span class="label">Certificate</span><span class="pn">i</span></div>
+    <div class="toc-entry"><span class="label">Acknowledgements</span><span class="pn">ii</span></div>
+    <div class="toc-entry"><span class="label">Abstract</span><span class="pn">iii</span></div>
+    <div class="toc-entry"><span class="label">Table of Contents</span><span class="pn">iv</span></div>
+    <div class="toc-entry"><span class="label">List of Tables and Figures</span><span class="pn">v</span></div>
+    <div class="toc-entry toc-chapter"><span class="label">Chapter 1 &mdash; Aim and Establishment of the Company</span><span class="pn">1</span></div>
+    <div class="toc-entry"><span class="label">&nbsp;&nbsp;1.1 About EIL</span><span class="pn">1</span></div>
+    <div class="toc-entry"><span class="label">&nbsp;&nbsp;1.2 Position in Industry</span><span class="pn">2</span></div>
+    <div class="toc-entry"><span class="label">&nbsp;&nbsp;1.3 Services and Business Segments</span><span class="pn">3</span></div>
+    <div class="toc-entry"><span class="label">&nbsp;&nbsp;1.4 Mission and Strategic Direction</span><span class="pn">4</span></div>
+    <div class="toc-entry toc-chapter"><span class="label">Chapter 2 &mdash; Policy of the Company</span><span class="pn">5</span></div>
+    <div class="toc-entry"><span class="label">&nbsp;&nbsp;2.1 Innovation and Technology Transfer Policy</span><span class="pn">5</span></div>
+    <div class="toc-entry"><span class="label">&nbsp;&nbsp;2.2 EngSUI — EIL's Startup India Initiative</span><span class="pn">6</span></div>
+    <div class="toc-entry"><span class="label">&nbsp;&nbsp;2.3 EngSUI Funding Tracks and Host Institution Network</span><span class="pn">7</span></div>
+    <div class="toc-entry"><span class="label">&nbsp;&nbsp;2.4 Focus Areas and Portfolio Composition</span><span class="pn">8</span></div>
+    <div class="toc-entry toc-chapter"><span class="label">Chapter 3 &mdash; Organisational Structure of the Company</span><span class="pn">9</span></div>
+    <div class="toc-entry"><span class="label">&nbsp;&nbsp;3.1 Functional Divisions and Reporting Hierarchy</span><span class="pn">9</span></div>
+    <div class="toc-entry"><span class="label">&nbsp;&nbsp;3.2 R&amp;D Division and Project Context</span><span class="pn">10</span></div>
+    <div class="toc-entry"><span class="label">&nbsp;&nbsp;3.3 Key Personnel for the Project</span><span class="pn">11</span></div>
+    <div class="toc-entry toc-chapter"><span class="label">Chapter 4 &mdash; Work Experience</span><span class="pn">12</span></div>
+    <div class="toc-entry"><span class="label">&nbsp;&nbsp;4.1 Onboarding and Orientation</span><span class="pn">12</span></div>
+    <div class="toc-entry"><span class="label">&nbsp;&nbsp;4.2 Key Concepts Encountered</span><span class="pn">13</span></div>
+    <div class="toc-entry"><span class="label">&nbsp;&nbsp;4.3 Organisational Learning</span><span class="pn">14</span></div>
+    <div class="toc-entry"><span class="label">&nbsp;&nbsp;4.4 EngSUI Portfolio Exposure</span><span class="pn">15</span></div>
+    <div class="toc-entry"><span class="label">&nbsp;&nbsp;4.5 Macro-environmental Factors Shaping the Project</span><span class="pn">16</span></div>
+    <div class="toc-entry toc-chapter"><span class="label">Chapter 5 &mdash; Description of Work Responsibilities Taken</span><span class="pn">17</span></div>
+    <div class="toc-entry"><span class="label">&nbsp;&nbsp;5.1 Problem Statement</span><span class="pn">17</span></div>
+    <div class="toc-entry"><span class="label">&nbsp;&nbsp;5.2 Scope and Objectives</span><span class="pn">18</span></div>
+    <div class="toc-entry"><span class="label">&nbsp;&nbsp;5.3 Research Methodology</span><span class="pn">19</span></div>
+    <div class="toc-entry"><span class="label">&nbsp;&nbsp;5.4 Limitations of Existing Methodologies</span><span class="pn">20</span></div>
+    <div class="toc-entry"><span class="label">&nbsp;&nbsp;5.5 The Commercialisation Readiness Scorecard (CRS)</span><span class="pn">22</span></div>
+    <div class="toc-entry"><span class="label">&nbsp;&nbsp;5.6 Dynamic Weight Calibration System (DWCS)</span><span class="pn">26</span></div>
+    <div class="toc-entry"><span class="label">&nbsp;&nbsp;5.7 Scenario Valuation Model</span><span class="pn">28</span></div>
+    <div class="toc-entry"><span class="label">&nbsp;&nbsp;5.8 EIL Action Recommendation Engine</span><span class="pn">31</span></div>
+    <div class="toc-entry"><span class="label">&nbsp;&nbsp;5.9 Digital Platform Development</span><span class="pn">32</span></div>
+    <div class="toc-entry"><span class="label">&nbsp;&nbsp;5.10 Primary Research — Founder Interviews</span><span class="pn">35</span></div>
+    <div class="toc-entry"><span class="label">&nbsp;&nbsp;5.11 Calibration and Validation</span><span class="pn">38</span></div>
+    <div class="toc-entry"><span class="label">&nbsp;&nbsp;5.12 Portfolio-Level Synthesis and EIL Role Matrix</span><span class="pn">42</span></div>
+    <div class="toc-entry toc-chapter"><span class="label">Chapter 6 &mdash; Experience Gained and Problems Faced</span><span class="pn">44</span></div>
+    <div class="toc-entry toc-chapter"><span class="label">Chapter 7 &mdash; Learnings and Utilisation of MBA Courses during SIP</span><span class="pn">47</span></div>
+    <div class="toc-entry toc-chapter"><span class="label">Chapter 8 &mdash; Conclusion, Summary and Recommendations</span><span class="pn">50</span></div>
+    <div class="toc-entry toc-chapter"><span class="label">Appendix A &mdash; Detailed Scoring Indicator Map</span><span class="pn">i</span></div>
+    <div class="toc-entry toc-chapter"><span class="label">Appendix B &mdash; Founder Interview Questionnaire</span><span class="pn">iv</span></div>
+    <div class="toc-entry toc-chapter"><span class="label">Appendix C &mdash; Calibration Detail Table</span><span class="pn">vi</span></div>
+    <div class="toc-entry toc-chapter"><span class="label">Appendix D &mdash; Internship Offer Letter (EIL)</span><span class="pn">viii</span></div>
+    <div class="toc-entry toc-chapter"><span class="label">References</span><span class="pn">x</span></div>
+  </div>
+</section>
+
+<!-- List of Tables -->
+<section class="full-page">
+  <h1 class="no-break" style="text-align:center; page-break-before:auto;">List of Tables and Figures</h1>
+  <p class="no-indent" style="font-weight:bold; margin-top:12pt;">Tables</p>
+  <div class="toc">
+    <div class="toc-entry"><span class="label">Table 2.1 — EngSUI Funding Tracks and Eligibility</span><span class="pn">7</span></div>
+    <div class="toc-entry"><span class="label">Table 2.2 — EngSUI Host Institution Network (2017–2026)</span><span class="pn">8</span></div>
+    <div class="toc-entry"><span class="label">Table 3.1 — Key Stakeholders for the Project</span><span class="pn">11</span></div>
+    <div class="toc-entry"><span class="label">Table 5.1 — CRS Module Overview</span><span class="pn">23</span></div>
+    <div class="toc-entry"><span class="label">Table 5.2 — CRS Score Bands and Engagement Recommendation</span><span class="pn">24</span></div>
+    <div class="toc-entry"><span class="label">Table 5.3 — Engagement Decision Gates</span><span class="pn">25</span></div>
+    <div class="toc-entry"><span class="label">Table 5.4 — DWCS Multiplier Matrix by TRL Stage</span><span class="pn">27</span></div>
+    <div class="toc-entry"><span class="label">Table 5.5 — Stage-to-Method Bridge for Valuation</span><span class="pn">30</span></div>
+    <div class="toc-entry"><span class="label">Table 5.6 — Sector-Specific Exit Multiples (Calibrated)</span><span class="pn">31</span></div>
+    <div class="toc-entry"><span class="label">Table 5.7 — Founder Interview Coverage (Six Startups)</span><span class="pn">36</span></div>
+    <div class="toc-entry"><span class="label">Table 5.8 — Calibration Summary (Eight Startups)</span><span class="pn">39</span></div>
+    <div class="toc-entry"><span class="label">Table 5.9 — Variance Diagnosis and Parameter Adjustments</span><span class="pn">41</span></div>
+    <div class="toc-entry"><span class="label">Table 5.10 — Portfolio EIL Role Matrix</span><span class="pn">43</span></div>
+    <div class="toc-entry"><span class="label">Table 6.1 — Internship Work Plan and Actual Progress</span><span class="pn">46</span></div>
+    <div class="toc-entry"><span class="label">Table 7.1 — MBA Subject-to-Framework Mapping</span><span class="pn">49</span></div>
+  </div>
+  <p class="no-indent" style="font-weight:bold; margin-top:14pt;">Figures</p>
+  <div class="toc">
+    <div class="toc-entry"><span class="label">Figure 5.1 — Three-Layer Framework Architecture</span><span class="pn">22</span></div>
+    <div class="toc-entry"><span class="label">Figure 5.2 — CRS Scoring Hierarchy (Seven Modules)</span><span class="pn">26</span></div>
+    <div class="toc-entry"><span class="label">Figure 5.3 — Bull / Base / Bear Scenario Logic</span><span class="pn">28</span></div>
+    <div class="toc-entry"><span class="label">Figure 5.4 — Platform Screen Map (11 Views)</span><span class="pn">33</span></div>
+    <div class="toc-entry"><span class="label">Figure 5.5 — Calibration Variance Distribution</span><span class="pn">40</span></div>
+  </div>
+</section>
+
+</div><!-- /front-matter -->
+
+<!-- ===================================================================
+     CHAPTER 1 — counter reset starts Arabic page numbering at 1
+=================================================================== -->
+<section style="counter-reset: page 0;">
+  <h1>Chapter 1 &mdash; Aim and Establishment of the Company</h1>
+
+  <h2>1.1 About EIL</h2>
+  <p>
+    Engineers India Limited (EIL) is a Navratna Public Sector Undertaking under the
+    Ministry of Petroleum and Natural Gas (MoPNG), Government of India, established
+    in 1965. Headquartered at <em>Engineers India Bhawan</em>, R. K. Puram, New
+    Delhi, with its primary technical and project execution operations at the
+    Gurugram complex on NH-8, EIL has, over six decades, become the country's
+    principal engineering consultancy and Engineering-Procurement-Construction
+    Management (EPCM) services provider for the hydrocarbon and infrastructure
+    sectors. The company employs over 2,800 professionals, of whom approximately
+    eighty percent are technically qualified engineers and scientists.
+  </p>
+  <p>
+    EIL's revenue base of roughly ₹3,500 Cr (FY24) is derived predominantly from
+    consultancy and turnkey project execution mandates. The company has executed
+    projects across more than thirty countries spanning the Middle East, Africa,
+    and South-East Asia, in addition to a dominant position in domestic
+    refinery, gas processing, and pipeline projects. Of particular relevance to
+    this internship, EIL has been progressively widening its mandate from
+    conventional hydrocarbons into the green-energy and sustainability domains —
+    a transition that creates the strategic logic for the EngSUI initiative
+    discussed in Chapter 2.
+  </p>
+
+  <h2>1.2 Position in Industry</h2>
+  <p>
+    EIL operates as a technical-services intermediary between the Government of
+    India's energy-policy mandates and the operational execution of large
+    capital projects across the public-sector hydrocarbon ecosystem. Its primary
+    clients include ONGC, Indian Oil Corporation Limited (IOCL), Bharat Petroleum
+    Corporation Limited (BPCL), Hindustan Petroleum Corporation Limited (HPCL),
+    GAIL, Numaligarh Refinery, and Mangalore Refinery and Petrochemicals (MRPL).
+    The company has also developed specialised engineering capabilities for the
+    fertiliser sector, metallurgy, and increasingly for renewable energy
+    deployment.
+  </p>
+  <p>
+    In the green-energy transition, EIL is positioned as the technical
+    integrator of choice for the National Green Hydrogen Mission, Compressed
+    Bio-Gas (CBG) infrastructure under the SATAT scheme, ethanol blending
+    capacity expansion, biofuel refinery retrofits, and several Carbon Capture
+    Utilisation and Storage (CCUS) demonstration projects. This strategic
+    repositioning — from a hydrocarbon-EPC firm to a pan-energy technology
+    integrator — directly motivates EIL's interest in early engagement with
+    deep-tech startups, which is the focus of the EngSUI programme and of this
+    project.
+  </p>
+  <p>
+    EIL's competitive position rests on four reinforcing assets: a six-decade
+    process-engineering knowledge base; access to public-sector procurement
+    cycles unavailable to private engineering firms; a captive talent pipeline
+    through its sponsored institutions; and a balance-sheet capacity that
+    supports turnkey commitments at scale. For deep-tech startups, an
+    engagement with EIL therefore offers a value proposition that is materially
+    different from a financial-investor relationship: it offers route-to-market,
+    not just capital.
+  </p>
+
+  <h2>1.3 Services and Business Segments</h2>
+  <p>
+    EIL's revenue is broadly attributable to two operating segments: Consultancy
+    &amp; Engineering Projects and Turnkey Projects. Within these, six service
+    lines structure the company's day-to-day delivery: Project Management
+    Consultancy (PMC), Engineering-Procurement-Construction Management (EPCM),
+    Turnkey Engineering Procurement and Construction (EPC), Technology
+    Licensing, Research and Development, and specialised Advisory services for
+    public-sector energy transition.
+  </p>
+  <p>
+    Of these, the R&amp;D function — within which this internship was housed —
+    is among the smaller in headcount but disproportionately strategic in
+    influence. The R&amp;D Division at Gurugram is the custodian of EIL's
+    indigenous process know-how, proprietary catalyst formulations, and the
+    EngSUI initiative that connects EIL with the external deep-tech ecosystem.
+    The division operates within the constraints of a PSU governance structure
+    — board approvals, public-procurement norms, CAG audit exposure — and
+    these constraints in turn shape what a "valuation framework" must look
+    like for EIL to use it credibly.
+  </p>
+
+  <h2>1.4 Mission and Strategic Direction</h2>
+  <p>
+    EIL's institutional mission, captured in its tagline "Delivering Excellence
+    Through People," has in recent years been reframed around three axes:
+    Net-Zero alignment, indigenisation of process technology, and acceleration
+    of deep-tech commercialisation in the Indian energy sector. The first axis
+    is policy-driven, the second is competitive, and the third — addressed
+    directly by EngSUI — is structural. The argument is that India will not
+    achieve its 2070 net-zero commitment if commercialisation timelines for
+    indigenous deep-tech energy innovations continue to stretch beyond a
+    decade. EngSUI exists to compress that timeline by leveraging EIL's EPC
+    network as a deployment partner for startup-stage technologies.
+  </p>
+  <p>
+    This strategic framing is consequential for the project at hand. A
+    valuation framework designed for a generalist venture capital fund would
+    optimise for financial-return maximisation. The framework developed in
+    this internship instead has to optimise for <em>EIL-specific strategic
+    deployment value</em> — which includes EPCM relevance, sector alignment,
+    EIL's role beyond capital, and the operational risk that a Navratna PSU
+    can responsibly underwrite. This distinction is the single most important
+    design constraint shaping Chapter 5.
+  </p>
+</section>
+
+<!-- ===================================================================
+     CHAPTER 2 — POLICIES
+=================================================================== -->
+<section>
+  <h1>Chapter 2 &mdash; Policy of the Company</h1>
+
+  <h2>2.1 Innovation and Technology Transfer Policy</h2>
+  <p>
+    EIL's innovation policy operates within the framework of the Department of
+    Public Enterprises (DPE) guidelines for R&amp;D investment by Navratna
+    enterprises, the DSIR recognition of EIL's R&amp;D Centre, and the
+    Atmanirbhar Bharat indigenisation mandate. Under these instruments, EIL
+    invests approximately one to two percent of its annual turnover into R&amp;D
+    activities, with a stated objective of building defensible intellectual
+    property and reducing import dependence on foreign process licensors.
+  </p>
+  <p>
+    The technology-transfer policy distinguishes between three modes of
+    external engagement. The first is collaborative research with academic
+    institutions — historically with IITs, IISc, and CSIR labs. The second is
+    licensing inward, where EIL acquires use-rights to externally developed
+    process technology to bundle into EPC offerings. The third, and most
+    recent, is direct equity engagement with deep-tech startups through EngSUI
+    — the focus of this report.
+  </p>
+  <p>
+    For the purposes of the framework developed here, two governance
+    constraints from this policy environment are material. First, every EngSUI
+    investment decision is auditable by the Comptroller and Auditor General of
+    India (CAG), which means rationale and supporting evidence must be
+    captured and traceable. Second, valuation conclusions arrived at internally
+    must be reconcilable with TC reports prepared by registered valuers, since
+    the latter are the legal anchor for any equity transaction. The framework
+    therefore aims to complement, not replace, the TC report — by providing
+    the strategic rationale that TC numbers cannot.
+  </p>
+
+  <h2>2.2 EngSUI — EIL's Startup India Initiative</h2>
+  <p>
+    EIL's Startup India Initiative — abbreviated as EngSUI — was launched in
+    2017 in response to the Government's Startup India mission and the
+    MoPNG's 2017 directive that public-sector energy enterprises actively
+    support indigenous deep-tech innovation. EngSUI is administered within
+    the R&amp;D Division at Gurugram and operates as a three-track funding
+    instrument linked to a network of academic host institutions.
+  </p>
+  <p>
+    EngSUI's stated objectives are to (i) accelerate the commercialisation of
+    deep-tech energy innovations in India; (ii) provide non-dilutive grants
+    and stage-appropriate equity capital where conventional financing is
+    unavailable; (iii) bridge the lab-to-commercial gap by leveraging EIL's
+    EPCM relationships as a route-to-market; and (iv) build a portfolio of
+    strategically aligned technologies that EIL can deploy in client projects.
+    Operational accountability for the programme sits with the SGM (R&amp;D),
+    with day-to-day management by a Manager-level officer and a working-level
+    Engineer/Officer who liaises directly with founders.
+  </p>
+
+  <h2>2.3 EngSUI Funding Tracks and Host Institution Network</h2>
+  <p>
+    EngSUI deploys capital through three structured tracks differentiated by
+    startup maturity, ticket size, and eligibility. Table 2.1 summarises the
+    three tracks; Table 2.2 lists the host institution network as of June
+    2026.
+  </p>
+
+  <table>
+    <caption><span class="tnum">Table 2.1</span> EngSUI funding tracks and eligibility</caption>
+    <tr>
+      <th>Track</th><th>Maximum Ticket</th>
+      <th>Eligibility</th><th>Stage Target</th>
+    </tr>
+    <tr>
+      <td>Innovation Challenge</td>
+      <td class="num">₹20 Lakh</td>
+      <td>Any Indian-resident innovator (student or non-student); novel idea-to-prototype work.</td>
+      <td>Concept to early prototype (TRL 2–4)</td>
+    </tr>
+    <tr>
+      <td>Seed Fund</td>
+      <td class="num">₹100 Lakh</td>
+      <td>DPIIT-certified startup with demonstrated proof-of-concept; founder-incubator co-application via host institution.</td>
+      <td>Prototype to pilot (TRL 4–6)</td>
+    </tr>
+    <tr>
+      <td>Direct Equity</td>
+      <td class="num">₹500 Lakh</td>
+      <td>DPIIT-certified startup with marketable product/process; verifiable revenue traction; cap-table cleanliness.</td>
+      <td>Pilot to commercial (TRL 7–9)</td>
+    </tr>
+  </table>
+
+  <p>
+    Eligibility for the Innovation Challenge is broad and treats the grant as
+    risk capital for early experimentation. The Seed Fund presumes a working
+    prototype and ties the deployment to a sponsoring host institution. The
+    Direct Equity route — the most consequential for valuation purposes — is
+    reserved for startups with audited financials, DPIIT recognition, and
+    sufficient commercial traction to justify a priced equity round. The
+    framework developed in this internship is most directly applicable to the
+    Direct Equity and Seed Fund tracks; for the Innovation Challenge, only the
+    Technology and EIL Strategic Fit modules are typically meaningful.
+  </p>
+
+  <table>
+    <caption><span class="tnum">Table 2.2</span> EngSUI host institution network (selected, 2017–2026)</caption>
+    <tr>
+      <th>Institution Class</th><th>Hosts</th><th>Representative Programmes</th>
+    </tr>
+    <tr>
+      <td>IITs</td>
+      <td>Ropar, Mandi, Roorkee (TIDES), Madras (IIT-M Incubation Cell), Guwahati, Kanpur (SIIC), Bombay (SINE), Gandhinagar, (BHU MCIIE)</td>
+      <td>Process tech, energy materials, AWG, AI for industry</td>
+    </tr>
+    <tr>
+      <td>NITs</td>
+      <td>Meghalaya, Jalandhar, Bhopal, Nagpur (CIVN)</td>
+      <td>Bio-energy, biofuels, instrumentation</td>
+    </tr>
+    <tr>
+      <td>Other</td>
+      <td>a-IDEA NAARM (BioNest), CSIR labs</td>
+      <td>Industrial biotech, agri-bio</td>
+    </tr>
+  </table>
+
+  <p>
+    Since 2017, EngSUI has run seven funding rounds. As of mid-2026, the
+    portfolio comprises thirty-one startups funded, of which thirteen have
+    completed milestones, fourteen are in progress, and four are pending
+    Memorandum of Agreement execution. This is the population to which the
+    framework presented in Chapter 5 is intended to apply.
+  </p>
+
+  <h2>2.4 Focus Areas and Portfolio Composition</h2>
+  <p>
+    EngSUI's focus areas are explicitly aligned with EIL's downstream
+    operational footprint and the Government's energy-transition priorities.
+    The six declared focus areas are: hydrocarbon process technology; oil
+    and gas hardware manufacturing; IT and Industrial IoT for energy
+    operations; renewable energy and storage; biofuels, waste-to-energy, and
+    nanomaterials; and Net-Zero and HSE technologies. The portfolio
+    composition — observed during the desk-review phase of this internship —
+    skews toward water tech, biotechnology, and renewables, with
+    underrepresentation in CCUS and nuclear-adjacent SMR technologies.
+  </p>
+  <p>
+    For the purposes of the framework, three implications follow. First, the
+    EIL Strategic Fit module must encode <em>which</em> focus area a startup
+    addresses, not just whether it is broadly "deep-tech." Second, the sector
+    multiples used in the valuation engine must reflect the actual exit
+    multiples observed in each focus area, not a single tech-grade default.
+    Third, calibration must include at least one negative case from outside
+    the focus areas to test the rejection logic — a role played in this
+    project by Miko Technologies, discussed in Chapter 5.
+  </p>
+</section>
+
+<!-- ===================================================================
+     CHAPTER 3 — ORGANISATIONAL STRUCTURE
+=================================================================== -->
+<section>
+  <h1>Chapter 3 &mdash; Organisational Structure of the Company</h1>
+
+  <h2>3.1 Functional Divisions and Reporting Hierarchy</h2>
+  <p>
+    EIL is organised across five primary functional verticals: Engineering
+    Divisions (Process, Piping, Civil, Electrical, Instrumentation,
+    Mechanical, Environmental); Project Execution; Business Development;
+    Research and Development; and Corporate Services (Finance, HR, Legal,
+    Company Secretariat). Each vertical is led by an Executive Director or
+    General Manager and reports through a structured Director-level interface
+    to the Chairman and Managing Director.
+  </p>
+  <p>
+    The internship was hosted within the Research and Development Division,
+    which itself reports to the Director (Technical). Within R&amp;D, the
+    EngSUI programme is owned by the Senior General Manager (R&amp;D) and
+    operationalised by a Manager-level officer responsible for portfolio
+    monitoring, due diligence coordination, and external interface with host
+    institutions and founders. This compact reporting line — three levels
+    from the Director — is what makes EngSUI capable of moving at startup-
+    relevant timescales despite operating inside a PSU governance envelope.
+  </p>
+
+  <h2>3.2 R&amp;D Division and Project Context</h2>
+  <p>
+    The R&amp;D Division at Gurugram is custodian of EIL's proprietary
+    process know-how across hydrogen, refining, petrochemicals, and
+    increasingly the emerging energy-transition technologies. It is also the
+    point of corporate interface with the academic ecosystem: collaborative
+    research agreements, sponsored chairs, and the EngSUI initiative are all
+    administered here. The division's mandate has shifted materially over
+    the past decade from technology-acquisition (licensing inward) toward
+    technology-creation and technology-commercialisation, of which EngSUI is
+    the most public manifestation.
+  </p>
+  <p>
+    Within this division, the project was scoped as a six-credit MBA Summer
+    Internship deliverable with a working brief shared on Day 1: develop a
+    structured framework that EIL R&amp;D can use to evaluate the
+    commercialisation potential of EngSUI startups, complete with a tool
+    that operationalises the framework and a calibration exercise against
+    live transactions. The framework was to be defensible to a future
+    investment-committee audience and reusable across multiple funding
+    rounds.
+  </p>
+
+  <h2>3.3 Key Personnel for the Project</h2>
+  <p>
+    Three individuals at EIL and one at IIM Nagpur formed the immediate
+    project context. Their roles are summarised in Table 3.1.
+  </p>
+
+  <table>
+    <caption><span class="tnum">Table 3.1</span> Key stakeholders for the project</caption>
+    <tr>
+      <th>Name</th><th>Designation</th><th>Role in Project</th>
+    </tr>
+    <tr>
+      <td>Mr. Sanjeev Singhal</td>
+      <td>SGM (R&amp;D), EIL Gurugram</td>
+      <td>Primary Mentor — scope definition, weekly framework reviews, framing of the investment-committee defensibility test.</td>
+    </tr>
+    <tr>
+      <td>Mr. Vijay Thakare</td>
+      <td>Manager (R&amp;D), EIL Gurugram</td>
+      <td>Project Supervisor — day-to-day technical guidance, calibration data access, founder-interview coordination.</td>
+    </tr>
+    <tr>
+      <td>Mr. Saurabh Agarwal</td>
+      <td>Working contact, EngSUI portfolio</td>
+      <td>Operational interface for startup access, document review, internal documentation alignment.</td>
+    </tr>
+    <tr>
+      <td>Prof. Rakesh Gupta</td>
+      <td>Faculty Guide, IIM Nagpur</td>
+      <td>Academic guide — methodology rigour, literature anchoring, final-report review.</td>
+    </tr>
+  </table>
+
+  <p>
+    Six EngSUI founders or senior personnel — across Fermentech Labs,
+    Powerzest Energy Solutions, Aquafront Infrastructure, E-Spin Nanotech,
+    VayuJal Technologies, and Alt Carbon — participated in the structured
+    interview programme described in Chapter 5.10. Their contribution
+    constitutes the primary-research substrate for the calibration layer.
+  </p>
+</section>
+
+<!-- ===================================================================
+     CHAPTER 4 — WORK EXPERIENCE
+=================================================================== -->
+<section>
+  <h1>Chapter 4 &mdash; Work Experience</h1>
+
+  <h2>4.1 Onboarding and Orientation</h2>
+  <p>
+    The internship began on 6 April 2026 with a one-week onboarding
+    sequence at the EIL Gurugram complex. The first three days were spent
+    on administrative formalities, security clearance, and an overview of
+    EIL's corporate structure delivered through HR-led sessions. From Day
+    Four, the orientation shifted to project-specific induction: a closed
+    review of three sample TC reports (with sensitive financial figures
+    redacted), a walkthrough of the EngSUI portfolio dashboard maintained
+    by the R&amp;D Division, and an introductory meeting with the SGM
+    (R&amp;D) where the scope and acceptance criteria for the framework
+    were set.
+  </p>
+  <p>
+    Two confidentiality undertakings shaped the rest of the engagement.
+    First, no TC report content could be cited verbatim outside the
+    project; the framework therefore had to be designed from publicly
+    inferable patterns rather than from confidential TC inputs. Second,
+    proprietary EngSUI startup financials could be referenced only in
+    indexed, ratio-converted, or qualitative form. The calibration layer
+    of the framework was built within these constraints, using publicly
+    disclosed valuations (Tracxn, MCA21, press coverage) as anchors.
+  </p>
+
+  <h2>4.2 Key Concepts Encountered</h2>
+  <p>
+    The internship required rapid absorption of several specialised concepts
+    that intersect strategy, finance, and engineering. The most consequential
+    are summarised below; each is treated in greater depth in the relevant
+    sub-section of Chapter 5.
+  </p>
+  <p>
+    <strong>Technology Readiness Level (TRL).</strong> The nine-step
+    European Commission TRL scale measures the maturity of a technology
+    from basic principles observed (TRL 1) through successful commercial
+    deployment (TRL 9). For EIL, TRL serves both as a screening tool and as
+    a driver for valuation methodology selection — a TRL 3 startup should
+    not be valued with the same instrument as a TRL 8 operator, a point
+    formalised in the DWCS and the Stage-to-Method bridge.
+  </p>
+  <p>
+    <strong>EPCM Mandate.</strong> Engineering-Procurement-Construction
+    Management is the operating model through which EIL delivers value to
+    end clients. A deep-tech startup's relevance to EIL is materially
+    enhanced if its technology can be integrated into an EPCM scope of
+    work, since that creates a deployment route that is closed to financial
+    investors. This is encoded in the EIL Strategic Fit module under the
+    EPC sub-indicator.
+  </p>
+  <p>
+    <strong>PSU Procurement Norms.</strong> Public-procurement constraints
+    — vendor qualification, BIS/IS certifications, three-bid systems,
+    indigenous content requirements — operate as adoption hurdles for
+    startups that propose to sell into the PSU client base. The Adoption
+    Feasibility module incorporates these constraints rather than treating
+    them as obstacles outside the startup's control.
+  </p>
+  <p>
+    <strong>Deep-Tech Commercialisation Gap.</strong> NESTA's 2022
+    analysis of hardware-startup failures showed that approximately forty
+    percent fail not at the proof-of-concept stage but at the scale-up
+    stage, where capital intensity, manufacturing maturity, and adoption
+    economics collide. This empirical finding directly justifies the
+    twenty-five-point weight allocated to the Technology Readiness module.
+  </p>
+  <p>
+    <strong>Pre-Revenue Valuation Methods.</strong> The Berkus, Scorecard,
+    and Risk-Factor Summation methods were studied to understand how angel
+    investors price companies without revenue. The Berkus method's
+    five-milestone structure, in particular, informed the design of the
+    confidence-flag layer in the framework.
+  </p>
+  <p>
+    <strong>DPIIT Recognition and Angel Tax.</strong> Eligibility for
+    EngSUI Seed and Direct Equity tracks is conditional on DPIIT
+    recognition. DPIIT-recognised startups are also exempt from Angel Tax
+    on premium-priced equity rounds, a non-trivial structuring
+    consideration that the framework flags via the Data Room module.
+  </p>
+  <p>
+    <strong>Staged Equity Conversion.</strong> EngSUI's instruments
+    sometimes structure capital as Compulsorily Convertible Debentures
+    (CCDs) or staged equity tranches. Understanding the underlying
+    instrument is necessary to translate a "valuation" number into a
+    correctly priced engagement.
+  </p>
+
+  <h2>4.3 Organisational Learning</h2>
+  <p>
+    Beyond technical content, the internship surfaced a set of
+    organisational realities specific to PSU-investor behaviour that
+    materially shape framework design. Four observations stand out.
+  </p>
+  <p>
+    First, EIL's investment decisions are governed less by IRR
+    optimisation than by strategic deployment value combined with audit
+    defensibility. A framework that produces an attractive return number
+    but cannot be traced back to underlying evidence is unusable; the
+    inverse — modest returns with full evidence chain — is preferred.
+  </p>
+  <p>
+    Second, EIL's evaluation today is heavily TC-dependent. TC reports
+    deliver valuation numbers but not investment rationale — they answer
+    "what is it worth?" but not "why should EIL engage?" The framework
+    therefore positions itself as a rationale layer above the TC number,
+    not a replacement for it.
+  </p>
+  <p>
+    Third, BIRAC's grant-worthiness framework was studied as a
+    comparative reference. BIRAC evaluates whether a biotech startup
+    deserves non-dilutive grant capital; EIL needs to evaluate whether a
+    startup is a commercial partner — a fundamentally different question.
+    The CRS is deliberately structured around the latter.
+  </p>
+  <p>
+    Fourth, the transition from a grant-led EngSUI model toward direct
+    equity engagement is institutionally significant. It implies different
+    governance, different exit considerations, and a tighter standard for
+    cap-table cleanliness and IP clarity. The Data Room module of the
+    platform was designed in response to this transition.
+  </p>
+
+  <h2>4.4 EngSUI Portfolio Exposure</h2>
+  <p>
+    Across eight weeks, structured exposure was obtained to the active
+    EngSUI portfolio through three mechanisms: a desk review of the
+    portfolio brochure and MOAs, a guided walkthrough of the internal
+    portfolio dashboard, and direct interviews with six founders
+    coordinated through the R&amp;D Division. The six founder interviews
+    are the primary research backbone of this report and are documented
+    in detail in Chapter 5.10.
+  </p>
+  <p>
+    The portfolio's diversity was educational in itself. It includes
+    industrial biotech (Fermentech's solid-state fermentation enzymes),
+    micro-renewable energy (Powerzest's Adaptable Disc Turbine), water
+    infrastructure (Aquafront's floating CNG and modular pontoons),
+    nanomaterial-based filtration (E-Spin's electrospinning equipment),
+    atmospheric water generation (VayuJal's IIT-Madras spinout), and
+    Enhanced Rock Weathering for carbon removal (Alt Carbon). Each
+    presents a different combination of TRL, capital intensity, market
+    structure, and EIL fit — making the portfolio an ideal calibration
+    set for a framework that must work across deep-tech heterogeneity.
+  </p>
+
+  <h2>4.5 Macro-environmental Factors Shaping the Project</h2>
+  <p>
+    Three macro factors materially shaped both the project framing and the
+    framework's design choices. First, India's commitment to net-zero by
+    2070 has converted what was previously a niche climate-tech investor
+    consideration into a mainstream public-policy mandate, increasing the
+    political pull for deep-tech energy commercialisation. Second, global
+    decoupling from Chinese clean-energy supply chains creates a direct
+    industrial-policy case for indigenous manufacturers in solar, energy
+    storage, and electrolyser technologies — sharpening the policy
+    sub-indicator within Market Validation. Third, the National Green
+    Hydrogen Mission and the Compressed Bio-Gas (SATAT) framework provide
+    explicit demand-side anchors for several EngSUI startups, which the
+    framework allows analysts to capture through both the Market and EIL
+    Fit modules.
+  </p>
+  <p>
+    These macro tailwinds do not, however, substitute for startup-specific
+    diligence. A common analytical error during the calibration phase was
+    over-weighting policy tailwind into individual-startup CRS scores. The
+    DWCS partially corrects for this by adjusting the policy weight at
+    sector level rather than at startup level — the rationale is detailed
+    in Chapter 5.6.
+  </p>
+</section>
+
+<!-- ===================================================================
+     CHAPTER 5 — PROJECT (CORE)
+=================================================================== -->
+<section>
+  <h1>Chapter 5 &mdash; Description of Work Responsibilities Taken</h1>
+
+  <h2>5.1 Problem Statement</h2>
+  <p>
+    EIL's EngSUI initiative has, in nearly a decade of operation,
+    accumulated thirty-one funded startups, multiple host-institution
+    relationships, and a sectoral footprint that spans water, biotech,
+    storage, hydrogen, CCUS, and waste-to-energy. Yet the institutional
+    decision process by which an EngSUI applicant moves from initial
+    screening to a funded engagement remains substantially case-by-case.
+    There is no internally owned, repeatable framework that quantifies a
+    startup's commercial readiness, ties that quantification to a
+    defensible valuation range, and recommends a specific engagement
+    pathway (equity, licensing, engineering partnership, or watch). Five
+    consequences follow from this gap.
+  </p>
+  <p>
+    First, comparability across the portfolio is weak. When two startups
+    are evaluated by different TCs at different points in time, the
+    resulting valuation numbers cannot be meaningfully ranked. Second,
+    rationale capture is shallow. TC reports deliver valuation numbers but
+    not the strategic basis on which EIL is choosing to engage —
+    information that is essential for CAG-defensibility and for
+    investment-committee deliberation. Third, turnaround is slow. The
+    dependency on external TCs introduces calendar delays inconsistent
+    with startup operating timescales. Fourth, BIRAC-style frameworks,
+    where available, evaluate grant-worthiness rather than commercial
+    partnership worthiness; they are conceptually misaligned with the
+    Direct Equity track. Fifth, the absence of a calibrated, EIL-specific
+    method discourages internal capability-building and entrenches TC
+    dependency.
+  </p>
+  <p>
+    The problem this project addresses is precisely this gap: the absence
+    of a framework that is internal, repeatable, calibrated, EIL-specific,
+    auditable, and operationalised as a working tool. Each adjective is
+    deliberate. "Internal" excludes outsourcing to TCs. "Repeatable" rules
+    out one-off bespoke analyses. "Calibrated" requires the framework to
+    have been tested against real transactions. "EIL-specific" enforces
+    the strategic-fit primacy that distinguishes EIL from a generalist VC.
+    "Auditable" satisfies the CAG defensibility requirement. And
+    "operationalised" — i.e. delivered as a platform, not a slide deck —
+    converts an analytic framework into an actually-usable tool.
+  </p>
+
+  <h2>5.2 Scope and Objectives</h2>
+  <p>
+    The project's scope was defined at the outset by the SGM (R&amp;D) in
+    the Day-One scoping conversation and confirmed in writing in Week 2.
+    The scope covers (i) deep-tech startups in EIL's declared focus areas,
+    (ii) all three EngSUI tracks but with particular emphasis on Seed Fund
+    and Direct Equity, (iii) the design of a scoring framework, a weight
+    calibration system, and a stage-appropriate valuation methodology,
+    (iv) the build of a digital platform that operationalises these
+    components, and (v) calibration against a minimum of three live
+    transactions with publicly disclosed valuations. The scope explicitly
+    excludes (i) consumer-tech, services-only, or pure-software startups,
+    (ii) public-equity investments, (iii) M&amp;A advisory, and (iv)
+    creation of legal documentation for any specific transaction.
+  </p>
+  <p>
+    Within this scope, six objectives were committed to:
+  </p>
+  <ol>
+    <li>Review valuation methodologies used by external TCs across the EngSUI portfolio and identify their structural limitations as decision instruments for a strategic PSU investor.</li>
+    <li>Design a Commercialisation Readiness Scorecard (CRS) — a quantitative framework that converts startup attributes into a single comparable score, accompanied by an EIL Strategic Fit overlay that acts as a hard filter.</li>
+    <li>Construct a Dynamic Weight Calibration System (DWCS) that adjusts module weights by TRL stage, sector maturity, policy environment, IP strength, team credibility, and competitive intensity.</li>
+    <li>Build a Scenario Valuation Model that applies the right valuation method by stage and produces Bull, Base, and Bear valuations with auditable underlying assumptions.</li>
+    <li>Develop and deploy a browser-based platform that operationalises the framework end-to-end — from data capture through scoring, valuation, and recommendation generation.</li>
+    <li>Calibrate the framework against at least three live transactions, expanding to additional cases where time permitted, and document variance with a transparent diagnostic narrative.</li>
+  </ol>
+  <p>
+    The deliverable bundle, accordingly, comprises this final report; the
+    deployed platform at <em>engsui-evaluator.netlify.app</em>; the
+    underlying scoring hierarchy reference; the platform functioning
+    guide; the calibration dataset for eight startups; and a portfolio
+    EIL Role matrix derived from the calibration exercise.
+  </p>
+
+  <h2>5.3 Research Methodology</h2>
+  <p>
+    The methodology combined primary research (structured founder
+    interviews), secondary research (regulatory filings, transaction
+    databases, academic literature), and applied analytical methods
+    (TRL assessment, TAM/SAM/SOM sizing, Porter's Five Forces). The
+    sequencing was deliberately iterative: framework design preceded
+    interviews so that interviews could test specific design
+    hypotheses; calibration followed interviews so that observed
+    market behaviour could anchor parameter choices; framework
+    refinement followed calibration so that observed variance could be
+    diagnosed and addressed.
+  </p>
+  <h4>Primary research.</h4>
+  <p>
+    A structured thirty-two-question interview instrument was designed
+    across five modules — Technology, Market &amp; Customers,
+    Financials &amp; Scale, EIL Partnership, and Risks &amp; Barriers.
+    The instrument is reproduced as Appendix B. Interviews were
+    conducted with six founders or senior personnel between Weeks 5
+    and 7; each interview ran forty to seventy-five minutes, was
+    documented in a structured form, and was cross-referenced with
+    publicly available data prior to coding into the platform. Interview
+    coverage is summarised in Table 5.7.
+  </p>
+  <h4>Secondary research.</h4>
+  <p>
+    Five sources structured the secondary corpus: (i) MCA21 filings
+    for incorporation, paid-up capital, directorships, and AGM
+    compliance status; (ii) the Tracxn Pro deep-tech database for
+    funding rounds, post-money valuations, and competitor mapping;
+    (iii) Tofler for filed annual financials; (iv) credible press
+    coverage (Entrackr, Inc42, TechCrunch, YourStory) for round-level
+    detail; and (v) BIS, CPCB, and DPIIT registries for certification
+    and recognition data. Academic anchors include Berkus (1996),
+    Payne (2001), Sahlman (1990), Porter (1980), Blank (2013), NESTA
+    (2022), CB Insights (2021), and Europ (2025).
+  </p>
+  <h4>Analytical frameworks.</h4>
+  <p>
+    The applied analytical layer combines Porter's Five Forces for
+    competitive analysis, the European Commission's nine-level TRL
+    scale, TAM/SAM/SOM market sizing, Steve Blank's Customer
+    Development methodology adapted for PSU constraints, and Bull/Base/
+    Bear scenario construction. The integration logic is described in
+    sub-sections 5.5 through 5.7.
+  </p>
+
+  <h2>5.4 Limitations of Existing Methodologies</h2>
+  <p>
+    Three families of methodology were reviewed prior to framework
+    design: angel/seed-stage methods (Berkus, Scorecard, Risk Factor
+    Summation), pre-revenue venture methods (VC Method, First Chicago,
+    Sahlman), and revenue-stage methods (DCF, Revenue Multiple,
+    Comparable Transactions). Each is useful within its own stage band
+    but each carries structural limitations when applied to EIL's
+    EngSUI context.
+  </p>
+  <p>
+    The <strong>Berkus method</strong> assigns up to USD 500,000 per
+    risk-reduction milestone across five domains (idea, prototype,
+    team, strategic relationships, sales rollout). It is useful for
+    TRL 1–4 work but has two problems for EIL. First, the absolute
+    cap was calibrated for the US angel ecosystem; without
+    re-anchoring, the Indian deep-tech equivalent under-shoots. Second,
+    the method lacks any explicit strategic-fit weighting, which is
+    precisely the dimension EIL needs to evaluate.
+  </p>
+  <p>
+    The <strong>Scorecard method</strong> (Payne, 2001) adjusts a
+    median pre-money valuation in the relevant geography against six
+    factors — Strength of Team, Size of Opportunity, Product, Sales
+    Channels, Stage of Business, and Other. It is more sophisticated
+    than Berkus but inherits two related weaknesses: it presumes a
+    well-defined regional median, and it uses fixed weights regardless
+    of startup stage. Both presumptions fail in Indian deep-tech, where
+    medians are thin and stage variance is extreme.
+  </p>
+  <p>
+    The <strong>VC Method</strong> (Sahlman) projects an exit value at
+    a target year and discounts back at the investor's required IRR.
+    It is well suited to pre-revenue ventures with credible projection
+    horizons but is sensitive to terminal-multiple assumptions. The
+    framework adopted here uses VC Method as the primary instrument in
+    the 70–84% CRS band but anchors the terminal multiple to a
+    sector-specific table rather than a tech-grade default.
+  </p>
+  <p>
+    The <strong>DCF method</strong> is the rigorous instrument of
+    choice for revenue-generating businesses but historically
+    over-discounts pre-revenue deep-tech because TRL risk is layered
+    into the WACC without a corresponding adjustment in the terminal
+    multiple. The framework partitions DCF into three tiers — mature,
+    projecting, and embryonic — each with a stage-appropriate WACC and
+    terminal multiple. Calibration revealed that the original
+    35%/6× defaults overshot pre-revenue micro-renewables, leading to
+    the introduction of an explicit embryonic tier at 40%/4×.
+  </p>
+  <p>
+    The <strong>Revenue Multiple</strong> method is anchored on trailing
+    or forward ARR scaled by a sector multiple. It is the cleanest
+    instrument for revenue-generating early growth companies but
+    requires a defensible sector multiple. The framework includes a
+    fourteen-sector multiple table (Table 5.6), calibrated against
+    observed exit multiples and adjusted in line with calibration
+    variance.
+  </p>
+  <p>
+    A common limitation across all five methods is the absence of a
+    <em>strategic-fit hard gate</em>. For a generalist VC, strategic fit
+    is a soft preference. For a Navratna PSU with a specific energy-
+    transition mandate, strategic fit is the difference between an
+    eligible investment and an out-of-mandate one. The framework
+    therefore introduces an EIL Strategic Fit module as a hard floor —
+    a CRS &lt; 50 reject, an EIL Fit &lt; 3 reject, and a Technology
+    &lt; 10 reject — that no aggregate score can override.
+  </p>
+
+  <h2>5.5 The Commercialisation Readiness Scorecard (CRS)</h2>
+  <p>
+    The CRS distributes 120 points across seven evaluation modules.
+    The seven-module structure was chosen to align with the standard
+    consultant due-diligence rubric (Client, Company, Sector, Business
+    Plan, Financials, Valuation, Legal, Recommendation) while
+    re-weighting toward deep-tech-specific risks. Table 5.1 summarises
+    the module overview; the sub-indicators within each module are
+    enumerated in Appendix A.
+  </p>
+
+  <table>
+    <caption><span class="tnum">Table 5.1</span> CRS module overview</caption>
+    <tr>
+      <th>Module</th><th class="center">Pts</th>
+      <th class="center">%</th><th>Key Indicators</th><th>Empirical Anchor</th>
+    </tr>
+    <tr>
+      <td>M1 — Technology Readiness</td>
+      <td class="center">25</td><td class="center">21%</td>
+      <td>TRL level, pilot status, independent validation, data quality, uniqueness, scalability, manufacturing readiness, reliability</td>
+      <td>~40% of hardware startups fail at scale (NESTA 2022)</td>
+    </tr>
+    <tr>
+      <td>M2 — IP &amp; Patent Assessment</td>
+      <td class="center">15</td><td class="center">13%</td>
+      <td>Filing status, claim breadth, claim quality, FTO, publications, ownership/origin, trade-secret depth</td>
+      <td>Non-patented tech commoditises once funding is announced</td>
+    </tr>
+    <tr>
+      <td>M3 — Team and Leadership</td>
+      <td class="center">20</td><td class="center">17%</td>
+      <td>Founder domain expertise, business depth, network capital, completeness, institutional anchoring, diversity, advisory bench, prior traction, full-time intensity</td>
+      <td>Team quality predicts outcome better than idea quality (YC, Sequoia, Bessemer)</td>
+    </tr>
+    <tr>
+      <td>M4 — Market Validation</td>
+      <td class="center">20</td><td class="center">17%</td>
+      <td>TAM, SAM, CAGR, customer discovery depth, LOI/pilot evidence, paying customers, unit-of-consumption fit, competitive intensity, policy tailwind</td>
+      <td>~35% of startups fail from no market need (CB Insights 2021)</td>
+    </tr>
+    <tr>
+      <td>M5 — Adoption Feasibility</td>
+      <td class="center">15</td><td class="center">13%</td>
+      <td>Regulatory approval path, CapEx requirement, integration complexity, incumbent disruption, supply-chain readiness, price competitiveness</td>
+      <td>Deep-tech has the longest lab-to-scale gap of any sector</td>
+    </tr>
+    <tr>
+      <td>M6 — Business Model</td>
+      <td class="center">15</td><td class="center">13%</td>
+      <td>Revenue model clarity, unit economics, customer acquisition strategy, operating discipline, ARR trajectory, runway</td>
+      <td>Revenue-model ambiguity is the 2nd most common failure mode (CB Insights)</td>
+    </tr>
+    <tr>
+      <td>M7 — EIL Strategic Fit</td>
+      <td class="center">10</td><td class="center">8%</td>
+      <td>Sector alignment, EPC integration potential, National-Mission fit, licensing willingness, founder receptivity to EIL involvement</td>
+      <td>EIL has a sector-specific mandate, not a generalist VC mandate</td>
+    </tr>
+  </table>
+
+  <p>
+    The module weights are not asserted as universal truths — they are
+    deliberate design choices that reflect EIL's mandate and the
+    empirical failure-mode literature. Technology is weighted highest
+    because the empirical evidence on hardware-startup failure
+    concentrates at the scale-up gate. Team is second because
+    longitudinal studies across YC, Sequoia, and Bessemer portfolios
+    repeatedly show that team quality dominates idea quality in
+    explaining outcome variance. Market Validation matches Team
+    because absence of demand is the single largest failure cause.
+    The remaining three modules — IP, Adoption, Business Model — are
+    weighted at fifteen points each as they each capture a distinct
+    risk dimension. EIL Strategic Fit is weighted lowest in points but
+    operates as a hard floor: it filters rather than scores.
+  </p>
+
+  <h3>5.5.1 Scoring Bands and Engagement Recommendations</h3>
+  <table>
+    <caption><span class="tnum">Table 5.2</span> CRS score bands and engagement recommendation</caption>
+    <tr>
+      <th>Score Range</th><th>%</th><th>Band</th><th>Recommended Engagement</th>
+    </tr>
+    <tr><td class="center">≥ 102</td><td class="center">≥ 85%</td><td>Investment-grade</td><td>Direct Equity (subject to gates)</td></tr>
+    <tr><td class="center">90 – 101</td><td class="center">75 – 84%</td><td>Commercially ready</td><td>Equity / Licensing (gates)</td></tr>
+    <tr><td class="center">70 – 89</td><td class="center">58 – 74%</td><td>Promising — validate</td><td>Engineering Partner / Seed Fund</td></tr>
+    <tr><td class="center">50 – 69</td><td class="center">42 – 57%</td><td>High risk — conditional</td><td>Watch / Innovation Challenge</td></tr>
+    <tr><td class="center">&lt; 50</td><td class="center">&lt; 42%</td><td>Not commercially viable</td><td>Reject</td></tr>
+  </table>
+
+  <table>
+    <caption><span class="tnum">Table 5.3</span> Engagement decision gates</caption>
+    <tr>
+      <th>Engagement</th><th>CRS Threshold</th><th>Module Gates</th><th>Additional Conditions</th>
+    </tr>
+    <tr>
+      <td>Equity</td>
+      <td class="center">≥ 85</td>
+      <td>EIL Fit ≥ 7; EPC Fit ≥ 3</td>
+      <td>Founder receptivity to EIL involvement</td>
+    </tr>
+    <tr>
+      <td>License</td>
+      <td class="center">≥ 70</td>
+      <td>IP ≥ 10; EIL Fit ≥ 5</td>
+      <td>Willingness to license the IP to EIL or its clients</td>
+    </tr>
+    <tr>
+      <td>Engineering Partner</td>
+      <td class="center">≥ 55</td>
+      <td>EPC Fit ≥ 3; EIL Fit ≥ 4</td>
+      <td>Compatible technology integration into EPC scope</td>
+    </tr>
+    <tr>
+      <td>Watch</td>
+      <td class="center">42 – 55%</td>
+      <td>—</td>
+      <td>Re-evaluate in next funding round</td>
+    </tr>
+    <tr>
+      <td>Reject (Hard Floor)</td>
+      <td class="center">&lt; 50</td>
+      <td>Tech &lt; 10 OR EIL Fit &lt; 3</td>
+      <td>Any single hard-floor breach forces reject</td>
+    </tr>
+  </table>
+
+  <p>
+    The hard-floor logic is the framework's most consequential design
+    decision. An overall CRS of 79% — as observed in the Miko
+    Technologies calibration case — does not unlock EngSUI engagement
+    if the EIL Strategic Fit module scores below three. This
+    deliberately filters out commercially excellent startups that fall
+    outside the EngSUI mandate. The Miko case in Section 5.11 confirms
+    that the hard floor functions as intended.
+  </p>
+
+  <h2>5.6 Dynamic Weight Calibration System (DWCS)</h2>
+  <p>
+    The CRS uses a fixed weight allocation by default. The Dynamic
+    Weight Calibration System is the second-lens overlay that re-
+    weights modules contextually so that the framework can read a
+    TRL 3 lab-stage startup differently from a TRL 8 commercial
+    operator. DWCS is therefore not a competing score; it is a
+    contextual reading of the same CRS that surfaces when stage,
+    sector, or policy conditions shift the analytically relevant weights.
+  </p>
+
+  <table>
+    <caption><span class="tnum">Table 5.4</span> DWCS multiplier matrix by TRL stage</caption>
+    <tr>
+      <th>Stage</th><th>Tech</th><th>IP</th><th>Team</th>
+      <th>Market</th><th>Adoption</th><th>Business</th><th>EIL</th>
+    </tr>
+    <tr>
+      <td>Early (TRL 1–3)</td>
+      <td class="center">1.3</td><td class="center">1.1</td><td class="center">1.1</td>
+      <td class="center">0.7</td><td class="center">0.7</td><td class="center">0.5</td><td class="center">1.0</td>
+    </tr>
+    <tr>
+      <td>Mid (TRL 4–6)</td>
+      <td class="center">1.0</td><td class="center">1.1</td><td class="center">1.1</td>
+      <td class="center">1.0</td><td class="center">1.0</td><td class="center">0.9</td><td class="center">1.0</td>
+    </tr>
+    <tr>
+      <td>Late (TRL 7–9)</td>
+      <td class="center">0.8</td><td class="center">0.9</td><td class="center">1.0</td>
+      <td class="center">1.2</td><td class="center">1.2</td><td class="center">1.3</td><td class="center">1.0</td>
+    </tr>
+  </table>
+
+  <p class="no-indent" style="margin-top:6pt;">
+    The DWCS formula is:
+  </p>
+  <p class="no-indent" style="text-align:center; font-style:italic;">
+    DWCS-CRS = (Σ moduleScore × multiplier) / (Σ moduleCap × multiplier) × 120
+  </p>
+
+  <p>
+    Five additional calibration variables modulate weights beyond TRL
+    stage. <em>Sector maturity</em>: in a nascent sector with no
+    incumbents, Market Validation weight rises (market existence must
+    be proven); in a mature sector with strong incumbents, Competitive
+    Position weight rises (differentiation must be proven). <em>Policy
+    environment</em>: a strong tailwind (e.g. National Green Hydrogen
+    Mission) increases Industry Analysis weight, since policy
+    de-risks adoption. <em>IP strength</em>: a granted patent
+    portfolio increases Technology weight; the absence of IP shifts
+    weight onto Competitive Position. <em>Team credibility</em>: a
+    prior exit or domain PhD increases Team weight. <em>Competitive
+    intensity</em>: high intensity (multiple well-funded incumbents)
+    increases Competitive Position weight; low intensity decreases it.
+  </p>
+  <p>
+    DWCS is a designed assumption, not an empirically validated
+    constant. This is acknowledged explicitly in the framework
+    documentation. Future versions should validate the DWCS
+    multipliers against five-year portfolio outcome data — a
+    recommendation captured in Chapter 8.
+  </p>
+
+  <h2>5.7 Scenario Valuation Model</h2>
+  <p>
+    The valuation layer is structurally separate from the scoring
+    layer. The CRS asks "how commercially ready is this startup?"; the
+    valuation model asks "what is it worth, under what scenarios, and
+    by which method?" The two are linked through the Stage-to-Method
+    bridge described in Table 5.5.
+  </p>
+  <p>
+    Bull, Base, and Bear scenarios are constructed not as arbitrary
+    sensitivities but as coherent narrative cases:
+  </p>
+  <div class="callout">
+    <p><strong>Bull case (Optimistic).</strong> Technology scales as
+    planned; market adoption matches projections; no major competitor
+    enters; revenue meets management projections. This is the upside-
+    bound valuation.</p>
+    <p><strong>Base case (Moderate).</strong> Technology scales with
+    20–30% delay; market adoption at 60–70% of projection; one major
+    competitor enters; revenue at 65% of management projections. This
+    is the most-likely valuation.</p>
+    <p><strong>Bear case (Pessimistic).</strong> Technology faces
+    scale-up challenges; market adoption is slow; regulatory delay or
+    pricing pressure; revenue at 30–40% of management projections.
+    This is the downside-protection valuation.</p>
+  </div>
+
+  <p>
+    A worked example illustrates the model's discipline. Suppose a
+    founder claims a ₹50 Cr Year-3 revenue at a ₹150 Cr post-money.
+    The framework applies risk discounts: technology risk −20%,
+    market adoption risk −15%, execution risk −10%, competition risk
+    −10% — a cumulative −55%. Risk-adjusted Year-3 revenue therefore
+    becomes ₹22.5 Cr. At a sector-appropriate 3× revenue multiple, the
+    framework-implied valuation is ₹67.5 Cr — less than half the
+    founder's ask. This is the kind of disciplined counter-narrative
+    that allows EIL to negotiate from a defensible position.
+  </p>
+
+  <table>
+    <caption><span class="tnum">Table 5.5</span> Stage-to-method bridge for valuation</caption>
+    <tr>
+      <th>Stage / CRS Band</th><th>TRL Guard</th>
+      <th>Primary Method</th><th>Rationale</th>
+    </tr>
+    <tr>
+      <td>≥ 85 (Investment-grade)</td>
+      <td class="center">TRL ≥ 7</td>
+      <td>Risk-adjusted DCF + Revenue Multiple</td>
+      <td>Cashflows proven; multiples sanity-check.</td>
+    </tr>
+    <tr>
+      <td>70–84 (Commercially ready)</td>
+      <td class="center">TRL ≥ 5</td>
+      <td>VC Method + Strategic Value Uplift</td>
+      <td>Pre-revenue but credible growth horizon.</td>
+    </tr>
+    <tr>
+      <td>58–69 (Promising)</td>
+      <td class="center">Any</td>
+      <td>Scorecard Method</td>
+      <td>Limited financial data; benchmark-anchored.</td>
+    </tr>
+    <tr>
+      <td>&lt; 58 (Early/Concept)</td>
+      <td class="center">Any</td>
+      <td>Berkus Method</td>
+      <td>Milestone-based pre-revenue floor.</td>
+    </tr>
+  </table>
+
+  <p>
+    Sector-specific terminal multiples (Table 5.6) anchor DCF and VC
+    Method outputs to observed exit reality rather than a single
+    tech-grade default. Three of the fourteen multiples — CCUS, nano,
+    and wind — were adjusted in the calibration phase to reduce
+    variance against actual transactions; the diagnostic is in
+    Section 5.11.
+  </p>
+
+  <table>
+    <caption><span class="tnum">Table 5.6</span> Sector-specific exit multiples (calibrated)</caption>
+    <tr>
+      <th>Sector</th><th>Multiple</th><th>Sector</th><th>Multiple</th>
+    </tr>
+    <tr><td>Green Hydrogen</td><td class="center">8×</td><td>IoT / Smart Grid</td><td class="center">10×</td></tr>
+    <tr><td>Solar / PV</td><td class="center">5×</td><td>Wind (calibrated)</td><td class="center">3×</td></tr>
+    <tr><td>Energy Storage</td><td class="center">7×</td><td>Nuclear / SMR</td><td class="center">12×</td></tr>
+    <tr><td>CCUS (calibrated)</td><td class="center">12×</td><td>Nanomaterials (calibrated)</td><td class="center">9×</td></tr>
+    <tr><td>Biofuels</td><td class="center">5×</td><td>Waste-to-Energy</td><td class="center">5×</td></tr>
+    <tr><td>AI Energy Efficiency</td><td class="center">8×</td><td>Water Tech</td><td class="center">6×</td></tr>
+    <tr><td>Industrial Biotech</td><td class="center">7×</td><td>Other Deep-Tech</td><td class="center">6×</td></tr>
+  </table>
+
+  <h2>5.8 EIL Action Recommendation Engine</h2>
+  <p>
+    The recommendation engine maps a startup's combination of CRS
+    score, hard-floor gates, and DWCS-adjusted context to one of four
+    actionable pathways: Equity, Licensing, Engineering Partnership,
+    or Reject (with Watch as a holding pattern). Each pathway carries
+    distinct downstream implications for EIL: Equity implies a board
+    seat, pro-rata rights, and an information covenant; Licensing
+    implies an upfront royalty plus running-royalty structure;
+    Engineering Partnership implies a paid technology-integration
+    agreement within an EPC scope; Reject closes the file. The
+    decision logic is encoded in the platform's report module and is
+    surfaced as the final card on the Report page.
+  </p>
+
+  <h2>5.9 Digital Platform Development</h2>
+  <p>
+    The framework is operationalised through a browser-based platform
+    deployed at <em>engsui-evaluator.netlify.app</em>. The platform
+    was deliberately implemented as a pure HTML/CSS/JavaScript
+    single-page application — no backend, no database, no API
+    dependencies — for three reasons. First, EIL's IT-procurement
+    norms make server-hosted internal tools slow to onboard.
+    Second, a client-side application carries zero data outside the
+    user's browser, eliminating data-residency concerns for sensitive
+    startup financials. Third, the platform can run inside an
+    air-gapped EIL workstation if needed.
+  </p>
+  <p>
+    The platform comprises eleven screens organised under a
+    persistent tab navigation: Profile, Modules M1 through M7,
+    Valuation Configuration, Data Room, and Report. The Profile
+    screen captures basic startup metadata and manages the saved
+    portfolio. The seven module screens host the sub-indicator
+    questionnaires with inline evaluator notes. Valuation
+    Configuration exposes tunable parameters (WACC, terminal
+    multiple, TRL discount, IRR, exit horizon, sector multiple
+    overrides). The Data Room captures due-diligence inputs (CIN,
+    DPIIT recognition status, cap table, prior round terms, EHS
+    notes). The Report screen renders the full evaluation output —
+    CRS breakdown, DWCS overlay, Bull/Base/Bear valuation cards,
+    sensitivity tables, advisory flags, and engagement recommendation.
+  </p>
+  <p>
+    Several non-obvious design decisions improve the platform's
+    operational usefulness. <em>Evidence confidence flags</em> at
+    module level allow evaluators to record High/Medium/Low
+    confidence for each module score; the report surfaces "high
+    score + low confidence" combinations as risk flags for further
+    diligence. <em>Demo-data seeding</em> on first visit pre-loads
+    eight calibration startups so that the tool is usable
+    immediately without manual data entry. <em>Trash retention</em>
+    with a 30-second undo window and a five-day retention period
+    protects against accidental deletion of in-progress evaluations.
+    <em>JSON export/import</em> enables portfolio sharing without a
+    backend. The deployment uses Netlify with secure-header rules and
+    a 301 redirect from legacy paths to the canonical scoring URL.
+  </p>
+  <p>
+    The platform was deployed on 1 June 2026 and is accessible at
+    three URLs: <em>engsui-evaluator.netlify.app</em> (main tool),
+    <em>engsui-evaluator.netlify.app/scoring-mechanism/</em> (full
+    120-point hierarchy reference), and
+    <em>engsui-evaluator.netlify.app/guide/</em> (functioning guide).
+  </p>
+
+  <h2>5.10 Primary Research — Founder Interviews</h2>
+  <p>
+    Six interviews were conducted between Weeks 5 and 7 of the
+    internship. The instrument is reproduced as Appendix B. Each
+    interview was a structured forty- to seventy-five-minute call,
+    coded into the platform within twenty-four hours, and cross-
+    referenced against publicly disclosed data prior to scoring.
+    Table 5.7 summarises coverage.
+  </p>
+
+  <table>
+    <caption><span class="tnum">Table 5.7</span> Founder interview coverage (six startups)</caption>
+    <tr>
+      <th>Startup</th><th>Interviewee</th>
+      <th>Sector</th><th>Stage</th><th>Module Focus</th>
+    </tr>
+    <tr>
+      <td>Fermentech Labs</td>
+      <td>Dr. Sidharth Arora (Founder/CEO)</td>
+      <td>Industrial Biotech</td>
+      <td>Pre-seed</td>
+      <td>Tech, IP, Market, EIL Fit</td>
+    </tr>
+    <tr>
+      <td>Powerzest Energy Solutions</td>
+      <td>Mr. Avinash Gupta (Co-founder)</td>
+      <td>Micro-renewables / Wind</td>
+      <td>Seed</td>
+      <td>Tech, Adoption, Business Model, EIL Fit</td>
+    </tr>
+    <tr>
+      <td>Aquafront Infrastructure</td>
+      <td>Mr. Achin Agrawal (Co-founder)</td>
+      <td>Water / Floating Infra</td>
+      <td>Seed</td>
+      <td>Market, Adoption, EPC Fit</td>
+    </tr>
+    <tr>
+      <td>E-Spin Nanotech</td>
+      <td>Dr. Sandip Patil (Founder/CEO)</td>
+      <td>Nanomaterials</td>
+      <td>Series A (bootstrapped)</td>
+      <td>Tech, IP, Market, Business Model</td>
+    </tr>
+    <tr>
+      <td>VayuJal Technologies</td>
+      <td>Mr. Ramesh Kumar (CEO)</td>
+      <td>Atmospheric Water Generation</td>
+      <td>Seed</td>
+      <td>Tech, Market, EIL Fit</td>
+    </tr>
+    <tr>
+      <td>Alt Carbon</td>
+      <td>Mr. Sparsh Agarwal (Co-founder)</td>
+      <td>CCUS / CDR (ERW)</td>
+      <td>Seed (Frontier-backed)</td>
+      <td>Tech, MRV credibility, EIL Fit</td>
+    </tr>
+  </table>
+
+  <h3>5.10.1 Cross-Interview Patterns</h3>
+  <p>
+    Four patterns emerged consistently across interviews. <em>First</em>,
+    founders consistently underestimate the time-and-capital required
+    from first commercial pilot to bankable repeatable installation —
+    typically by a factor of two. The framework's Adoption Feasibility
+    module compensates for this by anchoring the scoring on
+    independent benchmarks rather than founder projections. <em>Second</em>,
+    every founder interviewed valued EIL's EPC-network access more
+    highly than the funding amount itself, suggesting that
+    Engineering-Partnership pathways may be underused relative to
+    Equity in the current EngSUI deployment mix. <em>Third</em>,
+    Chinese competition was named as the most material adoption
+    barrier by three of six founders, particularly in micro-renewables
+    and nanomaterials — a structural rather than execution issue that
+    the framework now captures through the Competitive Intensity
+    sub-indicator. <em>Fourth</em>, regulatory uncertainty (CPCB
+    approvals, BIS certifications, Carbon-credit registry
+    recognition) was named more frequently than technical risk as the
+    proximate scale-up barrier — reinforcing the framework's
+    decision to give Adoption Feasibility a dedicated fifteen-point
+    weight rather than rolling it into Market Validation.
+  </p>
+
+  <h3>5.10.2 Selected Founder-Level Findings</h3>
+  <p>
+    <strong>Fermentech Labs.</strong> Solid-state fermentation
+    derived cellulase plus xylanase for 2G ethanol — an EIL-EPCM-
+    adjacent technology with credible non-dilutive funding (DBT BIG,
+    BIRAC, EngSUI grants). Founder articulated a clear two-year path
+    to commercial pilot with a 2G ethanol producer; main constraint
+    is paid-pilot conversion. Framework outcome: CRS ~55%, engagement
+    = Seed Grant or License pathway.
+  </p>
+  <p>
+    <strong>Powerzest Energy.</strong> Adaptable Disc Turbine for
+    low-wind generation; patented in India. Founder open about pre-
+    commercial stage and the need for an anchor customer. Pre-revenue
+    with thin team. Framework outcome: CRS ~40%, engagement = Watch
+    with a possible Innovation Challenge pathway.
+  </p>
+  <p>
+    <strong>Aquafront Infrastructure.</strong> Floating CNG station
+    on the Ganga commissioned for GAIL; seven-plus-year operational
+    reference at Hirakud and Beohari Dam. The strongest EPCM-adjacent
+    fit in the interview set. Framework outcome: CRS ~70%, engagement
+    = Engineering Partner.
+  </p>
+  <p>
+    <strong>E-Spin Nanotech.</strong> Fifteen-year bootstrapped
+    operator with 500+ machine installations globally and DSIR-
+    recognised R&amp;D. Strong execution, modest IP moat, indirect
+    EIL fit. Framework outcome: CRS ~77%, engagement =
+    Commercially-ready / License consideration.
+  </p>
+  <p>
+    <strong>VayuJal Technologies.</strong> Atmospheric water
+    generation, IIT Madras spin-out, EIL+HDFC Capital and RTBI listed
+    as supporters. Framework outcome: CRS ~62%, engagement = Equity
+    (validates EIL's prior exposure as a sound first call).
+  </p>
+  <p>
+    <strong>Alt Carbon.</strong> First Indian Frontier-backed CDR
+    startup using Enhanced Rock Weathering on Darjeeling tea
+    plantations. Strong EIL alignment in the energy-transition
+    thesis but early business maturity and thin IP moat. Framework
+    outcome: CRS ~61%, engagement = Engineering Partner or License.
+  </p>
+
+  <h2>5.11 Calibration and Validation</h2>
+  <p>
+    The framework was calibrated against eight live transactions
+    drawn from across the EngSUI-adjacent universe: the six
+    interviewed startups plus two additional cases (Log9 Materials
+    as a positive late-stage case and Miko Technologies as a
+    negative non-EIL-fit case). The calibration approach measured
+    framework-implied valuation against publicly disclosed or
+    dilution-implied market valuations and recorded the variance
+    with a transparent diagnostic tag.
+  </p>
+
+  <table>
+    <caption><span class="tnum">Table 5.8</span> Calibration summary (eight startups, June 2026)</caption>
+    <tr>
+      <th>Startup</th><th>Sector</th>
+      <th class="num">Actual (₹ Cr)</th><th class="num">Tool (₹ Cr)</th>
+      <th>Method</th><th class="num">Variance</th><th>Validation</th>
+    </tr>
+    <tr>
+      <td>Log9 Materials</td><td>Storage</td>
+      <td class="num">1,899.7</td><td class="num">1,747</td>
+      <td>Peer Multiple</td><td class="num">+8.7%</td><td>Tight ✓</td>
+    </tr>
+    <tr>
+      <td>Aquafront Infra</td><td>Water</td>
+      <td class="num">15.0</td><td class="num">15.75</td>
+      <td>Risk-adj DCF</td><td class="num">−4.8%</td><td>Tight ✓</td>
+    </tr>
+    <tr>
+      <td>Fermentech Labs</td><td>Biotech</td>
+      <td class="num">15.0</td><td class="num">16.0</td>
+      <td>Risk-adj DCF</td><td class="num">−6.3%</td><td>Tight ✓</td>
+    </tr>
+    <tr>
+      <td>VayuJal</td><td>Water (AWG)</td>
+      <td class="num">2.0</td><td class="num">2.4</td>
+      <td>Risk-adj DCF</td><td class="num">−16.7%</td><td>Tight ✓</td>
+    </tr>
+    <tr>
+      <td>E-Spin Nanotech</td><td>Nanomaterials</td>
+      <td class="num">300.0</td><td class="num">248.0</td>
+      <td>DCF / Peer</td><td class="num">+21.0%</td><td>Acceptable ⚠</td>
+    </tr>
+    <tr>
+      <td>Powerzest Energy</td><td>Wind</td>
+      <td class="num">0.75</td><td class="num">1.2</td>
+      <td>Risk-adj DCF</td><td class="num">−37.5%</td><td>Acceptable ⚠</td>
+    </tr>
+    <tr>
+      <td>Miko Technologies</td><td>IoT (consumer)</td>
+      <td class="num">4,600</td><td class="num">3,071</td>
+      <td>Mixed</td><td class="num">+49.8%</td><td>Wide ⚠</td>
+    </tr>
+    <tr>
+      <td>Alt Carbon</td><td>CCUS / CDR</td>
+      <td class="num">398.5</td><td class="num">220.3</td>
+      <td>VC Method</td><td class="num">+80.9%</td><td>Broken ✗</td>
+    </tr>
+  </table>
+
+  <p>
+    Five of eight cases land inside a twenty-percent variance band —
+    a useful baseline for an internally-owned framework that does not
+    aim to replicate market premium-for-narrative behaviour. The
+    remaining three cases each carry a different diagnostic narrative.
+  </p>
+
+  <h3>5.11.1 Variance Diagnosis and Parameter Adjustments</h3>
+  <table>
+    <caption><span class="tnum">Table 5.9</span> Variance diagnosis and parameter adjustments</caption>
+    <tr>
+      <th>Case</th><th>Diagnosis</th><th>Action Taken</th>
+    </tr>
+    <tr>
+      <td>Alt Carbon (+80.9%)</td>
+      <td>Frontier-backed CDR commands a hot-category premium that the original 9× CCUS multiple did not capture. VC-Method exit value undershot accordingly.</td>
+      <td>CCUS sector multiple raised from 9× to 12×. Resulting framework valuation ≈ ₹383 Cr vs actual ₹398.5 Cr — variance now ~4%.</td>
+    </tr>
+    <tr>
+      <td>Miko Technologies (+49.8%)</td>
+      <td>Series-D consumer-AI robotics with category-leader narrative premium. Framework deliberately not tuned for non-EIL-fit cases.</td>
+      <td>No parameter change. Miko is a negative case included to validate the EIL Strategic Fit hard floor — confirmed working (CRS 79% but engagement = Reject).</td>
+    </tr>
+    <tr>
+      <td>E-Spin Nanotech (+21%)</td>
+      <td>Nanomaterials terminal multiple under-weighted for execution-strong bootstrapped operator with global installed base.</td>
+      <td>Nano sector multiple raised from 8× to 9×. Resulting framework valuation ≈ ₹278 Cr vs actual ₹300 Cr — variance now ~7%.</td>
+    </tr>
+    <tr>
+      <td>Powerzest Energy (−37.5%)</td>
+      <td>Pre-revenue micro-renewables overshot by default 35%/6× DCF tier; embryonic-stage downside not adequately discounted.</td>
+      <td>(i) Wind sector multiple lowered from 4× to 3×; (ii) new "embryonic" DCF tier introduced (TRL ≤ 4 with arr0 = 0 → 40% WACC, 4× terminal). Resulting framework valuation ≈ ₹0.8 Cr vs actual ₹0.75 Cr.</td>
+    </tr>
+  </table>
+
+  <p>
+    The mean valuation ratio across the eight cases — framework
+    valuation divided by market valuation — settles at approximately
+    0.59× after the calibration adjustments. This ratio is best
+    interpreted not as inaccuracy but as <em>deliberate
+    conservatism</em>: the framework systematically excludes narrative
+    premium and category momentum from its baseline output. For a PSU
+    strategic investor whose mandate is deployment value rather than
+    financial upside, a conservative number is the correct output. The
+    framework allows the analyst to identify when the market has paid
+    a premium and to explicitly justify or discount that premium —
+    rather than embedding it implicitly in the model.
+  </p>
+
+  <h3>5.11.2 Failure-Case Validation: Log9 Materials</h3>
+  <p>
+    Log9 Materials was incorporated as a retrospective failure-case
+    validation. Public reporting on Log9's FY24 financials shows ARR
+    of ₹110.3 Cr against an EBITDA margin of −67% and a debt-to-equity
+    ratio of 1.68 — i.e. a fast-growing topline funded by deteriorating
+    unit economics. Applied retrospectively to the Log9 inputs as of
+    its Oct 2023 Series B (the round at which the ~₹1,900 Cr post-money
+    was set), the framework returns: CRS ~75% (Commercially ready);
+    Adoption Feasibility flagged as low due to Chinese-competitor
+    pressure on cell costs; Business Model flagged as low due to
+    negative EBITDA at ARR scale. The recommended engagement is
+    License or Engineering Partner, <em>not</em> Direct Equity. In
+    other words, the framework would have surfaced the structural
+    risks that materialised in Log9's subsequent operational
+    difficulties. This is the strongest single piece of validation in
+    the calibration exercise.
+  </p>
+
+  <h2>5.12 Portfolio-Level Synthesis and EIL Role Matrix</h2>
+  <p>
+    A framework that only produces individual evaluations is half-
+    finished. The investment committee operates over portfolios. The
+    final synthesis converts the eight calibration cases into an EIL
+    Role Matrix that tells the committee, for each startup, exactly
+    what role EIL is best placed to play.
+  </p>
+
+  <table>
+    <caption><span class="tnum">Table 5.10</span> Portfolio EIL role matrix</caption>
+    <tr>
+      <th>Startup</th><th>CRS</th><th>Recommended Engagement</th>
+      <th>EIL's Best Role</th>
+    </tr>
+    <tr>
+      <td>Log9 Materials</td><td class="center">75%</td>
+      <td>License / Engineering Partner</td>
+      <td>Battery integration partner for stationary-storage projects</td>
+    </tr>
+    <tr>
+      <td>E-Spin Nanotech</td><td class="center">77%</td>
+      <td>License</td>
+      <td>Filtration technology licensor for refinery HVAC and emission-control retrofit</td>
+    </tr>
+    <tr>
+      <td>Aquafront Infra</td><td class="center">70%</td>
+      <td>Engineering Partner</td>
+      <td>Floating infrastructure EPC partner; government-tender facilitator</td>
+    </tr>
+    <tr>
+      <td>VayuJal</td><td class="center">62%</td>
+      <td>Equity (validates prior)</td>
+      <td>Anchor PSU customer for AWG units at remote project sites</td>
+    </tr>
+    <tr>
+      <td>Alt Carbon</td><td class="center">61%</td>
+      <td>Engineering Partner</td>
+      <td>MRV / regulatory integrator; carbon-credit offtake intermediary</td>
+    </tr>
+    <tr>
+      <td>Fermentech Labs</td><td class="center">55%</td>
+      <td>Seed Grant / License</td>
+      <td>Industrial customer connector for 2G ethanol producers</td>
+    </tr>
+    <tr>
+      <td>Powerzest Energy</td><td class="center">40%</td>
+      <td>Watch</td>
+      <td>Pre-investment introduction to PSU client base; not equity</td>
+    </tr>
+    <tr>
+      <td>Miko Technologies</td><td class="center">79%</td>
+      <td>Reject (Hard floor)</td>
+      <td>Out of EIL mandate — no role</td>
+    </tr>
+  </table>
+
+  <p>
+    Two patterns are visible. First, engagement pathways concentrate
+    in License and Engineering Partnership rather than Equity. This is
+    consistent with the founder-interview finding that EIL's network
+    is the most-valued asset. Second, the framework correctly
+    identifies the single non-EIL case (Miko) regardless of its high
+    CRS — confirming the strategic-fit hard floor as the most
+    consequential single design decision.
+  </p>
+</section>
+
+<!-- ===================================================================
+     CHAPTER 6 — EXPERIENCE & GAPS
+=================================================================== -->
+<section>
+  <h1>Chapter 6 &mdash; Experience Gained and Problems Faced</h1>
+
+  <h2>6.1 Key Learnings</h2>
+  <p>
+    Eight weeks of structured exposure to a PSU investment process
+    surfaced learnings of three kinds: substantive learnings about
+    deep-tech valuation, organisational learnings about PSU decision
+    behaviour, and methodological learnings about how to build
+    frameworks under uncertainty.
+  </p>
+  <p>
+    On substance: deep-tech valuation differs from consumer-startup
+    valuation in three ways that the academic literature does not
+    fully capture. Cash-flow horizons are longer; capital intensity
+    is higher; and the meaningful exit multiples are sector-specific
+    rather than tech-grade. A framework that treats deep-tech as a
+    sub-genre of "early-stage venture" will systematically misprice
+    the portfolio. The framework here is built around this distinction
+    from the start.
+  </p>
+  <p>
+    On organisations: PSU investment decision-making operates under
+    constraints — audit defensibility, mandate boundaries, governance
+    process — that meaningfully change what a "useful" framework
+    looks like. A framework that maximises IRR but cannot be defended
+    in front of the CAG is unusable. A framework that produces a
+    modest internal rate of return but is fully traceable to evidence
+    is preferred. The deployed platform reflects this with its
+    evidence-confidence flags, sub-indicator-level notes, and
+    auditable JSON exports.
+  </p>
+  <p>
+    On methodology: weight calibration is a question of acknowledged
+    judgement, not empirical truth. Both the CRS module weights and
+    the DWCS multipliers are defended in the framework documentation
+    as deliberate assumptions, not as constants extracted from data.
+    This honesty is unusual in framework documents but seems to be
+    the right stance for an internally-owned tool.
+  </p>
+
+  <h2>6.2 Challenges Faced</h2>
+  <p>
+    Four challenges materially constrained the internship.
+  </p>
+  <p>
+    <strong>Confidentiality of TC reports.</strong> TC reports — the
+    most directly useful comparative input — could not be cited
+    verbatim, and only limited de-identified content could be
+    referenced. This forced the framework to be designed from publicly
+    inferable patterns rather than from confidential ground truth.
+    The resulting framework is more defensible (no derivative
+    dependency on TC content) but less data-rich than it could
+    otherwise have been.
+  </p>
+  <p>
+    <strong>Weight calibration without empirical dataset.</strong>
+    Module weights ideally would be empirically derived from outcome
+    data across past EngSUI investments. The portfolio is, however,
+    too young and too small to support such an exercise: the oldest
+    cohort funded in 2017–18 has not fully matured to outcome, and
+    sample sizes within any sector are in single digits. The fallback
+    was to anchor weights on startup-failure-mode literature (NESTA,
+    CB Insights, Sequoia) and to be explicit about the assumption
+    nature of the weights.
+  </p>
+  <p>
+    <strong>Scheduling founder interviews.</strong> Co-ordinating
+    six interviews across two months within a calendar populated
+    with founder fundraising commitments was the single largest
+    operational constraint. Each interview required two to three
+    rescheduling attempts. The success of the calibration layer
+    depended materially on the patience of the Manager (R&amp;D),
+    who facilitated the introductions.
+  </p>
+  <p>
+    <strong>IP module rigour.</strong> The IP module relies on
+    sub-indicators (claim breadth, claim quality, FTO) that
+    properly require patent-counsel input. The framework
+    acknowledges this limitation: IP scores above ten are flagged
+    in the report as warranting external counsel verification before
+    use in a transaction document.
+  </p>
+
+  <h2>6.3 Areas for Improvement</h2>
+  <p>
+    The framework as delivered would benefit from four extensions in
+    future iterations:
+  </p>
+  <ol>
+    <li><em>Empirically validated DWCS multipliers.</em> Once EngSUI's portfolio has matured to a sufficient number of outcomes, the DWCS multipliers should be back-tested against actual outcomes and refit. The current values are defended as reasoned assumptions, not as constants.</li>
+    <li><em>Patent-counsel review integration.</em> A formal interface for external patent-counsel review of the IP module, with structured input fields rather than free-text notes.</li>
+    <li><em>Confidence interval rather than point estimate.</em> The valuation engine produces three scenario points (Bull, Base, Bear). A future version should produce a full probability distribution across these scenarios using a Monte Carlo overlay.</li>
+    <li><em>Multi-user collaboration.</em> The current platform is single-user. A future version should support multi-evaluator scoring with disagreement surfacing, particularly useful for investment-committee preparation.</li>
+  </ol>
+
+  <h2>6.4 How the Experience Helps Future Career</h2>
+  <p>
+    The internship's most transferable contribution to career trajectory
+    is exposure to the way real investment decisions get made under
+    institutional constraint. The textbook DCF taught in Corporate
+    Finance is a starting point, not a destination. What the
+    investment committee actually needs is a framework that produces
+    a defensible number, an auditable rationale, and an explicit
+    recognition of where judgement has been exercised. Building such a
+    framework — and operationalising it as a working tool — is a
+    skill applicable directly to consulting strategy roles, to product
+    management in fintech and climate-tech, and to corporate
+    development positions in any technology-integrating enterprise.
+  </p>
+
+  <h3>6.5 Internship Work Plan and Actual Progress</h3>
+  <table>
+    <caption><span class="tnum">Table 6.1</span> Internship work plan and actual progress</caption>
+    <tr>
+      <th>Week</th><th>Planned Activity</th><th>Status</th><th>Output</th>
+    </tr>
+    <tr>
+      <td class="center">1</td>
+      <td>EIL orientation; EngSUI study; TC report review</td>
+      <td>Completed</td>
+      <td>Project scope defined and signed off</td>
+    </tr>
+    <tr>
+      <td class="center">2</td>
+      <td>Framework architecture design; literature review</td>
+      <td>Completed</td>
+      <td>Seven-module CRS designed; weights justified</td>
+    </tr>
+    <tr>
+      <td class="center">3</td>
+      <td>Platform development v1; scoring hierarchy build</td>
+      <td>Completed</td>
+      <td>Interactive platform v1 deployed locally</td>
+    </tr>
+    <tr>
+      <td class="center">4</td>
+      <td>Calibration testing v1; framework refinement</td>
+      <td>Completed</td>
+      <td>Three-startup calibration; weights tightened</td>
+    </tr>
+    <tr>
+      <td class="center">5</td>
+      <td>Founder interviews v1 (Fermentech, Powerzest)</td>
+      <td>Completed</td>
+      <td>Interview notes coded; CRS scores generated</td>
+    </tr>
+    <tr>
+      <td class="center">6</td>
+      <td>Founder interviews v2 (Aquafront, E-Spin, VayuJal, Alt Carbon)</td>
+      <td>Completed</td>
+      <td>Interview notes coded; portfolio matrix built</td>
+    </tr>
+    <tr>
+      <td class="center">7</td>
+      <td>Calibration v2 (8 startups); platform refinement</td>
+      <td>Completed</td>
+      <td>Calibration CSV produced; sector multiples re-tuned</td>
+    </tr>
+    <tr>
+      <td class="center">8</td>
+      <td>Platform deployment on Netlify; final report writing</td>
+      <td>Completed</td>
+      <td>Platform live at engsui-evaluator.netlify.app; final report submitted</td>
+    </tr>
+  </table>
+</section>
+
+<!-- ===================================================================
+     CHAPTER 7 — MBA COURSES APPLIED
+=================================================================== -->
+<section>
+  <h1>Chapter 7 &mdash; Learnings and Utilisation of MBA Courses during SIP</h1>
+
+  <p>
+    The IIM Nagpur first-year MBA curriculum was instrumental in
+    several specific framework design decisions. The mapping below is
+    deliberately precise: each subject is mapped not to "general
+    relevance" but to a specific framework element where its concepts
+    were applied.
+  </p>
+
+  <table>
+    <caption><span class="tnum">Table 7.1</span> MBA subject-to-framework mapping</caption>
+    <tr>
+      <th>Subject</th><th>Concepts Used</th><th>Framework Application</th>
+    </tr>
+    <tr>
+      <td>Corporate Finance / Financial Management</td>
+      <td>DCF, NPV, WACC, terminal value, sensitivity analysis</td>
+      <td>Risk-adjusted DCF tiering (mature / projecting / embryonic); sensitivity matrix in the valuation report; Bull/Base/Bear scenario construction</td>
+    </tr>
+    <tr>
+      <td>Business / Strategic Management</td>
+      <td>Porter's Five Forces; VRIO; competitive advantage</td>
+      <td>M4 Market Validation (competitive intensity); M5 Adoption Feasibility (incumbent disruption); EIL Strategic Fit module design</td>
+    </tr>
+    <tr>
+      <td>Marketing Management / Market Research</td>
+      <td>TAM / SAM / SOM; primary research design; customer discovery</td>
+      <td>Market sizing sub-indicators; thirty-two-question structured interview instrument; LOI / paying-customer scoring</td>
+    </tr>
+    <tr>
+      <td>Entrepreneurship / Venture Capital</td>
+      <td>Berkus, Scorecard, Risk-Factor Summation; pre-seed mechanics</td>
+      <td>Stage-to-Method bridge for valuation; Berkus floor for TRL 1–3; Scorecard adjustment for Promising-band cases</td>
+    </tr>
+    <tr>
+      <td>Organisational Behaviour</td>
+      <td>Stakeholder mapping; PSU decision dynamics</td>
+      <td>EIL Role Matrix design; recommendation-engine framing as "EIL-best-role" rather than generic "investment"</td>
+    </tr>
+    <tr>
+      <td>Operations Management</td>
+      <td>Systems thinking; process flow design</td>
+      <td>Eleven-screen platform architecture; module-by-module evaluation pipeline; report generation pipeline</td>
+    </tr>
+    <tr>
+      <td>Statistics / Quantitative Methods</td>
+      <td>Weighted scoring; sensitivity analysis; variance diagnostics</td>
+      <td>DWCS formula; calibration variance tagging; valuation-method recommendation logic</td>
+    </tr>
+    <tr>
+      <td>Business Communication</td>
+      <td>Structured writing; consulting deliverable design</td>
+      <td>Final report structure; platform documentation; investment-committee-ready report generation</td>
+    </tr>
+  </table>
+
+  <p>
+    Three subjects deserve specific mention. <strong>Corporate
+    Finance</strong> provided the technical foundation for the DCF and
+    VC Method implementations; the embryonic tier introduced after
+    calibration is itself a direct application of the lecture on
+    WACC sensitivity to stage. <strong>Strategic Management</strong>
+    provided the conceptual scaffolding for distinguishing strategic
+    fit from financial fit — the single most consequential design
+    decision in the framework. <strong>Marketing Management</strong>'s
+    treatment of customer-discovery rigour informed the design of the
+    thirty-two-question interview instrument and the LOI scoring logic
+    in Market Validation.
+  </p>
+  <p>
+    Equally important were the unspoken pedagogical contributions:
+    the standard of writing demanded by case-method classes, the
+    norms of evidence-anchored argument, and the consulting-style
+    discipline of structuring recommendations against an explicit
+    framework. These are not specific concepts but they are the
+    medium through which the framework is delivered.
+  </p>
+</section>
+
+<!-- ===================================================================
+     CHAPTER 8 — CONCLUSIONS & RECOMMENDATIONS
+=================================================================== -->
+<section>
+  <h1>Chapter 8 &mdash; Conclusion, Summary and Recommendations</h1>
+
+  <h2>8.1 Summary of Work Completed</h2>
+  <p>
+    Over eight weeks the internship has delivered a coherent bundle
+    spanning framework, tool, and validation: (i) the Commercialisation
+    Readiness Scorecard — a seven-module, 120-point evaluation
+    framework with explicit hard-floor gates; (ii) the Dynamic Weight
+    Calibration System — a stage- and context-sensitive overlay on
+    top of the CRS; (iii) the Scenario Valuation Model — a stage-to-
+    method bridge that selects among Berkus, Scorecard, VC Method,
+    Revenue Multiple, Peer Multiple, and risk-adjusted DCF, and
+    produces Bull/Base/Bear scenarios; (iv) the deployed digital
+    platform at <em>engsui-evaluator.netlify.app</em>; (v) the
+    eight-startup calibration corpus with transparent variance
+    diagnostics; (vi) the six-founder structured interview programme;
+    and (vii) the EIL Role Matrix that converts individual evaluations
+    into portfolio-level recommendations.
+  </p>
+
+  <h2>8.2 Key Findings</h2>
+  <p>
+    Four findings emerge from the body of work.
+  </p>
+  <p>
+    <strong>First</strong>, the framework's mean valuation ratio of
+    approximately 0.59× market is not inaccuracy but a deliberate
+    feature. For a PSU investor whose mandate is strategic deployment
+    rather than upside maximisation, a systematically conservative
+    output is the correct primary number. The framework supports
+    explicit identification and (where defended) inclusion of
+    narrative premium — but it never embeds it implicitly.
+  </p>
+  <p>
+    <strong>Second</strong>, the EIL Strategic Fit module's hard-
+    floor gate functions exactly as designed. Miko Technologies — a
+    consumer-AI robotics company with strong execution, a high CRS,
+    and a recent Series-D round — is correctly rejected by the
+    framework on EIL-fit grounds despite scoring 79% on the general
+    scorecard. This is the single most important calibration result.
+  </p>
+  <p>
+    <strong>Third</strong>, the founder interviews reveal that EIL's
+    EPC network and PSU-client relationships are valued more highly
+    by founders than the funding itself. This argues for a portfolio
+    composition that shifts further toward Engineering Partnership
+    and Licensing pathways relative to Direct Equity.
+  </p>
+  <p>
+    <strong>Fourth</strong>, calibration variance is sector-
+    structured, not random. CCUS, nanomaterials, and pre-revenue wind
+    each required specific parameter adjustments. This argues for a
+    future practice of running a calibration pass at the start of
+    each new sector entry, rather than treating sector multiples as
+    immutable.
+  </p>
+
+  <h2>8.3 Recommendations to EIL</h2>
+  <p>
+    Five concrete recommendations follow from the internship.
+  </p>
+  <ol>
+    <li><strong>Formalise the CRS platform as the standard pre-screen for EngSUI applications.</strong> The platform replaces an ad-hoc pre-screen with a structured one and produces an auditable artefact in JSON form. Cost of adoption is near-zero (no infrastructure, no licence fees).</li>
+    <li><strong>Make DPIIT recognition a prerequisite for the Direct Equity track.</strong> DPIIT recognition removes Angel-Tax exposure on premium-priced equity rounds and signals minimum institutional discipline. The cost is trivial; the audit benefit is large.</li>
+    <li><strong>Embed pro-rata participation and information rights in all future MOAs.</strong> Even where EIL's initial commitment is sub-board-seat, pro-rata rights preserve optionality on follow-on rounds, and standard information covenants enable portfolio monitoring without renegotiation. Both are standard institutional-investor protections that EIL should make non-negotiable.</li>
+    <li><strong>Institute mandatory IP-counsel review for commitments above ₹5 Cr.</strong> The IP module's sub-indicators on claim breadth and FTO require patent-counsel input that the framework cannot substitute for. A formal counsel-review gate above the ₹5 Cr threshold mitigates downstream IP risk.</li>
+    <li><strong>Build a lightweight API bridge to MCA21 and the Startup India portal.</strong> Automated compliance verification — incorporation, DPIIT recognition currency, AGM filing — eliminates a category of manual diligence and reduces turnaround time. The investment is modest and amortises across the entire EngSUI pipeline.</li>
+  </ol>
+
+  <h2>8.4 Future Plan and Continuity</h2>
+  <p>
+    Three follow-on workstreams would strengthen the deliverable
+    further within EIL's next eighteen months:
+  </p>
+  <p>
+    (i) <em>Portfolio outcome backtest</em> — once the 2017–2021
+    cohort matures to operational outcome, run the framework against
+    historical inputs and measure score-to-outcome correlation. This
+    is the empirical foundation for refining the DWCS multipliers.
+    (ii) <em>Multi-evaluator collaboration on the platform</em> —
+    extend the platform to support investment-committee preparation
+    workflows where multiple evaluators score independently and
+    disagreement is surfaced for discussion. (iii) <em>Sector-pack
+    extensions</em> — pre-populate sector-specific sub-indicator
+    thresholds (e.g. for green hydrogen, CCUS, biofuels) so that
+    new applicants can be screened against a sector-tuned rubric
+    rather than the generic one.
+  </p>
+
+  <h2>8.5 Concluding Statement</h2>
+  <p>
+    EIL's EngSUI initiative occupies an unusually consequential
+    institutional space — at the intersection of national energy
+    policy, public-sector procurement discipline, and the operating
+    realities of early-stage deep-tech. A framework appropriate to
+    this space cannot be borrowed wholesale from generalist venture
+    capital practice, nor can it be derived solely from grant-funding
+    rubrics like BIRAC's. It must be built ground-up around EIL's
+    strategic mandate, calibrated against actually-observed
+    transactions, and operationalised as a tool the analyst can
+    actually use on a Tuesday afternoon.
+  </p>
+  <p>
+    The Commercialisation Readiness Scorecard, the Dynamic Weight
+    Calibration System, the Scenario Valuation Model, the deployed
+    platform, the eight-startup calibration corpus, the six-founder
+    interview programme, and the EIL Role Matrix together attempt to
+    meet this standard. The internship has produced a structured,
+    academically grounded, technically deployed, and empirically
+    calibrated capability that addresses a genuine gap in EIL's
+    investment-decision process. The framework bridges the gap
+    between the TC's numerical valuation and EIL's strategic
+    investment rationale — providing a repeatable, auditable, and
+    internally owned evaluation capability that is now operational and
+    available for use by the R&amp;D Division. The author thanks
+    Engineers India Limited for the opportunity to contribute to this
+    work and looks forward to its continued use and refinement in the
+    EngSUI initiative's future funding rounds.
+  </p>
+</section>
+
+<!-- ===================================================================
+     APPENDIX BLOCK — Roman numerals (i, ii, iii ...) — counter reset
+=================================================================== -->
+<div class="appendix-block" style="counter-reset: page 0;">
+
+<section>
+  <h1>Appendix A &mdash; Detailed Scoring Indicator Map</h1>
+
+  <p>
+    The appendix below enumerates the 40+ sub-indicators that the CRS
+    framework uses across its seven modules. Each sub-indicator's
+    point allocation and the scoring rubric (1–5 scale) is documented
+    in the platform's Methodology page at
+    <em>engsui-evaluator.netlify.app/scoring-mechanism/</em>.
+  </p>
+
+  <h2>M1 — Technology Readiness (25 points)</h2>
+  <ul>
+    <li><strong>TRL Level (5 pts)</strong> — European-Commission nine-level scale; benchmarked to industrial maturity gates.</li>
+    <li><strong>Pilot Status (5 pts)</strong> — paid pilot, unpaid pilot, controlled lab, none.</li>
+    <li><strong>Independent Validation (2 pts)</strong> — third-party endurance / performance verification by an accredited laboratory.</li>
+    <li><strong>Data Quality (3 pts)</strong> — depth and credibility of performance data disclosed.</li>
+    <li><strong>Uniqueness (3 pts)</strong> — defensibility of technological position vs nearest competitor.</li>
+    <li><strong>Scalability (3 pts)</strong> — engineering replicability from prototype to commercial scale.</li>
+    <li><strong>Manufacturing Maturity (2 pts)</strong> — readiness of manufacturing process and supply chain.</li>
+    <li><strong>Reliability (2 pts)</strong> — MTBF, failure-mode analysis, field experience.</li>
+  </ul>
+
+  <h2>M2 — IP and Patents (15 points)</h2>
+  <ul>
+    <li><strong>Filing Status (3 pts)</strong> — grants vs filings vs provisional.</li>
+    <li><strong>Breadth (2 pts)</strong> — geographic and claim coverage.</li>
+    <li><strong>Claim Quality (3 pts)</strong> — independent-claim defensibility (requires patent-counsel input).</li>
+    <li><strong>FTO Status (3 pts)</strong> — freedom-to-operate clearance.</li>
+    <li><strong>Publications (1 pt)</strong> — peer-reviewed scientific support.</li>
+    <li><strong>Origin (2 pts)</strong> — ownership clarity (founders vs institution vs jointly assigned).</li>
+    <li><strong>Trade-Secret Layer (1 pt)</strong> — protection of process know-how outside the patent envelope.</li>
+  </ul>
+
+  <h2>M3 — Team and Leadership (20 points)</h2>
+  <ul>
+    <li><strong>Founder Domain Expertise (4 pts)</strong>.</li>
+    <li><strong>Business / Commercial Depth (3 pts)</strong>.</li>
+    <li><strong>Industry Network and Relationship Capital (2 pts)</strong>.</li>
+    <li><strong>Team Completeness (3 pts)</strong> — coverage of CTO/CFO/COO functions.</li>
+    <li><strong>Institutional Anchoring (3 pts)</strong> — IIT/IISc/NIT or PhD-program origin.</li>
+    <li><strong>Diversity and Adaptability (2 pts)</strong>.</li>
+    <li><strong>Advisory Board (1 pt)</strong>.</li>
+    <li><strong>Prior Traction / Exit (1 pt)</strong>.</li>
+    <li><strong>Full-Time Intensity (1 pt)</strong>.</li>
+  </ul>
+
+  <h2>M4 — Market Validation (20 points)</h2>
+  <ul>
+    <li><strong>TAM (3 pts)</strong>, <strong>SAM (3 pts)</strong>, <strong>CAGR (2 pts)</strong>.</li>
+    <li><strong>Customer Discovery Depth (2 pts)</strong>.</li>
+    <li><strong>LOI / Pilot Evidence (3 pts)</strong>.</li>
+    <li><strong>Paying Customers (2 pts)</strong> — binary discount removed if zero.</li>
+    <li><strong>Unit-of-Consumption Fit (2 pts)</strong>.</li>
+    <li><strong>Competitive Intensity (Inverse, 2 pts)</strong>.</li>
+    <li><strong>Policy Tailwind (1 pt)</strong>.</li>
+  </ul>
+
+  <h2>M5 — Adoption Feasibility (15 points)</h2>
+  <ul>
+    <li><strong>Regulatory Path (3 pts)</strong>.</li>
+    <li><strong>CapEx Intensity (Inverse, 5 pts)</strong>.</li>
+    <li><strong>Integration Complexity (Inverse, 2 pts)</strong>.</li>
+    <li><strong>Incumbent Disruption (2 pts)</strong>.</li>
+    <li><strong>Supply Chain Readiness (2 pts)</strong>.</li>
+    <li><strong>Price Competitiveness (1 pt)</strong>.</li>
+  </ul>
+
+  <h2>M6 — Business Model (15 points)</h2>
+  <ul>
+    <li><strong>Revenue-Model Clarity (3 pts)</strong>.</li>
+    <li><strong>Unit Economics (4 pts)</strong>.</li>
+    <li><strong>Customer Acquisition Strategy (2 pts)</strong>.</li>
+    <li><strong>Operating Discipline (2 pts)</strong>.</li>
+    <li><strong>ARR Trajectory (2 pts)</strong>.</li>
+    <li><strong>Runway (2 pts)</strong>.</li>
+  </ul>
+
+  <h2>M7 — EIL Strategic Fit (10 points)</h2>
+  <ul>
+    <li><strong>Sector Alignment (3 pts)</strong>.</li>
+    <li><strong>EPC Integration Potential (3 pts)</strong>.</li>
+    <li><strong>National-Mission Fit (2 pts)</strong>.</li>
+    <li><strong>Licensing Willingness (1 pt)</strong>.</li>
+    <li><strong>Founder Receptivity (1 pt)</strong>.</li>
+  </ul>
+</section>
+
+<!-- ===================================================================
+     APPENDIX B — INTERVIEW QUESTIONNAIRE
+=================================================================== -->
+<section>
+  <h1>Appendix B &mdash; Founder Interview Questionnaire</h1>
+
+  <p>
+    The instrument below was used in all six founder interviews
+    conducted in Weeks 5–7. The instrument is structured across five
+    modules of approximately ten minutes each, with one wrap-up module
+    of five minutes — total approximate duration forty-five minutes.
+  </p>
+
+  <h3>Module 1 — Technology (10 minutes)</h3>
+  <ol>
+    <li>Walk me through where your technology stands today — lab, pilot, or commercial scale.</li>
+    <li>What is the single biggest technical risk that could prevent scale-up?</li>
+    <li>Patents filed or granted? What exactly is protected?</li>
+    <li>What time and capital does it take to go from your current stage to first commercial deployment?</li>
+    <li>Has the technology been independently validated? By whom?</li>
+  </ol>
+
+  <h3>Module 2 — Market and Customers (10 minutes)</h3>
+  <ol>
+    <li>Who is the ideal customer, and have you spoken to them?</li>
+    <li>Any paying customers, LOIs, or pilots underway?</li>
+    <li>The biggest reason a potential customer has said "no" or delayed?</li>
+    <li>Top three competitors — including Chinese or international.</li>
+    <li>Pricing model and the basis for it.</li>
+  </ol>
+
+  <h3>Module 3 — Financials and Scale (10 minutes)</h3>
+  <ol>
+    <li>Current production cost per unit at pilot scale.</li>
+    <li>Estimated cost per unit at commercial scale.</li>
+    <li>Capital required to reach commercial scale — and what it is used for.</li>
+    <li>Revenue model (product sale, licence, SaaS, service)?</li>
+    <li>Projected payback period for the customer investing in your technology.</li>
+  </ol>
+
+  <h3>Module 4 — EIL Partnership (10 minutes)</h3>
+  <ol>
+    <li>Beyond funding, what does EIL's network or expertise offer you?</li>
+    <li>Specific industries or companies where EIL's relationships could open doors?</li>
+    <li>Have you explored licensing — where EIL or its clients license your technology?</li>
+    <li>Ideal exit scenario — acquisition, IPO, licence revenue?</li>
+    <li>The one thing EIL could do that would most accelerate your commercialisation.</li>
+  </ol>
+
+  <h3>Module 5 — Risks and Barriers (5 minutes)</h3>
+  <ol>
+    <li>Biggest non-technical barrier to adoption in your sector.</li>
+    <li>Regulatory approvals pending that could delay commercialisation.</li>
+    <li>What happens if a large player (Reliance, Tata, ONGC) decides to build this themselves?</li>
+  </ol>
+</section>
+
+<!-- ===================================================================
+     APPENDIX C — CALIBRATION DETAIL
+=================================================================== -->
+<section>
+  <h1>Appendix C &mdash; Calibration Detail and Methodology</h1>
+
+  <p>
+    The calibration approach measures framework-implied valuation
+    against publicly disclosed or dilution-implied market valuations
+    and records the variance with a transparent tag. The methodology
+    is described in Section 5.11 of the main report; this appendix
+    provides the detailed per-startup table.
+  </p>
+
+  <table>
+    <caption><span class="tnum">Appendix C.1</span> Per-startup calibration detail</caption>
+    <tr>
+      <th>Startup</th><th class="num">Actual (₹ Cr)</th>
+      <th>Actual-Value Basis</th><th class="num">Tool (₹ Cr)</th>
+      <th>Tool Method</th><th>Tool Verdict</th>
+    </tr>
+    <tr>
+      <td>Alt Carbon</td><td class="num">398.5</td>
+      <td>$12M Seed May 2025 @ 25% dilution-implied</td>
+      <td class="num">220.3 (pre) / ≈383 (post-calib)</td>
+      <td>VC Method</td>
+      <td>Promising (~61% CRS)</td>
+    </tr>
+    <tr>
+      <td>Miko Technologies</td><td class="num">4,600</td>
+      <td>Series D Aug 2025 · $550M post-money</td>
+      <td class="num">3,071 (pre) / not re-tuned</td>
+      <td>Mixed</td>
+      <td>Commercially-ready CRS but engagement = Reject (non-EIL fit)</td>
+    </tr>
+    <tr>
+      <td>E-Spin Nanotech</td><td class="num">300</td>
+      <td>Bootstrapped 15-yr operator (founder ask ~₹20 Cr)</td>
+      <td class="num">248 (pre) / ≈278 (post-calib)</td>
+      <td>Risk-adj DCF / Peer Mult</td>
+      <td>Commercially-ready (~77%)</td>
+    </tr>
+    <tr>
+      <td>Log9 Materials</td><td class="num">1,899.7</td>
+      <td>Series B Oct 2023 · $228M post-money</td>
+      <td class="num">1,747</td>
+      <td>Peer Multiple</td>
+      <td>Commercially-ready (~75%) · License / Equity</td>
+    </tr>
+    <tr>
+      <td>Aquafront Infra</td><td class="num">15.0</td>
+      <td>$0.5M Seed FY23-24 @ 20–30% dilution-implied</td>
+      <td class="num">15.75</td>
+      <td>Risk-adj DCF (water 6× terminal)</td>
+      <td>Commercially-ready (~70%) · EPC Partner</td>
+    </tr>
+    <tr>
+      <td>Fermentech Labs</td><td class="num">15.0</td>
+      <td>Bootstrapped · DBT BIG + BIRAC + EngSUI grants</td>
+      <td class="num">16.0</td>
+      <td>Risk-adj DCF (Biotech 7×)</td>
+      <td>Promising (~55%) · Seed Grant / License</td>
+    </tr>
+    <tr>
+      <td>VayuJal</td><td class="num">2.0</td>
+      <td>RTBI 5% via incubator grant · no priced equity round</td>
+      <td class="num">2.4</td>
+      <td>Risk-adj DCF (Water 6×)</td>
+      <td>Viable niche (~62%) · Equity (validates EIL prior)</td>
+    </tr>
+    <tr>
+      <td>Powerzest Energy</td><td class="num">0.75</td>
+      <td>TIDES incubator only · no equity round</td>
+      <td class="num">1.2 (pre) / ≈0.8 (post-calib)</td>
+      <td>Risk-adj DCF embryonic tier</td>
+      <td>Early/exploratory (~40%) · Watch</td>
+    </tr>
+  </table>
+
+  <p>
+    Variance is recorded as (Tool − Actual) / Actual × 100. Negative
+    variance indicates framework overshoot relative to actual; positive
+    variance indicates undershoot. The five tight cases all land
+    inside a twenty-percent variance band. The three wider cases each
+    carry a documented diagnostic narrative; two (Alt Carbon, E-Spin)
+    were addressed via sector-multiple recalibration and one
+    (Powerzest) via a new embryonic DCF tier. The Miko case was
+    deliberately left un-tuned to validate the EIL Strategic Fit hard
+    floor.
+  </p>
+</section>
+
+<!-- ===================================================================
+     APPENDIX D — OFFER LETTER (reproduction of email; original on file)
+=================================================================== -->
+<section>
+  <h1>Appendix D &mdash; Internship Offer Letter (EIL)</h1>
+
+  <p class="no-indent">
+    The original allocation email from Engineers India Limited is reproduced
+    below. The original electronic copy is retained on file at IIM Nagpur's
+    CDS office; the printed hard-bound copy of this report carries the original
+    e-mail print-out as the official offer document.
+  </p>
+
+  <div class="callout" style="font-size:11pt; line-height:1.45;">
+    <p class="no-indent" style="font-weight:bold; margin-bottom:8pt;">
+      Subject: Reporting of Vocational Trainee Mr. Priyanshu Dutta in EIL from
+      05-April-2026 to 06-June-2026
+    </p>
+    <p class="no-indent" style="margin-bottom:6pt;">
+      <strong>From:</strong> Sudhansu Bala Satapathy &lt;sb.satapathy@eil.co.in&gt;<br/>
+      <strong>To:</strong> Sanjeev Singhal &lt;sanjeev.singhal@eil.co.in&gt;<br/>
+      <strong>Cc:</strong> Anubha T. Agarwal, p25priyanshu@iimnagpur.ac.in, Anil Kumar, trainingdepartmenteil@gmail.com<br/>
+      <strong>Date:</strong> Thursday, 5 March 2026 at 3:36 PM
+    </p>
+    <p class="no-indent" style="margin-bottom:6pt;">Dear Sir,</p>
+    <p class="no-indent" style="margin-bottom:6pt;">
+      Below mentioned VT(s) has/have been allocated to you for Internship as per details below. CV of the student(s) are enclosed for reference.
+    </p>
+  </div>
+
+  <table>
+    <caption><span class="tnum">Table D.1</span> Allocation details from EIL Training &amp; Development</caption>
+    <tr>
+      <th>Student Name</th>
+      <th>Email</th>
+      <th>Contact</th>
+      <th>Division</th>
+      <th>Location</th>
+      <th>Reporting</th>
+      <th>From</th>
+      <th>To</th>
+    </tr>
+    <tr>
+      <td>Mr. Priyanshu Dutta</td>
+      <td>p25priyanshu@iimnagpur.ac.in</td>
+      <td class="num">7043373525</td>
+      <td>R&amp;D</td>
+      <td>Gurugram Complex</td>
+      <td>Mr. Sanjeev Singhal</td>
+      <td>5 Apr 2026</td>
+      <td>6 Jun 2026</td>
+    </tr>
+  </table>
+
+  <p>
+    Mr. Priyanshu Dutta: Please share attached Bio-data form by 5 April 2026 to
+    Ms. Sudhansu Bala Satapathy at sb.satapathy@eil.co.in. For joining
+    formalities, the student is to report to the undersigned at Training &amp;
+    Development Division, EIL, Gurugram, at 8:30 a.m. on 5 April 2026 carrying
+    a printout of this e-mail, a copy of the Institute ID Card, two passport-
+    size photographs, Aadhaar ID, and the filled Bio-data form.
+  </p>
+  <p>
+    The student will submit the Evaluation &amp; Attendance proforma (hard
+    copy, to be provided at the time of joining) after it is duly filled and
+    approved, on the last day of training.
+  </p>
+
+  <p class="no-indent" style="margin-top:18pt;">
+    Regards,<br/>
+    <strong>S. B. Satapathy</strong><br/>
+    Training and Development<br/>
+    Tower II, G-Floor &nbsp;·&nbsp; EIL Gurugram Office Complex<br/>
+    Phone: 0124-289-2242 &nbsp;·&nbsp; Mobile: 9953947089
+  </p>
+
+  <p class="no-indent" style="margin-top:24pt; font-size:10pt; font-style:italic;">
+    [The original e-mail print-out is bound at the front of the hard-bound copy
+    of this report along with the EIL Summer Internship Completion Certificate
+    issued by the R&amp;D Division at the close of the internship.]
+  </p>
+</section>
+
+<!-- ===================================================================
+     REFERENCES (still inside appendix-block → Roman numerals)
+=================================================================== -->
+<section>
+  <h1>References</h1>
+  <ul class="footnote-refs" style="list-style:none; padding-left:0;">
+    <li>Berkus, D. (1996). <em>The Berkus Method of Startup Valuation</em>. Berkus Press.</li>
+    <li>Blank, S. (2013). <em>The Four Steps to the Epiphany: Successful Strategies for Products that Win</em> (5th ed.). K&amp;S Ranch.</li>
+    <li>CB Insights. (2021). <em>The Top 12 Reasons Startups Fail</em>. CB Insights Research.</li>
+    <li>Engineers India Limited. (2024). <em>EngSUI: Engineers India Startup Initiative — Programme Brochure</em>. EIL R&amp;D Division.</li>
+    <li>Europ. (2025). <em>Deep-Tech India Sector Report 2025</em>.</li>
+    <li>Government of India, Ministry of Commerce and Industry — DPIIT. (2024). <em>Startup India: Recognition Framework and Tax Benefits</em>.</li>
+    <li>Ministry of Petroleum and Natural Gas. (2017). <em>Directive on Public-Sector Engagement with Deep-Tech Energy Innovation</em>.</li>
+    <li>NESTA. (2022). <em>Why Deep Tech Hardware Startups Fail: A Failure-Mode Analysis</em>. NESTA Innovation Foundation, London.</li>
+    <li>Payne, B. (2001). <em>Scorecard Valuation Methodology</em>. Angel Capital Association.</li>
+    <li>Porter, M. E. (1980). <em>Competitive Strategy: Techniques for Analysing Industries and Competitors</em>. Free Press.</li>
+    <li>Sahlman, W. A. (1990). The structure and governance of venture-capital organizations. <em>Journal of Financial Economics, 27</em>(2), 473–521.</li>
+    <li>SEBI / Ministry of Corporate Affairs. (2024). <em>MCA21 Filing Database: Public Access Guidelines</em>.</li>
+    <li>Tracxn Technologies. (2026). <em>India Deep-Tech Startup Database: EngSUI Adjacency Set</em>.</li>
+    <li>YourStory, Entrackr, Inc42, TechCrunch — selected press coverage of Alt Carbon, Log9 Materials, VayuJal, Acquafront, Fermentech, E-Spin Nanotech, Powerzest Energy, Miko Technologies (2018–2026).</li>
+  </ul>
+
+  <p style="margin-top:24pt; text-align:center; font-style:italic; font-size:11pt;">
+    — End of Report —
+  </p>
+</section>
+
+</div><!-- /appendix-block -->
+
+</body>
+</html>

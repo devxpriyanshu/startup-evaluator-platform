@@ -1,0 +1,1624 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EngSUI Commercialisation Intelligence Tool</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js" defer></script>
+    <script src="./app.js" defer></script>
+  </head>
+  <body>
+    <div class="shell">
+      <header class="header">
+        <div>
+          <div class="header-title">EIL EngSUI — Tech Commercialisation Intelligence Tool</div>
+          <div class="header-subtitle">
+            Static internal decision tool · richer v3 modules restored · valuation methods configurable
+          </div>
+        </div>
+        <div class="header-meta">
+          8 evaluation modules · report intelligence layer<br />
+          Startup evaluation · internal use only
+        </div>
+      </header>
+
+      <div class="progress-bar">
+        <div class="progress-fill" id="progress-fill"></div>
+      </div>
+
+      <nav class="tab-nav">
+        <button class="tab-button active" data-page="0">Profile</button>
+        <button class="tab-button" data-page="1">M1 · Tech (25)</button>
+        <button class="tab-button" data-page="2">M2 · IP (15)</button>
+        <button class="tab-button" data-page="3">M3 · Team (20)</button>
+        <button class="tab-button" data-page="4">M4 · Market (20)</button>
+        <button class="tab-button" data-page="5">M5 · Adoption (15)</button>
+        <button class="tab-button" data-page="6">M6 · Business (15)</button>
+        <button class="tab-button" data-page="7">M7 · EIL Fit (10)</button>
+        <button class="tab-button" data-page="8">Valuation Config</button>
+        <button class="tab-button" data-page="9">Data Room</button>
+        <button class="tab-button report-tab" data-page="10">Report ↗</button>
+      </nav>
+
+      <main class="body">
+        <section class="page active" id="page-0">
+          <div class="page-title">Startup profile</div>
+          <div class="page-subtitle">
+            Core startup information, context, and saved startup management.
+          </div>
+
+          <div class="profile-layout">
+            <div class="card">
+              <div class="section-title">Basic information</div>
+              <div class="grid-two">
+                <div class="field-group">
+                  <label class="field-label" for="p-name">Startup name *</label>
+                  <input id="p-name" type="text" placeholder="e.g. GreenH2 Technologies Pvt. Ltd." />
+                </div>
+                <div class="field-group">
+                  <label class="field-label" for="p-yr">Founding year</label>
+                  <input id="p-yr" type="number" min="2000" max="2030" />
+                </div>
+              </div>
+
+              <div class="field-group">
+                <label class="field-label" for="p-desc">Technology description *</label>
+                <textarea
+                  id="p-desc"
+                  placeholder="e.g. Solid-oxide electrolyser achieving 95% Faradaic efficiency for green hydrogen at industrial scale"
+                ></textarea>
+              </div>
+
+              <div class="grid-two">
+                <div class="field-group">
+                  <label class="field-label" for="p-target">Target customer segment</label>
+                  <input
+                    id="p-target"
+                    type="text"
+                    placeholder="e.g. Refineries upgrading hydrogen production systems"
+                  />
+                </div>
+                <div class="field-group">
+                  <label class="field-label" for="p-incubator">Incubator / host institution</label>
+                  <input id="p-incubator" type="text" placeholder="e.g. IIT Delhi Bioincubator" />
+                </div>
+              </div>
+
+              <div class="grid-two">
+                <div class="field-group">
+                  <label class="field-label" for="p-sec">Sector</label>
+                  <select id="p-sec">
+                    <option value="hydrogen">Green Hydrogen / Electrolysis</option>
+                    <option value="solar">Solar / Photovoltaics</option>
+                    <option value="storage">Energy Storage / Batteries</option>
+                    <option value="ccus">CCUS / Carbon Capture</option>
+                    <option value="biofuels">Biofuels / Biomass</option>
+                    <option value="iot">Smart Grid / Industrial IIoT</option>
+                    <option value="wind">Wind Energy</option>
+                    <option value="nuclear">Nuclear / SMR</option>
+                    <option value="nano">Nanomaterials / Advanced Materials</option>
+                    <option value="w2e">Waste-to-Energy</option>
+                    <option value="efficiency">AI-Driven Energy Efficiency</option>
+                    <option value="water">Water Technology</option>
+                    <option value="biotech">Industrial Biotech</option>
+                    <option value="other">Other Deep-Tech Energy</option>
+                  </select>
+                </div>
+                <div class="field-group">
+                  <label class="field-label" for="p-stage">Stage</label>
+                  <select id="p-stage">
+                    <option value="idea">Idea / Concept</option>
+                    <option value="seed">Pre-seed / Seed</option>
+                    <option value="psa">Pre-Series A</option>
+                    <option value="sa">Series A</option>
+                    <option value="sb">Series B+</option>
+                    <option value="rev">Revenue-generating</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="grid-two">
+                <div class="field-group">
+                  <label class="field-label" for="p-hq">Headquarters</label>
+                  <input id="p-hq" type="text" placeholder="e.g. Bengaluru, Karnataka" />
+                </div>
+                <div class="field-group">
+                  <label class="field-label" for="p-eval">Evaluator & date</label>
+                  <input id="p-eval" type="text" placeholder="e.g. Priyanshu Dutta · April 2026" />
+                </div>
+              </div>
+
+              <div class="grid-two">
+                <div class="field-group">
+                  <label class="field-label" for="p-founder-ask">Founder valuation ask (₹ Cr)</label>
+                  <input id="p-founder-ask" type="number" min="0" step="0.1" />
+                </div>
+                <div class="field-group">
+                  <label class="field-label" for="p-notes">Context notes</label>
+                  <input
+                    id="p-notes"
+                    type="text"
+                    placeholder="e.g. EIL interaction, pilot context, or diligence notes"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <aside class="card sidebar-card">
+              <div class="section-title">Saved startups</div>
+              <div class="action-row">
+                <button class="button button-primary" id="save-startup">Save startup</button>
+                <button class="button" id="new-startup">New startup</button>
+              </div>
+              <div class="action-row" style="margin-top:6px">
+                <button class="button" id="export-all-startups" title="Download a JSON backup of all saved and archived startups">Export all</button>
+                <button class="button" id="import-startups-btn" title="Restore from a JSON backup file">Import</button>
+                <input id="import-startups-file" type="file" accept="application/json,.json" hidden />
+              </div>
+              <div id="export-reminder" class="export-reminder" hidden></div>
+              <div id="import-preview" class="import-preview" hidden></div>
+              <div class="saved-list" id="saved-list"></div>
+            </aside>
+          </div>
+
+          <details class="card weights-rationale">
+            <summary>
+              <strong>Why these module weights?</strong>
+              <span style="font-size:11px;color:var(--text-tertiary)">Click to expand</span>
+              <a href="/scoring-mechanism/" target="_blank" rel="noopener"
+                 class="methodology-link" onclick="event.stopPropagation()"
+                 title="Open the full 120-point scoring framework reference in a new tab">View full scoring framework →</a>
+            </summary>
+            <div class="weights-grid">
+              <div class="weight-row"><span class="w-name">M1 · Technology readiness</span><span class="w-val">25</span><span class="w-why">Highest weight because a deep-tech startup without a working core technology has no investable thesis. TRL, pilot data, and engineering scalability drive all downstream value.</span></div>
+              <div class="weight-row"><span class="w-name">M3 · Team</span><span class="w-val">20</span><span class="w-why">Deep-tech outcomes track founder capability 2×-3× more than any other variable. Weighted second-highest to reflect execution risk dominance at early stage.</span></div>
+              <div class="weight-row"><span class="w-name">M4 · Market validation</span><span class="w-val">20</span><span class="w-why">Technology without demand is R&amp;D. LOIs, paying pilots, and market size establish whether the tech solves a commercial problem worth investing in.</span></div>
+              <div class="weight-row"><span class="w-name">M2 · IP &amp; patents</span><span class="w-val">15</span><span class="w-why">EIL's licensing and equity routes both require defensible IP. Weighted high enough to gate the licensing decision, but capped to avoid paper patents dominating.</span></div>
+              <div class="weight-row"><span class="w-name">M5 · Adoption feasibility</span><span class="w-val">15</span><span class="w-why">Even proven tech can fail at plant level (capex, integration, regulatory). Weighted to flag adoption friction that won't show up in lab TRL.</span></div>
+              <div class="weight-row"><span class="w-name">M6 · Business model</span><span class="w-val">15</span><span class="w-why">Revenue model and unit economics determine whether a win at pilot scales to a business. Includes cash runway as a live-or-die signal.</span></div>
+              <div class="weight-row"><span class="w-name">M7 · EIL strategic fit</span><span class="w-val">10</span><span class="w-why">Lowest weight — acts as a decision filter rather than a score driver. A startup can be excellent without EIL fit, but EIL will not engage without it (see hard gate below).</span></div>
+            </div>
+            <div class="weight-note">Weights reflect EIL's deep-tech infrastructure investment thesis (capital-intensive, long-horizon, EPCM-leveraged). A different investor class (pure VC, sovereign fund) would reweight — this rubric is intentionally EIL-specific. <strong>EIL fit &lt; 3 triggers rejection</strong> regardless of other module scores.</div>
+          </details>
+        </section>
+
+        <section class="page" id="page-1">
+          <div class="page-title">Module 1 · Technology readiness <span class="pill blue">25 points</span></div>
+          <div class="page-subtitle">
+            Technology maturity, third-party validation, engineering architecture, manufacturing readiness, and reliability.
+          </div>
+
+          <div class="card module-body-card">
+
+          <div class="section-title">TRL & maturity</div>
+          <div class="field-group">
+            <label class="field-label" for="t-trl">Technology Readiness Level (TRL 1–9)</label>
+            <span class="field-hint">1–3 Basic research · 4–6 Development / prototype · 7–9 Demonstration to commercial</span>
+            <div class="slider-row">
+              <span class="slider-minmax">1</span>
+              <input id="t-trl" type="range" min="1" max="9" value="3" data-output="t-trl-out" />
+              <span class="slider-minmax">9</span>
+              <span class="slider-value" id="t-trl-out">TRL 3</span>
+            </div>
+          </div>
+
+          <div class="grid-two">
+            <div class="field-group">
+              <label class="field-label" for="t-pilot">Pilot / demonstration status</label>
+              <select id="t-pilot">
+                <option value="0">No pilot — lab / simulation only</option>
+                <option value="2">Bench-scale PoC demonstrated</option>
+                <option value="4">Controlled lab pilot (internal team)</option>
+                <option value="6">Third-party validated field pilot</option>
+                <option value="8">Multi-site industrial pilot with paying clients</option>
+                <option value="10">Fully commercial-scale deployment active</option>
+              </select>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="t-iv">Independent validation</label>
+              <select id="t-iv">
+                <option value="1">Yes — independent validation available</option>
+                <option value="0">No — internal validation only</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label class="field-label" for="t-data">Empirical data quality</label>
+            <span class="field-hint">1 = Internal simulations only · 5 = Independent, published, third-party field-verified data</span>
+            <div class="slider-row">
+              <input id="t-data" type="range" min="1" max="5" value="2" data-output="t-data-out" />
+              <span class="slider-value" id="t-data-out">2/5</span>
+            </div>
+          </div>
+
+          <div class="section-title">Engineering properties</div>
+          <div class="field-group">
+            <label class="field-label" for="t-uniq">Technology uniqueness & differentiation</label>
+            <span class="field-hint">1 = Incremental improvement · 5 = Breakthrough / world-first innovation</span>
+            <div class="slider-row">
+              <input id="t-uniq" type="range" min="1" max="5" value="3" data-output="t-uniq-out" />
+              <span class="slider-value" id="t-uniq-out">3/5</span>
+            </div>
+          </div>
+
+          <div class="grid-two">
+            <div class="field-group">
+              <label class="field-label" for="t-scale">Scalability of engineering architecture</label>
+              <select id="t-scale">
+                <option value="1">Bespoke — custom engineering every installation</option>
+                <option value="2">Significant scale-up challenges</option>
+                <option value="3">Scalable with major investment</option>
+                <option value="4">Modular — standard engineering replication</option>
+                <option value="5">Plug-and-play — inherently scalable</option>
+              </select>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="t-mfg">Manufacturing readiness</label>
+              <select id="t-mfg">
+                <option value="1">Low — no repeatable manufacturing path</option>
+                <option value="2">Medium — partial readiness, further process work needed</option>
+                <option value="3">High — scale-ready or production proven</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid-two">
+            <div class="field-group">
+              <label class="field-label" for="t-rel">Technology reliability & failure risk</label>
+              <span class="field-hint">1 = Unproven, high failure rate risk · 5 = Proven reliable across operating conditions</span>
+              <div class="slider-row">
+                <input id="t-rel" type="range" min="1" max="5" value="2" data-output="t-rel-out" />
+                <span class="slider-value" id="t-rel-out">2/5</span>
+              </div>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="t-benchmarks">Performance benchmarks / evidence</label>
+              <input id="t-benchmarks" type="text" placeholder="e.g. third-party benchmark report, endurance testing, BIS/IEC evidence" />
+            </div>
+          </div>
+
+          <div class="confidence-row">
+            <label for="conf-m1">Evidence confidence:</label>
+            <select id="conf-m1" class="conf-select">
+              <option value="high">High — independent / verified</option>
+              <option value="medium" selected>Medium — founder-provided with some evidence</option>
+              <option value="low">Low — self-reported, no third-party proof</option>
+            </select>
+            <span class="c-note">Low confidence flags this module in the final report.</span>
+          </div>
+          </div>
+        </section>
+
+        <section class="page" id="page-2">
+          <div class="page-title">Module 2 · IP & patent assessment <span class="pill purple">15 points</span></div>
+          <div class="page-subtitle">
+            Patent status, breadth, claim quality, freedom to operate, publications, secrecy depth, and IP origin clarity.
+          </div>
+
+          <div class="card module-body-card">
+
+          <div class="section-title">Patent portfolio status</div>
+          <div class="grid-two">
+            <div class="field-group">
+              <label class="field-label" for="ip-status">Patent filing status</label>
+              <select id="ip-status">
+                <option value="0">No IP filed — no protection whatsoever</option>
+                <option value="1">Trade secret / proprietary know-how only</option>
+                <option value="2">Provisional application filed (India)</option>
+                <option value="3">Complete patent application filed (India)</option>
+                <option value="4">PCT application filed (international)</option>
+                <option value="5">Patent granted — India</option>
+                <option value="6">Patent granted — India + 1 major jurisdiction</option>
+                <option value="7">Patent granted — India + multiple major jurisdictions</option>
+              </select>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="ip-breadth">Patent portfolio breadth</label>
+              <select id="ip-breadth">
+                <option value="0">No patents</option>
+                <option value="1">1 patent / very narrow claims</option>
+                <option value="2">2–3 patents covering core technology</option>
+                <option value="3">4–7 patents across core + adjacent areas</option>
+                <option value="4">8+ patents — comprehensive portfolio</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="section-title">IP quality & defensibility</div>
+          <div class="grid-two">
+            <div class="field-group">
+              <label class="field-label" for="ip-quality">Claim quality — scope and defensibility</label>
+              <select id="ip-quality">
+                <option value="0">No claims or trivially narrow claims</option>
+                <option value="1">Narrow method claims — easy to design around</option>
+                <option value="2">Moderate-scope claims — some design-around risk</option>
+                <option value="3">Broad claims covering core inventive concept</option>
+                <option value="4">Very broad claims — strong by IP counsel review</option>
+              </select>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="ip-fto">Freedom-to-operate (FTO) status</label>
+              <select id="ip-fto">
+                <option value="0">No FTO analysis conducted</option>
+                <option value="1">Internal review only</option>
+                <option value="2">Basic FTO analysis; some conflicts identified</option>
+                <option value="3">Independent FTO analysis; mostly clear</option>
+                <option value="4">Full FTO clearance from independent counsel</option>
+              </select>
+              <span class="field-hint">If unknown, default to <strong>1 (Internal review only)</strong>. Pre-Series-A startups rarely have a formal FTO; founders usually know only whether a quick prior-art scan was done.</span>
+            </div>
+          </div>
+
+          <div class="section-title">Scientific validation & publication</div>
+          <div class="grid-two">
+            <div class="field-group">
+              <label class="field-label" for="ip-pub">Peer-reviewed publications</label>
+              <select id="ip-pub">
+                <option value="0">No publications</option>
+                <option value="1">1–2 conference papers</option>
+                <option value="2">1–2 peer-reviewed journal papers</option>
+                <option value="3">3–5 peer-reviewed papers</option>
+                <option value="4">6+ papers including high-impact journals</option>
+              </select>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="ip-origin">Institutional origin of IP</label>
+              <select id="ip-origin">
+                <option value="0">No clear institutional origin</option>
+                <option value="1">Founder-developed independently</option>
+                <option value="2">Developed at IIT / IISc / NIT — assignment confirmed</option>
+                <option value="3">Co-developed with industry partner — licensing clear</option>
+                <option value="4">Developed under DST / BIRAC / grant — rights confirmed</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label class="field-label" for="ip-sec">Technology secrecy risk (reverse-engineerability)</label>
+            <span class="field-hint">5 = Very hard to reverse-engineer; deep trade secrets protect even if patent lapses</span>
+            <div class="slider-row">
+              <input id="ip-sec" type="range" min="1" max="5" value="3" data-output="ip-sec-out" />
+              <span class="slider-value" id="ip-sec-out">3/5</span>
+            </div>
+          </div>
+
+          <div class="confidence-row">
+            <label for="conf-m2">Evidence confidence:</label>
+            <select id="conf-m2" class="conf-select">
+              <option value="high">High — patents verified at registry / IP counsel opinion</option>
+              <option value="medium" selected>Medium — filings sighted, FTO partial</option>
+              <option value="low">Low — claim unverified by registry or counsel</option>
+            </select>
+            <span class="c-note">Low confidence flags this module in the final report.</span>
+          </div>
+          </div>
+        </section>
+
+        <section class="page" id="page-3">
+          <div class="page-title">Module 3 · Team & leadership assessment <span class="pill green">20 points</span></div>
+          <div class="page-subtitle">
+            Founder capability, business leadership, team completeness, networks, and execution strength.
+          </div>
+
+          <div class="card module-body-card">
+
+          <div class="section-title">Founder profile</div>
+          <div class="grid-two">
+            <div class="field-group">
+              <label class="field-label" for="tm-exp">Founder / CEO domain expertise</label>
+              <select id="tm-exp">
+                <option value="1">General entrepreneur — no domain expertise</option>
+                <option value="2">Basic domain knowledge — 2–3 yrs exposure</option>
+                <option value="3">Solid domain expertise — Masters / 5+ yrs industry</option>
+                <option value="4">Deep expertise — PhD or 10+ yrs deep-tech</option>
+                <option value="5">World-class — original inventor / recognised expert</option>
+              </select>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="tm-biz">Commercial & business leadership experience</label>
+              <select id="tm-biz">
+                <option value="1">First-time founder, no business background</option>
+                <option value="2">Some business exposure</option>
+                <option value="3">Prior startup experience</option>
+                <option value="4">Serial entrepreneur or ex-senior corporate</option>
+                <option value="5">Proven exits or major commercial achievements</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid-two">
+            <div class="field-group">
+              <label class="field-label" for="tm-net">Industry network & relationship capital</label>
+              <div class="slider-row">
+                <input id="tm-net" type="range" min="1" max="5" value="2" data-output="tm-net-out" />
+                <span class="slider-value" id="tm-net-out">2/5</span>
+              </div>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="tm-comp">Team completeness</label>
+              <select id="tm-comp">
+                <option value="1">Solo founder; key roles vacant</option>
+                <option value="2">2 co-founders; missing CTO or commercial lead</option>
+                <option value="3">Core team in place; some gaps</option>
+                <option value="4">Full founding team across functions</option>
+                <option value="5">Complete team with senior hires</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid-two">
+            <div class="field-group">
+              <label class="field-label" for="tm-inst">Institutional origin & academic pedigree</label>
+              <select id="tm-inst">
+                <option value="1">No institutional affiliation</option>
+                <option value="2">Tier-2 / Tier-3 institute</option>
+                <option value="3">IIT / NIT / BITS / top state university</option>
+                <option value="4">IIT / IISc / IISER with active collaboration</option>
+                <option value="5">IIT / IISc / global institution spin-out</option>
+              </select>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="tm-div">Team diversity (tech–biz–ops)</label>
+              <div class="slider-row">
+                <input id="tm-div" type="range" min="1" max="5" value="3" data-output="tm-div-out" />
+                <span class="slider-value" id="tm-div-out">3/5</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="section-title">Advisory & execution track record</div>
+          <div class="grid-two">
+            <div class="field-group">
+              <label class="field-label" for="tm-adv">Advisory board quality</label>
+              <select id="tm-adv">
+                <option value="0">No formal advisors</option>
+                <option value="1">1–2 informal advisors</option>
+                <option value="2">Formal advisors; incubated at strong institution</option>
+                <option value="3">Industry advisors + government program support</option>
+                <option value="4">High-profile board — ex-CEO / ex-PSU / known VC</option>
+              </select>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="tm-tr">Execution track record</label>
+              <div class="slider-row">
+                <input id="tm-tr" type="range" min="1" max="5" value="3" data-output="tm-tr-out" />
+                <span class="slider-value" id="tm-tr-out">3/5</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid-two">
+            <div class="field-group">
+              <label class="field-label" for="tm-ft">Founder commitment & full-time status</label>
+              <select id="tm-ft">
+                <option value="0">Founders still in full-time employment elsewhere</option>
+                <option value="1">1 founder full-time; others part-time</option>
+                <option value="2">All core founders full-time; vesting in place</option>
+                <option value="3">Full-time, equity-vested, no moonlighting</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="confidence-row">
+            <label for="conf-m3">Evidence confidence:</label>
+            <select id="conf-m3" class="conf-select">
+              <option value="high">High — references checked / LinkedIn verified</option>
+              <option value="medium" selected>Medium — resumes and self-reported only</option>
+              <option value="low">Low — team makeup unverified</option>
+            </select>
+            <span class="c-note">Low confidence flags this module in the final report.</span>
+          </div>
+          </div>
+        </section>
+
+        <section class="page" id="page-4">
+          <div class="page-title">Module 4 · Market validation <span class="pill amber">20 points</span></div>
+          <div class="page-subtitle">
+            Market size, customer discovery, traction, competition, and policy environment.
+          </div>
+
+          <div class="card module-body-card">
+
+          <div class="section-title">Market sizing</div>
+          <div class="grid-three">
+            <div class="field-group">
+              <label class="field-label" for="m-tam">TAM — global</label>
+              <select id="m-tam">
+                <option value="1">&lt; $500M</option>
+                <option value="2">$500M – $2B</option>
+                <option value="3">$2B – $10B</option>
+                <option value="4">$10B – $50B</option>
+                <option value="5">&gt; $50B</option>
+              </select>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="m-sam">SAM — India</label>
+              <select id="m-sam">
+                <option value="1">&lt; ₹500 Cr</option>
+                <option value="2">₹500–2,000 Cr</option>
+                <option value="3">₹2,000–10,000 Cr</option>
+                <option value="4">₹10,000–50,000 Cr</option>
+                <option value="5">&gt; ₹50,000 Cr</option>
+              </select>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="m-cagr">Market CAGR (%)</label>
+              <div class="slider-row">
+                <input id="m-cagr" type="range" min="0" max="60" value="12" data-output="m-cagr-out" />
+                <span class="slider-value" id="m-cagr-out">12%</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="section-title">Customer validation</div>
+          <div class="grid-two">
+            <div class="field-group">
+              <label class="field-label" for="m-disc">Customer discovery depth</label>
+              <select id="m-disc">
+                <option value="0">No customer conversations held</option>
+                <option value="1">1–5 informal conversations</option>
+                <option value="2">5–15 structured interviews</option>
+                <option value="3">15+ interviews + survey data</option>
+                <option value="4">Primary research + confirmed paid pilot demand</option>
+              </select>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="m-loi">LOIs / MOUs signed</label>
+              <select id="m-loi">
+                <option value="0">None</option>
+                <option value="1">Verbal interest only</option>
+                <option value="2">1–2 written LOIs</option>
+                <option value="3">3–5 formal LOIs</option>
+                <option value="4">5+ LOIs or paid pilots active</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid-two">
+            <div class="field-group">
+              <label class="field-label" for="m-paying">Paying customers today</label>
+              <select id="m-paying">
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+              </select>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="m-uc">Use case clarity</label>
+              <div class="slider-row">
+                <input id="m-uc" type="range" min="1" max="5" value="3" data-output="m-uc-out" />
+                <span class="slider-value" id="m-uc-out">3/5</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="section-title">Competition & policy</div>
+          <div class="grid-two">
+            <div class="field-group">
+              <label class="field-label" for="m-comp">Competitive intensity (5 = blue ocean)</label>
+              <div class="slider-row">
+                <input id="m-comp" type="range" min="1" max="5" value="3" data-output="m-comp-out" />
+                <span class="slider-value" id="m-comp-out">3/5</span>
+              </div>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="m-pol">Policy / regulatory tailwind</label>
+              <select id="m-pol">
+                <option value="1">Regulatory headwinds</option>
+                <option value="2">Some supportive policies</option>
+                <option value="3">Strong support (PLI, MNRE, MoPNG)</option>
+                <option value="4">National mission-critical</option>
+                <option value="5">INDC / Net Zero critical-path</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="confidence-row">
+            <label for="conf-m4">Evidence confidence:</label>
+            <select id="conf-m4" class="conf-select">
+              <option value="high">High — LOIs and paying pilots on file</option>
+              <option value="medium" selected>Medium — conversations and soft commitments only</option>
+              <option value="low">Low — market size from founder deck; no demand proof</option>
+            </select>
+            <span class="c-note">Low confidence flags this module in the final report.</span>
+          </div>
+          </div>
+        </section>
+
+        <section class="page" id="page-5">
+          <div class="page-title">Module 5 · Adoption feasibility <span class="pill red">15 points</span></div>
+          <div class="page-subtitle">
+            Regulatory burden, deployment capex, integration complexity, incumbent resistance, supply chain readiness, and price competitiveness.
+          </div>
+
+          <div class="card module-body-card">
+
+          <div class="grid-two">
+            <div class="field-group">
+              <label class="field-label" for="a-reg">Regulatory approvals required</label>
+              <select id="a-reg">
+                <option value="1">Multiple complex approvals; years of uncertainty</option>
+                <option value="2">Significant regulatory process</option>
+                <option value="3">Standard approvals; clear pathway</option>
+                <option value="4">Minimal approvals</option>
+                <option value="5">No sector-specific approval needed</option>
+              </select>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="a-capex">Customer CapEx to deploy</label>
+              <select id="a-capex">
+                <option value="1">&gt; ₹500 Cr — prohibitive</option>
+                <option value="2">₹100–500 Cr — high</option>
+                <option value="3">₹10–100 Cr — moderate</option>
+                <option value="4">₹1–10 Cr — manageable</option>
+                <option value="5">&lt; ₹1 Cr — low / SaaS</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid-two">
+            <div class="field-group">
+              <label class="field-label" for="a-integ">Integration complexity with existing plant</label>
+              <div class="slider-row">
+                <input id="a-integ" type="range" min="1" max="5" value="3" data-output="a-integ-out" />
+                <span class="slider-value" id="a-integ-out">3/5</span>
+              </div>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="a-inc">Incumbent industry resistance</label>
+              <div class="slider-row">
+                <input id="a-inc" type="range" min="1" max="5" value="3" data-output="a-inc-out" />
+                <span class="slider-value" id="a-inc-out">3/5</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid-two">
+            <div class="field-group">
+              <label class="field-label" for="a-sc">Supply chain readiness in India</label>
+              <select id="a-sc">
+                <option value="1">Critical components absent; no domestic supply</option>
+                <option value="2">Partial; major development needed</option>
+                <option value="3">Moderate gaps; addressable in 3–5 yrs</option>
+                <option value="4">Largely available; minor gaps</option>
+                <option value="5">Full supply chain available domestically</option>
+              </select>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="a-price">Price competitiveness vs incumbent</label>
+              <select id="a-price">
+                <option value="1">2× more expensive; no business case</option>
+                <option value="2">20–100% premium; needs policy support</option>
+                <option value="3">Near-parity with incentives</option>
+                <option value="4">Cost parity today</option>
+                <option value="5">Already cheaper than incumbent</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="confidence-row">
+            <label for="conf-m5">Evidence confidence:</label>
+            <select id="conf-m5" class="conf-select">
+              <option value="high">High — EPC integration plan and regulatory pathway documented</option>
+              <option value="medium" selected>Medium — adoption assumptions plausible but untested</option>
+              <option value="low">Low — deployment economics and regulatory unclear</option>
+            </select>
+            <span class="c-note">Low confidence flags this module in the final report.</span>
+          </div>
+          </div>
+        </section>
+
+        <section class="page" id="page-6">
+          <div class="page-title">Module 6 · Business model strength <span class="pill orange">15 points</span></div>
+          <div class="page-subtitle">
+            Revenue model clarity, unit economics, go-to-market strength, operational scalability, and forward projections.
+          </div>
+
+          <div class="card module-body-card">
+
+          <div class="grid-two">
+            <div class="field-group">
+              <label class="field-label" for="b-rm">Revenue model clarity</label>
+              <select id="b-rm">
+                <option value="1">No model defined</option>
+                <option value="2">Concept; untested assumptions</option>
+                <option value="3">Model defined; some validated assumptions</option>
+                <option value="4">Paying customers demonstrating model</option>
+                <option value="5">Proven, repeatable at scale</option>
+              </select>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="b-ue">Unit economics (gross margin outlook)</label>
+              <select id="b-ue">
+                <option value="1">Negative gross margin</option>
+                <option value="2">Breakeven or marginal</option>
+                <option value="3">Moderate (20–40%)</option>
+                <option value="4">Strong (40–65%)</option>
+                <option value="5">High (&gt;65%) — IP / software</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid-two">
+            <div class="field-group">
+              <label class="field-label" for="b-cas">Customer acquisition strategy</label>
+              <div class="slider-row">
+                <input id="b-cas" type="range" min="1" max="5" value="2" data-output="b-cas-out" />
+                <span class="slider-value" id="b-cas-out">2/5</span>
+              </div>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="b-ops">Operational scalability</label>
+              <select id="b-ops">
+                <option value="1">Labour-intensive; hard to automate</option>
+                <option value="2">Some automation potential</option>
+                <option value="3">Scalable with moderate investment</option>
+                <option value="4">Asset-light / platform model</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid-three">
+            <div class="field-group">
+              <label class="field-label" for="b-arr">Current ARR (₹ Cr)</label>
+              <input id="b-arr" type="number" min="0" step="0.1" />
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="b-arr3">Projected ARR — Year 3 (₹ Cr)</label>
+              <input id="b-arr3" type="number" min="0" step="0.1" />
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="b-arr7">Projected ARR — Year 7 (₹ Cr)</label>
+              <input id="b-arr7" type="number" min="0" step="0.1" />
+            </div>
+          </div>
+
+          <div class="grid-two">
+            <div class="field-group">
+              <label class="field-label" for="b-monthly">Current monthly revenue (₹)</label>
+              <input id="b-monthly" type="number" min="0" step="1000" />
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="b-ebitda">EBITDA margin at maturity (%)</label>
+              <div class="slider-row">
+                <input id="b-ebitda" type="range" min="5" max="60" value="20" data-output="b-ebitda-out" />
+                <span class="slider-value" id="b-ebitda-out">20%</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="section-title">Financial runway</div>
+          <div class="grid-two">
+            <div class="field-group">
+              <label class="field-label" for="b-burn">Monthly burn rate (₹ lakhs)</label>
+              <input id="b-burn" type="number" min="0" step="1" placeholder="e.g. 25" />
+              <span class="field-hint">Average cash outflow per month. Excludes one-off capex.</span>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="b-runway">Cash runway (months)</label>
+              <input id="b-runway" type="number" min="0" step="1" placeholder="e.g. 12" />
+              <span class="field-hint">Months of runway at current burn. &lt; 6 months is a red flag.</span>
+            </div>
+          </div>
+
+          <div class="confidence-row">
+            <label for="conf-m6">Evidence confidence:</label>
+            <select id="conf-m6" class="conf-select">
+              <option value="high">High — audited financials / signed revenue contracts</option>
+              <option value="medium" selected>Medium — management accounts and projections reviewed</option>
+              <option value="low">Low — numbers from pitch deck; no backing</option>
+            </select>
+            <span class="c-note">Low confidence flags this module in the final report.</span>
+          </div>
+          </div>
+        </section>
+
+        <section class="page" id="page-7">
+          <div class="page-title">Module 7 · EIL strategic fit <span class="pill green">10 points</span></div>
+          <div class="page-subtitle">
+            EIL relevance, EPC integration, national mission alignment, licensing potential, and startup engagement ask.
+          </div>
+
+          <div class="card module-body-card">
+
+          <div class="grid-two">
+            <div class="field-group">
+              <label class="field-label" for="e-fit">Alignment with EIL core sectors</label>
+              <div class="slider-row">
+                <input id="e-fit" type="range" min="1" max="5" value="3" data-output="e-fit-out" />
+                <span class="slider-value" id="e-fit-out">3/5</span>
+              </div>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="e-epc">EPC integration potential</label>
+              <select id="e-epc">
+                <option value="1">No EPC relevance</option>
+                <option value="2">Peripheral — specific project types only</option>
+                <option value="3">Integrable in standard EIL projects</option>
+                <option value="4">Core to EIL's renewable / green EPCM mandate</option>
+                <option value="5">Transforms EIL's position in a major sector</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid-two">
+            <div class="field-group">
+              <label class="field-label" for="e-nat">National energy program alignment</label>
+              <select id="e-nat">
+                <option value="1">Unrelated to India's energy transition</option>
+                <option value="2">Peripherally related</option>
+                <option value="3">Supports 500 GW RE target</option>
+                <option value="4">Core to National Hydrogen Mission / Green Steel</option>
+                <option value="5">Critical-path to INDC / 2070 Net Zero</option>
+              </select>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="e-lic">Licensing revenue potential for EIL</label>
+              <div class="slider-row">
+                <input id="e-lic" type="range" min="1" max="5" value="2" data-output="e-lic-out" />
+                <span class="slider-value" id="e-lic-out">2/5</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label class="field-label" for="e-ask">EIL engagement ask from startup</label>
+            <select id="e-ask">
+              <option value="1">Wants capital only; no strategic role for EIL</option>
+              <option value="2">Open to EIL as minority investor</option>
+              <option value="3">Wants EIL as technology partner / co-developer</option>
+              <option value="4">Actively seeking EIL as EPCM anchor partner</option>
+              <option value="5">Wants EIL as anchor customer + co-investor + EPCM partner</option>
+            </select>
+          </div>
+
+          <div class="confidence-row">
+            <label for="conf-m7">Evidence confidence:</label>
+            <select id="conf-m7" class="conf-select">
+              <option value="high">High — prior EIL engagement discussed / sector-desk confirmed</option>
+              <option value="medium" selected>Medium — fit assessed from founder materials</option>
+              <option value="low">Low — EIL strategic alignment not yet validated internally</option>
+            </select>
+            <span class="c-note">Low confidence flags this module in the final report.</span>
+          </div>
+
+          <div class="centered-actions">
+            <button class="button button-success" id="generate-report">Generate full evaluation report ↗</button>
+          </div>
+          </div>
+        </section>
+
+        <section class="page" id="page-8">
+          <div class="page-title">Valuation method configuration</div>
+          <div class="page-subtitle">
+            Enable or disable valuation methods and edit the assumptions used in the report.
+          </div>
+
+          <div class="config-grid">
+            <div class="card">
+              <div class="section-title">Method toggles & assumptions</div>
+              <div class="action-row" style="justify-content:flex-end;margin-top:-4px;margin-bottom:12px">
+                <button class="button" id="restore-valuation-defaults">Restore defaults</button>
+              </div>
+
+              <div class="config-card">
+                <div class="config-header">
+                  <label><input type="checkbox" id="cfg-dcf-enabled" checked /> Risk-adjusted DCF</label>
+                  <span class="config-badge">High confidence when late-stage</span>
+                </div>
+                <div class="grid-two">
+                  <div class="field-group">
+                    <label class="field-label label-with-info" for="cfg-dcf-base-discount">
+                      Base discount rate (%)
+                      <span class="info-dot" tabindex="0">i<span class="info-tip">Used to discount future cash flows to present value. Higher rate means higher perceived risk and lower valuation.</span></span>
+                    </label>
+                    <input id="cfg-dcf-base-discount" type="number" min="10" max="80" step="1" value="35" />
+                  </div>
+                  <div class="field-group">
+                    <label class="field-label label-with-info" for="cfg-dcf-terminal-multiple">
+                      Terminal EBITDA multiple
+                      <span class="info-dot" tabindex="0">i<span class="info-tip">Multiplier applied to final-year EBITDA in DCF to estimate continuing business value beyond forecast years.</span></span>
+                    </label>
+                    <input id="cfg-dcf-terminal-multiple" type="number" min="1" max="20" step="0.5" value="6" />
+                  </div>
+                </div>
+                <div class="grid-three">
+                  <div class="field-group">
+                    <label class="field-label" for="cfg-dcf-trl13">TRL 1–3 risk add (%)</label>
+                    <input id="cfg-dcf-trl13" type="number" min="0" max="30" step="1" value="10" />
+                  </div>
+                  <div class="field-group">
+                    <label class="field-label" for="cfg-dcf-trl45">TRL 4–5 risk add (%)</label>
+                    <input id="cfg-dcf-trl45" type="number" min="0" max="30" step="1" value="7" />
+                  </div>
+                  <div class="field-group">
+                    <label class="field-label" for="cfg-dcf-trl67">TRL 6–7 risk add (%)</label>
+                    <input id="cfg-dcf-trl67" type="number" min="0" max="30" step="1" value="4" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="config-card">
+                <div class="config-header">
+                  <label><input type="checkbox" id="cfg-vc-enabled" checked /> VC Method</label>
+                  <span class="config-badge">Medium confidence</span>
+                </div>
+                <div class="grid-two">
+                  <div class="field-group">
+                    <label class="field-label label-with-info" for="cfg-vc-irr">
+                      Target IRR (%)
+                      <span class="info-dot" tabindex="0">i<span class="info-tip">Expected annual investor return used in VC method. Higher IRR lowers present valuation.</span></span>
+                    </label>
+                    <input id="cfg-vc-irr" type="number" min="10" max="80" step="1" value="35" />
+                  </div>
+                  <div class="field-group">
+                    <label class="field-label label-with-info" for="cfg-vc-years">
+                      Exit horizon (years)
+                      <span class="info-dot" tabindex="0">i<span class="info-tip">Assumed time to exit/liquidity in VC method. Longer horizons generally reduce current value.</span></span>
+                    </label>
+                    <input id="cfg-vc-years" type="number" min="3" max="12" step="1" value="7" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="config-card">
+                <div class="config-header">
+                  <label><input type="checkbox" id="cfg-strategic-enabled" checked /> Strategic value uplift</label>
+                  <span class="config-badge">EIL-specific</span>
+                </div>
+                <div class="grid-three">
+                  <div class="field-group">
+                    <label class="field-label" for="cfg-strategic-eil">EIL fit uplift max (%)</label>
+                    <input id="cfg-strategic-eil" type="number" min="0" max="100" step="1" value="20" />
+                  </div>
+                  <div class="field-group">
+                    <label class="field-label" for="cfg-strategic-ip">IP uplift max (%)</label>
+                    <input id="cfg-strategic-ip" type="number" min="0" max="100" step="1" value="10" />
+                  </div>
+                  <div class="field-group">
+                    <label class="field-label" for="cfg-strategic-team">Team uplift max (%)</label>
+                    <input id="cfg-strategic-team" type="number" min="0" max="100" step="1" value="5" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="config-card">
+                <div class="config-header">
+                  <label><input type="checkbox" id="cfg-rev-enabled" checked /> Revenue multiple</label>
+                  <span class="config-badge">Medium confidence</span>
+                </div>
+                <div class="grid-two">
+                  <div class="field-group">
+                    <label class="field-label label-with-info" for="cfg-rev-year">
+                      Projection basis
+                      <span class="info-dot" tabindex="0">i<span class="info-tip">Which ARR the Revenue Multiple method multiplies by the sector multiple. Current ARR (trailing) is the standard for mature revenue-generating companies (TRL ≥ 8, 5+ years of revenue). Year 3 / Year 7 projections are for growth-stage companies where current revenue is small and forward hyper-growth is priced in.</span></span>
+                    </label>
+                    <select id="cfg-rev-year">
+                      <option value="arr0">Use current ARR (trailing)</option>
+                      <option value="arr3">Use Year 3 ARR</option>
+                      <option value="arr7">Use Year 7 ARR</option>
+                    </select>
+                  </div>
+                  <div class="field-group">
+                    <label class="field-label label-with-info" for="cfg-rev-haircut">
+                      Projection haircut (%)
+                      <span class="info-dot" tabindex="0">i<span class="info-tip">Risk adjustment applied to projected revenue valuation. Higher haircut means more conservative valuation.</span></span>
+                    </label>
+                    <input id="cfg-rev-haircut" type="number" min="0" max="80" step="1" value="35" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="config-card">
+                <div class="config-header">
+                  <label><input type="checkbox" id="cfg-berkus-enabled" checked /> Berkus method</label>
+                  <span class="config-badge">Low confidence / early stage</span>
+                </div>
+                <div class="field-group">
+                  <label class="field-label" for="cfg-berkus-max">Maximum valuation (₹ Cr)</label>
+                  <input id="cfg-berkus-max" type="number" min="1" max="200" step="1" value="25" />
+                </div>
+              </div>
+
+              <div class="config-card">
+                <div class="config-header">
+                  <label><input type="checkbox" id="cfg-scorecard-enabled" checked /> Scorecard method</label>
+                  <span class="config-badge">Medium confidence / pilot stage</span>
+                </div>
+                <div class="grid-two">
+                  <div class="field-group">
+                    <label class="field-label label-with-info" for="cfg-scorecard-base">
+                      Comparable base valuation (₹ Cr)
+                      <span class="info-dot" tabindex="0">i<span class="info-tip">Sector/stage median pre-money from observed deals (e.g. Inc42, Entrackr, Tracxn). Leaving this at the default ₹18 Cr flags the Scorecard output as unanchored on the report.</span></span>
+                    </label>
+                    <input id="cfg-scorecard-base" type="number" min="1" max="200" step="1" value="18" />
+                    <span class="field-hint">Enter a real sector-comparable median. Default (₹18 Cr) is a placeholder — leaving it flags the Scorecard valuation as illustrative only.</span>
+                  </div>
+                  <div class="field-group">
+                    <label class="field-label label-with-info" for="cfg-scorecard-unit">
+                      Adjustment unit (₹ Cr)
+                      <span class="info-dot" tabindex="0">i<span class="info-tip">Multiplier controlling how strongly scorecard strengths/weaknesses change valuation around the base.</span></span>
+                    </label>
+                    <input id="cfg-scorecard-unit" type="number" min="0.5" max="20" step="0.5" value="1.5" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="section-title">
+                <span class="label-with-info">
+                  Sector revenue multiples
+                  <span class="info-dot" tabindex="0">i<span class="info-tip">These are ARR-to-valuation multipliers by sector. Revenue-based methods multiply ARR by this number before risk haircut.</span></span>
+                </span>
+              </div>
+              <div class="config-table" id="sector-multiples-table"></div>
+              <div class="card-compact-row" style="margin-top:8px">
+                <div class="section-title" style="margin:0">Method logic</div>
+                <button class="button" type="button" data-dialog="dialog-method-logic">View</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="page" id="page-9">
+          <div class="page-title">Valuation Data Room <span class="pill blue">Consultant inputs</span></div>
+          <div class="page-subtitle">
+            Structured financial & governance inputs an EIL-appointed third-party valuer typically requests. Captured here so the report is audit-ready; these fields do not alter the 120-point CRS score.
+          </div>
+
+          <div class="card">
+            <div class="section-title">A · Valuation metadata</div>
+            <div class="grid-two">
+              <div class="field-group">
+                <label class="field-label" for="vd-date">Date of valuation</label>
+                <input id="vd-date" type="date" />
+              </div>
+              <div class="field-group">
+                <label class="field-label" for="vd-cin">CIN / registration no.</label>
+                <input id="vd-cin" type="text" placeholder="e.g. U29253UP2010PTC042649" />
+              </div>
+            </div>
+            <div class="grid-two">
+              <div class="field-group">
+                <label class="field-label" for="vd-startup-india">Startup India / 80-IAC benefit</label>
+                <select id="vd-startup-india">
+                  <option value="">— select —</option>
+                  <option value="none">Not registered</option>
+                  <option value="dpiit">DPIIT recognised only</option>
+                  <option value="80iac">DPIIT + 80-IAC tax holiday granted</option>
+                  <option value="other">Other state / sector benefit</option>
+                </select>
+              </div>
+              <div class="field-group">
+                <label class="field-label" for="vd-audit-years">Audited financials available</label>
+                <select id="vd-audit-years">
+                  <option value="">— select —</option>
+                  <option value="0">None</option>
+                  <option value="1">1 year</option>
+                  <option value="2">2 years</option>
+                  <option value="3">3 years</option>
+                  <option value="inception">Since inception</option>
+                </select>
+              </div>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="vd-profile">Brief profile & business model</label>
+              <textarea id="vd-profile" rows="3" placeholder="Nature of business, products/services, revenue model, key contracts."></textarea>
+            </div>
+            <div class="grid-two">
+              <div class="field-group">
+                <label class="field-label" for="vd-market-ref">Market reference valuation (₹ Cr)</label>
+                <input id="vd-market-ref" type="number" min="0" step="0.1" placeholder="e.g. 4600 — latest Series D post-money" />
+                <span class="field-hint">Latest observed / reported valuation from a funding round or comparable deal. Used as a sanity check against the tool's intrinsic estimate — does not alter any score.</span>
+              </div>
+              <div class="field-group">
+                <label class="field-label" for="vd-market-ref-note">Source &amp; date</label>
+                <input id="vd-market-ref-note" type="text" placeholder="e.g. Entrackr · Series D · Aug 2025" />
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="section-title">B · Shareholding & securities</div>
+            <div class="field-group">
+              <label class="field-label" for="vd-captable">Dilutive cap table (as on valuation date)</label>
+              <textarea id="vd-captable" rows="3" placeholder="Founders %, ESOP pool %, angel/VC rounds with ₹ amounts and % dilution."></textarea>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="vd-ccd-terms">CCD / convertible / preference share terms</label>
+              <textarea id="vd-ccd-terms" rows="2" placeholder="Conversion ratio, coupon, trigger events, liquidation preference."></textarea>
+            </div>
+            <div class="grid-two">
+              <div class="field-group">
+                <label class="field-label" for="vd-invest-fv">Fair value of investments in company (₹ Cr)</label>
+                <input id="vd-invest-fv" type="number" min="0" step="0.1" />
+              </div>
+              <div class="field-group">
+                <label class="field-label" for="vd-land-value">Valuation of land, if any (₹ Cr)</label>
+                <input id="vd-land-value" type="number" min="0" step="0.1" />
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="section-title">C · Historical & current financials</div>
+            <div class="field-group">
+              <label class="field-label" for="vd-current-invest">Details of current investments held by company</label>
+              <textarea id="vd-current-invest" rows="2" placeholder="Mutual funds, fixed deposits, strategic stakes — ₹ amount and nature."></textarea>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="vd-other-income">Current sources of other income</label>
+              <textarea id="vd-other-income" rows="2" placeholder="Grants, interest, licensing, consulting — annualised ₹ figures."></textarea>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="vd-current-projects">Current projects in hand & year-wise revenue booking</label>
+              <textarea id="vd-current-projects" rows="3" placeholder="Project name · client · contract value · booking split across FY years."></textarea>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="section-title">D · Projected financials (5–10 yr)</div>
+            <div class="grid-three">
+              <div class="field-group">
+                <label class="field-label" for="vd-proj-years">Projection horizon (years)</label>
+                <input id="vd-proj-years" type="number" min="3" max="10" step="1" placeholder="e.g. 7" />
+              </div>
+              <div class="field-group">
+                <label class="field-label" for="vd-proj-rev-growth">Projected revenue CAGR (%)</label>
+                <input id="vd-proj-rev-growth" type="number" min="0" max="200" step="1" placeholder="e.g. 45" />
+              </div>
+              <div class="field-group">
+                <label class="field-label" for="vd-purchases-pct">Purchases as % of sales</label>
+                <input id="vd-purchases-pct" type="number" min="0" max="100" step="1" />
+              </div>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="vd-proj-assumptions">Key assumptions underpinning projections</label>
+              <textarea id="vd-proj-assumptions" rows="3" placeholder="Expansion plans, new projects, capacity additions, pricing, market share path."></textarea>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="vd-major-cost-drivers">Major cost drivers & % of revenue</label>
+              <textarea id="vd-major-cost-drivers" rows="2" placeholder="e.g. Raw material 45%, Power 12%, Manpower 18%, S&M 8%, Other 5%."></textarea>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="vd-addl-expenses">Additional expenses per category to achieve projected growth</label>
+              <textarea id="vd-addl-expenses" rows="2" placeholder="Category-wise incremental spend over projection years."></textarea>
+            </div>
+            <div class="grid-two">
+              <div class="field-group">
+                <label class="field-label" for="vd-salary-now">Current salary expense (₹ Cr / yr)</label>
+                <input id="vd-salary-now" type="number" min="0" step="0.1" />
+              </div>
+              <div class="field-group">
+                <label class="field-label" for="vd-hires-cost">Cost of additional hires required (₹ Cr)</label>
+                <input id="vd-hires-cost" type="number" min="0" step="0.1" />
+              </div>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="vd-salary-bifurc">Salary bifurcation — Non-exec / Exec / Management</label>
+              <textarea id="vd-salary-bifurc" rows="2" placeholder="e.g. Non-exec ₹0.6 Cr · Exec ₹1.8 Cr · Management ₹2.4 Cr (FY25)."></textarea>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="vd-hires-needed">Additional employees required for projected revenue</label>
+              <textarea id="vd-hires-needed" rows="2" placeholder="Role-wise headcount plan across projection years."></textarea>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="section-title">E · Working capital (days)</div>
+            <div class="grid-three">
+              <div class="field-group">
+                <label class="field-label" for="vd-ar-days">Trade receivable days</label>
+                <input id="vd-ar-days" type="number" min="0" max="365" step="1" />
+              </div>
+              <div class="field-group">
+                <label class="field-label" for="vd-ap-days">Trade payable days</label>
+                <input id="vd-ap-days" type="number" min="0" max="365" step="1" />
+              </div>
+              <div class="field-group">
+                <label class="field-label" for="vd-exp-days">Other expense payable days</label>
+                <input id="vd-exp-days" type="number" min="0" max="365" step="1" />
+              </div>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="vd-inv-days">Inventory days required</label>
+              <input id="vd-inv-days" type="number" min="0" max="365" step="1" />
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="section-title">F · Debt & financing</div>
+            <div class="field-group">
+              <label class="field-label" for="vd-secured-loans">Secured loans — balance & repayment schedule</label>
+              <textarea id="vd-secured-loans" rows="2" placeholder="Lender · outstanding ₹ Cr · interest · tenor · repayment schedule."></textarea>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="vd-unsecured-loans">Unsecured loans — balance & repayment schedule</label>
+              <textarea id="vd-unsecured-loans" rows="2" placeholder="Promoter / related-party / other unsecured debt."></textarea>
+            </div>
+            <div class="grid-two">
+              <div class="field-group">
+                <label class="field-label" for="vd-addl-loan">Additional loan required for projections (₹ Cr)</label>
+                <input id="vd-addl-loan" type="number" min="0" step="0.1" />
+              </div>
+              <div class="field-group">
+                <label class="field-label" for="vd-financing">Current financing structure & future plan</label>
+                <input id="vd-financing" type="text" placeholder="e.g. 60% equity / 40% debt · Series B planned FY26" />
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="section-title">G · Secretarial due diligence</div>
+            <div class="grid-two">
+              <div class="field-group">
+                <label class="field-label" for="vd-sec-dd">Secretarial DD status</label>
+                <select id="vd-sec-dd">
+                  <option value="">— select —</option>
+                  <option value="not-started">Not started</option>
+                  <option value="in-progress">In progress</option>
+                  <option value="clean">Completed — clean</option>
+                  <option value="observations">Completed — observations pending</option>
+                </select>
+                <span class="field-hint">Covers Companies Act 2013 compliance: MOA/AOA, share allotments (PAS-3 / SH-7 / MGT-14), charges (CHG-1), annual filings (AOC-4 / MGT-7), board & shareholder minutes, related-party register (AOC-2).</span>
+              </div>
+              <div class="field-group">
+                <label class="field-label" for="vd-sec-reviewer">Reviewing Company Secretary / firm</label>
+                <input id="vd-sec-reviewer" type="text" placeholder="e.g. ABC &amp; Associates, CS Priya Sharma · FCS 1234" />
+              </div>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="vd-sec-dd-notes">Material observations / pending items</label>
+              <textarea id="vd-sec-dd-notes" rows="3" placeholder="e.g. Form PAS-3 for Series-A allotment not filed within 30 days · CHG-1 pending for term loan · one AGM minute unsigned."></textarea>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="section-title">H · IPR due diligence</div>
+            <div class="grid-two">
+              <div class="field-group">
+                <label class="field-label" for="vd-ipr-dd">IPR DD status</label>
+                <select id="vd-ipr-dd">
+                  <option value="">— select —</option>
+                  <option value="not-started">Not started</option>
+                  <option value="in-progress">In progress</option>
+                  <option value="clean">Completed — clean</option>
+                  <option value="observations">Completed — observations pending</option>
+                </select>
+                <span class="field-hint">Covers ownership/assignment documents, employee IP assignments, NDAs, abandoned IPRs, renewals, infringement, liens, FTO opinions, and data-privacy compliance.</span>
+              </div>
+              <div class="field-group">
+                <label class="field-label" for="vd-ipr-reviewer">IP counsel / firm</label>
+                <input id="vd-ipr-reviewer" type="text" placeholder="e.g. K&amp;S IP Associates · Adv. R. Iyer" />
+              </div>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="vd-ipr-litigation">Active IP litigation / cease-and-desist / infringement allegations</label>
+              <textarea id="vd-ipr-litigation" rows="2" placeholder="Matter · parties · forum · status. Use 'None' if nil."></textarea>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="vd-ipr-liens">Liens, pledges, licences-out, or planned IP transactions</label>
+              <textarea id="vd-ipr-liens" rows="2" placeholder="Any encumbrance on IP assets · licensing-out agreements · planned assignments."></textarea>
+            </div>
+            <div class="grid-two">
+              <div class="field-group">
+                <label class="field-label" for="vd-ipr-privacy">Data privacy / SPDI compliance</label>
+                <select id="vd-ipr-privacy">
+                  <option value="">— select —</option>
+                  <option value="na">Not applicable — no personal data collected</option>
+                  <option value="policy-only">Policy drafted; no third-party audit</option>
+                  <option value="grievance">Policy + grievance officer designated</option>
+                  <option value="audited">Third-party audit completed</option>
+                </select>
+              </div>
+              <div class="field-group">
+                <label class="field-label" for="vd-ipr-notes">Material observations</label>
+                <input id="vd-ipr-notes" type="text" placeholder="e.g. 2 employee IP-assignment agreements pending signature" />
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="section-title">I · Legal due diligence</div>
+            <div class="grid-two">
+              <div class="field-group">
+                <label class="field-label" for="vd-legal-dd">Legal DD status</label>
+                <select id="vd-legal-dd">
+                  <option value="">— select —</option>
+                  <option value="not-started">Not started</option>
+                  <option value="in-progress">In progress</option>
+                  <option value="clean">Completed — clean</option>
+                  <option value="observations">Completed — observations pending</option>
+                </select>
+                <span class="field-hint">Covers material contracts (JV / investor / top customers & suppliers / govt / insurance / leases), related-party arrangements, and litigation / regulatory matters.</span>
+              </div>
+              <div class="field-group">
+                <label class="field-label" for="vd-legal-reviewer">Legal counsel / firm</label>
+                <input id="vd-legal-reviewer" type="text" placeholder="e.g. Trilegal · Partner: A. Menon" />
+              </div>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="vd-legal-material-contracts">Material contracts summary</label>
+              <textarea id="vd-legal-material-contracts" rows="3" placeholder="JV / investor / SHA · top-10 customer & supplier contracts · govt contracts · licence agreements (in/out) · key leases."></textarea>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="vd-legal-related-party">Related-party / non-arm's-length arrangements</label>
+              <textarea id="vd-legal-related-party" rows="2" placeholder="Form MBP-4 register · Section 188 approvals · promoter-group transactions."></textarea>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="vd-legal-litigation">Pending / threatened litigation & regulatory matters</label>
+              <textarea id="vd-legal-litigation" rows="3" placeholder="Civil / criminal / regulatory · POSH complaints · investor grievances · warranty claims. Use 'None' if nil."></textarea>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="vd-legal-notes">Material observations</label>
+              <input id="vd-legal-notes" type="text" placeholder="e.g. 2 top-customer contracts have change-of-control clauses" />
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="section-title">J · Regulatory due diligence</div>
+            <div class="grid-two">
+              <div class="field-group">
+                <label class="field-label" for="vd-reg-dd">Regulatory DD status</label>
+                <select id="vd-reg-dd">
+                  <option value="">— select —</option>
+                  <option value="not-started">Not started</option>
+                  <option value="in-progress">In progress</option>
+                  <option value="clean">Completed — clean</option>
+                  <option value="observations">Completed — observations pending</option>
+                </select>
+                <span class="field-hint">Covers FEMA / RBI filings, business licences (DPIIT / IEC / GST / sector approvals), and labour-law compliance (PF / ESI / POSH / Factories Act).</span>
+              </div>
+              <div class="field-group">
+                <label class="field-label" for="vd-reg-reviewer">Regulatory consultant / firm</label>
+                <input id="vd-reg-reviewer" type="text" placeholder="e.g. Nangia Andersen · CA Ritu Verma" />
+              </div>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="vd-reg-fema">FEMA / RBI filings status</label>
+              <textarea id="vd-reg-fema" rows="2" placeholder="FLA Return · APR · ECB returns · Form FC-GPR / FC-TRS / FC-ODI · ARF. Use 'Not applicable' if no foreign investment."></textarea>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="vd-reg-licences">Business licences held / pending</label>
+              <textarea id="vd-reg-licences" rows="2" placeholder="DPIIT · IEC · GST · sector-specific approvals (BIS / CPCB / PESO / Drug Licence, etc.)."></textarea>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="vd-reg-labour">Labour-law compliance</label>
+              <textarea id="vd-reg-labour" rows="3" placeholder="PF / ESI / Gratuity · POSH committee · HR policy · Shops &amp; Establishment · Factories Act · Contract Labour · trade unions."></textarea>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="vd-reg-notes">Material observations / pending items</label>
+              <input id="vd-reg-notes" type="text" placeholder="e.g. POSH committee pending constitution; one ECB return delayed" />
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="section-title">K · Environment, Health & Safety DD</div>
+            <div class="grid-two">
+              <div class="field-group">
+                <label class="field-label" for="vd-ehs-dd">EHS DD status</label>
+                <select id="vd-ehs-dd">
+                  <option value="">— select —</option>
+                  <option value="not-started">Not started</option>
+                  <option value="in-progress">In progress</option>
+                  <option value="clean">Completed — clean</option>
+                  <option value="observations">Completed — observations pending</option>
+                </select>
+                <span class="field-hint">Covers site/facility descriptions, environmental consents, audits, and violations / liability under Water, Air, Environment Protection and Hazardous Waste regulations.</span>
+              </div>
+              <div class="field-group">
+                <label class="field-label" for="vd-ehs-reviewer">EHS consultant / firm</label>
+                <input id="vd-ehs-reviewer" type="text" placeholder="e.g. ERM India · Lead: S. Rao" />
+              </div>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="vd-ehs-consents">Consents / permits held</label>
+              <textarea id="vd-ehs-consents" rows="2" placeholder="CTE / CTO under Water Act &amp; Air Act · Hazardous Waste Authorisation · CPCB / SPCB approvals · EC / CRZ clearances."></textarea>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="vd-ehs-audits">EHS audits, assessments & site studies</label>
+              <textarea id="vd-ehs-audits" rows="2" placeholder="Third-party audits · site assessments · ISO 14001 / 45001 certifications · safety reviews."></textarea>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="vd-ehs-violations">Violations, investigations, notices & liability matters</label>
+              <textarea id="vd-ehs-violations" rows="2" placeholder="SPCB / CPCB notices · NGT proceedings · remediation obligations. Use 'None' if nil."></textarea>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="vd-ehs-notes">Material observations</label>
+              <input id="vd-ehs-notes" type="text" placeholder="e.g. CTO renewal pending; HW authorisation expired Mar-26" />
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="section-title">L · Listed peer comparables</div>
+            <div class="field-group">
+              <label class="field-label" for="vd-peers">Listed peer companies (≥5, nearest comparable)</label>
+              <textarea id="vd-peers" rows="3" placeholder="Peer 1 · Peer 2 · Peer 3 · Peer 4 · Peer 5 — with exchange ticker if listed."></textarea>
+              <span class="field-hint">Used by the consultant for relative-valuation (EV/EBITDA, EV/Revenue) cross-checks.</span>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="vd-peer-multiple">Median peer EV/Revenue multiple</label>
+              <input id="vd-peer-multiple" type="number" min="0" step="0.1" placeholder="e.g. 8.5" />
+              <span class="field-hint">If a value &gt; 0 is entered, a <strong>Peer-multiple valuation</strong> is added to the report: current ARR × multiple × 0.80 (20% illiquidity / size discount vs listed peers).</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="page" id="page-10">
+          <div class="report-actions">
+            <button class="button button-primary" id="export-pdf">Export PDF</button>
+            <button class="button" id="refresh-report">Refresh report</button>
+          </div>
+
+          <div id="report-placeholder" class="report-placeholder">
+            Complete the modules and click “Generate full evaluation report” to view results.
+          </div>
+
+          <div id="report-body" class="report-body hidden">
+            <div class="report-header" id="report-header"></div>
+
+            <div class="top-metrics" id="report-top-metrics"></div>
+
+            <div class="grid-report">
+              <div class="card">
+                <div class="card-title">Module breakdown — score vs maximum</div>
+                <div id="report-module-bars"></div>
+              </div>
+              <div class="card">
+                <div class="card-title">Radar profile (% of module max)</div>
+                <div class="chart-wrap tall"><canvas id="report-radar"></canvas></div>
+              </div>
+            </div>
+
+            <div class="grid-report">
+              <div class="card">
+                <div class="card-title">Team assessment — sub-indicator scores</div>
+                <div id="report-team-bars"></div>
+              </div>
+              <div class="card">
+                <div class="card-title">IP & patent assessment — sub-indicator scores</div>
+                <div id="report-ip-bars"></div>
+              </div>
+            </div>
+
+            <div class="card card-compact">
+              <div class="card-compact-row">
+                <div class="card-title" style="margin:0">Key report metrics</div>
+                <button class="button" type="button" data-dialog="dialog-key-metrics">View</button>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Risk flags &amp; consistency checks</div>
+              <div id="report-risk-flags"></div>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Valuation estimates</div>
+              <div class="valuation-grid" id="report-valuations"></div>
+              <div class="chart-wrap short"><canvas id="report-valuations-chart"></canvas></div>
+              <div id="report-dcf-sensitivity"></div>
+            </div>
+
+            <div class="card card-compact">
+              <div class="card-compact-row">
+                <div class="card-title" style="margin:0">Data Room summary</div>
+                <button class="button" type="button" data-dialog="dialog-dataroom">View</button>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-title">EIL engagement decision</div>
+              <div class="engagement-grid" id="report-engagement"></div>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Risk profile matrix</div>
+              <div id="report-risk-matrix"></div>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Strategic recommendations for EIL investment committee</div>
+              <div id="report-recommendations"></div>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Stage-adjusted CRS (Dynamic Weight Calibration)</div>
+              <div id="report-dwcs"></div>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Portfolio snapshot</div>
+              <div id="report-portfolio"></div>
+            </div>
+
+            <div class="report-footer" id="report-footer"></div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="bottom-nav" id="bottom-nav">
+        <button class="button" id="prev-page">← Previous</button>
+        <span class="bottom-label" id="bottom-label">Step 1 of 10</span>
+        <div class="bottom-nav-right">
+          <a class="button methodology-footer-link" href="/guide/"
+             target="_blank" rel="noopener"
+             title="Open platform functioning guide in a new tab">Guide ↗</a>
+          <a class="button methodology-footer-link" href="/scoring-mechanism/"
+             target="_blank" rel="noopener"
+             title="Open the full 120-point scoring framework reference in a new tab">Methodology ↗</a>
+          <button class="button button-primary" id="next-page">Next →</button>
+        </div>
+      </footer>
+
+      <div class="credit-footer">
+        Made by <strong>Priyanshu Dutta</strong> &nbsp;·&nbsp;
+        MBA 2025–27, IIM Nagpur &nbsp;·&nbsp;
+        <a href="mailto:priyanshudutta248@gmail.com">priyanshudutta248@gmail.com</a> &nbsp;·&nbsp;
+        <a href="https://www.linkedin.com/in/priyanshudutta" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+    <div id="toast-status" class="toast-status" role="status" aria-live="polite" hidden></div>
+
+    <dialog class="app-dialog" id="dialog-key-metrics">
+      <div class="app-dialog-header">
+        <div class="card-title" style="margin:0">Key report metrics</div>
+        <button class="app-dialog-close" type="button" aria-label="Close">&times;</button>
+      </div>
+      <div class="app-dialog-body">
+        <div class="metric-list" id="report-extra-metrics"></div>
+      </div>
+    </dialog>
+
+    <dialog class="app-dialog" id="dialog-dataroom">
+      <div class="app-dialog-header">
+        <div class="card-title" style="margin:0">Data Room summary</div>
+        <button class="app-dialog-close" type="button" aria-label="Close">&times;</button>
+      </div>
+      <div class="app-dialog-body">
+        <div id="report-dataroom"></div>
+      </div>
+    </dialog>
+
+    <dialog class="app-dialog" id="dialog-method-logic">
+      <div class="app-dialog-header">
+        <div class="card-title" style="margin:0">Method logic</div>
+        <button class="app-dialog-close" type="button" aria-label="Close">&times;</button>
+      </div>
+      <div class="app-dialog-body">
+        <div class="info-block">
+          <p><strong>Primary recommendation</strong> (CRS-driven, with TRL as secondary guard):</p>
+          <ul>
+            <li>CRS &lt; 50 → Berkus (early, limited commercial signal)</li>
+            <li>CRS 50–69 → Scorecard</li>
+            <li>CRS 70–84 &amp; TRL ≥ 5 → VC Method</li>
+            <li>CRS ≥ 85 &amp; TRL ≥ 7 → Risk-adjusted DCF</li>
+          </ul>
+          <p style="margin-top:10px"><strong>Stage-to-method reference</strong> — the CRS rule above is calibrated against these canonical stage/method pairings:</p>
+          <table class="method-stage-table">
+            <thead>
+              <tr><th>Stage</th><th>Typical TRL</th><th>Preferred method(s)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Idea stage</td><td>1–3</td><td>Berkus (primary) · Scorecard (if sector comparables exist)</td></tr>
+              <tr><td>Prototype</td><td>4–5</td><td>Scorecard</td></tr>
+              <tr><td>Pilot</td><td>6–7</td><td>VC Method (Scorecard as cross-check)</td></tr>
+              <tr><td>Early revenue</td><td>7–8</td><td>Revenue Multiple (current ARR) · Peer Multiple</td></tr>
+              <tr><td>Growth</td><td>8–9</td><td>Revenue Multiple (current or Y3 ARR) · Peer Multiple</td></tr>
+              <tr><td>Mature</td><td>9</td><td>Risk-adjusted DCF (primary) · Peer Multiple (triangulation)</td></tr>
+            </tbody>
+          </table>
+          <p style="margin-top:10px"><strong>Why Revenue Multiple is the most common startup lens.</strong> Startups typically have unstable profits, negative cash flow, and unpredictable growth — conditions that make DCF's terminal value and WACC assumptions speculative. Revenue is observable and listed-peer multiples are available, so Revenue Multiple (and Peer Multiple) are the default for early-revenue through growth stages. DCF becomes the primary lens only once cash flows are proven and repeatable (mature stage).</p>
+          <p style="margin-top:10px"><strong>Projection basis for Revenue Multiple.</strong> Choose in the card above:</p>
+          <ul>
+            <li><strong>Current ARR (trailing)</strong> — use for mature, revenue-generating companies (TRL ≥ 8 with 5+ years of revenue). Multiplying current ARR by a sector multiple mirrors how listed comparables are priced.</li>
+            <li><strong>Year 3 ARR</strong> — growth-stage companies where current revenue is small but near-term ramp is credible (Series A/B).</li>
+            <li><strong>Year 7 ARR</strong> — long-horizon VC lens; use when forward hyper-growth is the thesis and a credible plan exists.</li>
+          </ul>
+        </div>
+      </div>
+    </dialog>
+  </body>
+</html>

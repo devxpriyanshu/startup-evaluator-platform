@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Startup Evaluator Platform - Functional Guide</title>
+  <style>
+    :root {
+      --navy: #0c2340;
+      --navy-2: #1e3a5c;
+      --blue: #185fa5;
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --text-tertiary: #64748b;
+      --border: #e2e8f0;
+      --border-dark: #cbd5e1;
+      --bg-primary: #ffffff;
+      --bg-secondary: #f8fafc;
+      --bg-tertiary: #f1f5f9;
+      --radius-md: 10px;
+      --radius-lg: 16px;
+      --shadow: 0 8px 24px rgba(18, 40, 74, 0.08);
+    }
+    * { box-sizing: border-box; }
+    body {
+      font-family: Inter, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text-primary);
+      margin: 0;
+      background:
+        radial-gradient(circle at top left, rgba(24, 95, 165, 0.08), transparent 30%),
+        radial-gradient(circle at top right, rgba(12, 35, 64, 0.08), transparent 26%),
+        linear-gradient(180deg, #eef2ff 0%, #f8fafc 45%, #f1f5f9 100%);
+      background-attachment: fixed;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    .doc {
+      position: relative;
+      max-width: 1200px;
+      margin: 20px auto;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.97) 0%, rgba(250, 252, 255, 0.97) 100%);
+      border: 1px solid rgba(209, 220, 232, 0.72);
+      border-radius: var(--radius-lg);
+      box-shadow: 0 18px 42px rgba(12, 35, 64, 0.09), 0 4px 14px rgba(12, 35, 64, 0.06);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      overflow: hidden;
+    }
+    .doc-hdr {
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at top right, rgba(184, 212, 234, 0.16), transparent 32%),
+        linear-gradient(135deg, var(--navy) 0%, #15324a 48%, var(--navy-2) 100%);
+      color: #fff;
+      padding: 18px 24px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow: 0 10px 24px rgba(12, 35, 64, 0.14);
+    }
+    .doc-hdr::after {
+      content: "";
+      position: absolute;
+      inset: auto -12% -55% auto;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(184, 212, 234, 0.14), transparent 62%);
+      pointer-events: none;
+    }
+    .doc-hdr > * { position: relative; }
+    .doc-ttl {
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+    .doc-sub {
+      margin-top: 4px;
+      font-size: 11px;
+      color: #b8d4ea;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .doc-body {
+      padding: 24px 28px 32px;
+    }
+    h2, h3 {
+      color: var(--navy);
+      line-height: 1.3;
+    }
+    h2 {
+      margin: 26px 0 10px;
+      font-size: 12px;
+      font-weight: 700;
+      padding-left: 12px;
+      border-left: 3px solid var(--blue);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    h3 {
+      margin: 16px 0 6px;
+      font-size: 15px;
+      font-weight: 600;
+    }
+    p {
+      margin: 8px 0 12px;
+      color: var(--text-primary);
+      font-size: 14px;
+    }
+    ul {
+      margin: 6px 0 12px 20px;
+      padding: 0;
+    }
+    li {
+      margin: 4px 0;
+      font-size: 14px;
+      color: var(--text-primary);
+    }
+    strong { color: var(--navy); }
+    .lead {
+      color: var(--text-secondary);
+      font-size: 14px;
+      margin: 0 0 20px;
+    }
+    .box {
+      border: 1px solid rgba(209, 220, 232, 0.72);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.96) 0%, #f6fafd 100%);
+      border-radius: var(--radius-md);
+      padding: 12px 14px;
+      margin: 12px 0;
+      font-size: 13px;
+      color: var(--text-primary);
+      box-shadow: 0 8px 20px rgba(12, 35, 64, 0.04);
+    }
+    .mono {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 12px;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border);
+      padding: 1px 6px;
+      border-radius: 6px;
+      color: var(--navy);
+    }
+    .footer {
+      margin-top: 32px;
+      border-top: 1px solid var(--border);
+      padding-top: 14px;
+      color: var(--text-tertiary);
+      font-size: 12px;
+    }
+    @media print {
+      body { background: #fff; }
+      .doc { max-width: none; margin: 0; border: none; border-radius: 0; box-shadow: none; }
+      .doc-hdr { border-radius: 0; }
+      a { color: inherit; text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="doc">
+    <header class="doc-hdr">
+      <div class="doc-ttl">EIL EngSUI — Functional Guide</div>
+      <div class="doc-sub">Scoring · Valuation · Reporting · Decision support</div>
+    </header>
+    <main class="doc-body">
+      <p class="lead">
+        Detailed explanation of how the platform works across scoring, valuation, reporting, and decision support.
+      </p>
+
+    <h2>1) Purpose of the Platform</h2>
+    <p>
+      This platform evaluates deep-tech startups in a structured, repeatable way for internal decision-making.
+      It combines qualitative and quantitative inputs, computes module scores, calculates a 120-point total score,
+      generates valuation estimates, and recommends an engagement path.
+    </p>
+
+    <h2>2) End-to-End User Flow</h2>
+    <div class="box">
+      <strong>Page flow:</strong> Profile → M1 Tech → M2 IP → M3 Team → M4 Market → M5 Adoption →
+      M6 Business → M7 EIL Fit → Valuation Config → Review → Data Room → Report
+    </div>
+    <ul>
+      <li>User enters startup information across module pages.</li>
+      <li>Inputs are read by scoring functions for each module.</li>
+      <li>Total score and verdict are computed from module caps.</li>
+      <li>Valuation methods run using assumptions from Valuation Configuration.</li>
+      <li>Clicking <span class="mono">Generate full evaluation report</span> on the Review page, or the
+      <span class="mono">Generate report →</span> button in the bottom navigation on the Data Room page,
+      publishes the full report. The report shows a calculating placeholder for ~700 ms before rendering.</li>
+      <li>Generated report persists across tab switches until regenerated.</li>
+    </ul>
+    <div class="box">
+      <strong>Navigation bar:</strong> A sticky bottom navigation provides <em>Previous</em> · <em>Step X of Y</em> ·
+      <em>Methodology ↗</em> · <em>Next →</em>. The Methodology link opens the scoring-mechanism reference
+      (the full 120-point scoring framework with per-field rationale) in a new tab. The bottom nav hides on
+      the Report page since there is nothing further to navigate to.
+    </div>
+
+    <h2>3) Scoring Framework (120 Points)</h2>
+    <p>Each module has a capped maximum score:</p>
+    <ul>
+      <li>Module 1 - Technology readiness: 25</li>
+      <li>Module 2 - IP &amp; patent assessment: 15</li>
+      <li>Module 3 - Team &amp; leadership: 20</li>
+      <li>Module 4 - Market validation: 20</li>
+      <li>Module 5 - Adoption feasibility: 15</li>
+      <li>Module 6 - Business model strength: 15</li>
+      <li>Module 7 - EIL strategic fit: 10</li>
+      <li><strong>Total:</strong> 120</li>
+    </ul>
+    <p>
+      The engine applies weighted transformations to sliders/selects (not only direct sums), then enforces module caps.
+      Sub-weights within Modules 3 and 6 are rebalanced so the raw sum of fields equals the module cap — preventing a
+      strong-on-every-dimension startup from being truncated by the cap.
+    </p>
+    <div class="box">
+      <strong>Weight rationale UI:</strong> The Profile page shows a collapsible <span class="mono">Why these weights?</span>
+      card. It explains why Technology and Team dominate (deep-tech failure causes), and justifies each module's
+      relative weight with one sentence of framework reasoning. This makes the 25/15/20/20/15/15/10 allocation
+      auditable rather than opaque.
+    </div>
+    <div class="box">
+      <strong>Runway indicator (Module 6):</strong> A runway field — derived from reported monthly burn and cash balance —
+      contributes up to 2 pts. Runway below 6 months scores 0, 6–11 months scores 1, and ≥12 months scores 2. This
+      captures financial resilience independently of revenue maturity, so that a pre-revenue startup with healthy
+      runway is not scored identically to one in survival mode.
+    </div>
+    <div class="box">
+      <strong>FTO default:</strong> The Freedom-to-Operate selector defaults to <em>Unknown → 1 pt</em>, not 0. An absence
+      of data is not the same as a declared absence of FTO analysis — evaluators must actively downgrade to 0 when
+      the startup confirms no FTO work has been done.
+    </div>
+    <div class="box">
+      <strong>M1 — Independent validation (binary, 1 pt):</strong> A dedicated field captures whether the technology has
+      been validated by an external party — a published benchmark, third-party pilot result, accredited lab test,
+      or peer-reviewed paper. This is reported separately from pilot status and empirical data quality, because
+      external corroboration carries more diligence weight than any self-reported claim.
+    </div>
+    <div class="box">
+      <strong>M3 — Team diversity (threshold field, 1 pt):</strong> Replaces the older Key-person dependency field.
+      Awarded when the founding/leadership team passes a diversity threshold (≥ 3 distinct backgrounds across
+      technical, commercial, domain, and geographic dimensions). Diversity is treated as a resilience signal —
+      more routes to insight, fewer blind spots — rather than a compliance checkbox.
+    </div>
+    <div class="box">
+      <strong>Sub-weight rebalancing (M3 &amp; M6):</strong> Within Team and Business, the individual field maxima are
+      reduced so that their raw sum equals the module cap exactly (20 and 15 respectively). Prior versions let
+      field maxima sum above the cap, which truncated strong-on-every-dimension startups. Affected fields include
+      Team Commercial experience (4→3), Industry network (3→2), Team completeness (4→3), Institutional origin (4→3),
+      Advisory board (4→2), Execution track record (2→1), Full-time commitment (3→1); and Revenue model (8→3) in M6.
+    </div>
+
+    <h2>4) Verdict Logic (5 Bands)</h2>
+    <p>Total score is mapped to decision-quality bands expressed as a percentage of the 120-pt cap:</p>
+    <ul>
+      <li><strong>Investment-grade</strong> — ≥ 85% (≥ 102 pts): strategically and commercially exceptional</li>
+      <li><strong>Commercially ready</strong> — 75–84% (90–101 pts): ready to engage at full scale</li>
+      <li><strong>Promising</strong> — 58–74% (70–89 pts): further validation required</li>
+      <li><strong>High risk</strong> — 42–57% (50–69 pts): conditional support only</li>
+      <li><strong>Not viable</strong> — &lt; 42% (&lt; 50 pts): reject or put on watch list</li>
+    </ul>
+    <p>
+      The additional Investment-grade tier separates truly exceptional opportunities from the merely
+      commercially-ready band. It prevents top-decile startups from being under-signalled when the rest of the
+      portfolio also scores in the 90s.
+    </p>
+
+    <h2>5) Engagement Decision Logic</h2>
+    <p>Separate from score bands, the platform recommends one of five engagement paths, each gated by module-specific thresholds:</p>
+    <ul>
+      <li><strong>Equity investment</strong> — CRS ≥ 85, EIL Fit ≥ 7, EPC Fit ≥ 3</li>
+      <li><strong>Licensing agreement</strong> — CRS ≥ 70, IP ≥ 10, EIL Fit ≥ 5, willingness to license confirmed</li>
+      <li><strong>Engineering partnership</strong> — CRS ≥ 55, EPC Fit ≥ 3, EIL Fit ≥ 4</li>
+      <li><strong>Watch</strong> — 42% ≤ CRS &lt; 55%, or upper gates not fully satisfied</li>
+      <li><strong>Reject</strong> — CRS &lt; 50, or Tech &lt; 10, or <strong>EIL Fit &lt; 3</strong> (hard floor)</li>
+    </ul>
+    <div class="box">
+      <strong>EIL hard gate:</strong> A technology scoring below 3/10 on EIL Strategic Fit is rejected regardless of
+      how well it scores on the general framework. This enforces EngSUI's mandate — EIL is not a generalist
+      venture fund, and strategic alignment is a prerequisite, not a tie-breaker. License and Engineering
+      recommendations additionally require EIL Fit ≥ 5 and ≥ 4 respectively.
+    </div>
+
+    <h2>6) Valuation Engine (Configurable)</h2>
+    <p>The platform can run multiple valuation methods in parallel:</p>
+    <ul>
+      <li>Risk-adjusted DCF</li>
+      <li>VC Method</li>
+      <li>Strategic Value Uplift</li>
+      <li>Revenue Multiple</li>
+      <li>Berkus</li>
+      <li>Scorecard</li>
+    </ul>
+    <p>
+      Users can enable/disable methods and adjust assumptions such as discount rate, IRR, exit horizon, haircut,
+      and sector revenue multiples. A <span class="mono">Restore defaults</span> action resets all valuation assumptions.
+    </p>
+    <div class="box">
+      <strong>CRS-driven method recommendation:</strong> The valuation card highlights the preferred method based
+      primarily on the total CRS score, with TRL as a secondary guard. Low-CRS startups are matched with
+      qualitative methods (Berkus, Scorecard); mid-CRS with VC Method or Risk-Adjusted DCF; high-CRS with
+      Revenue Multiple or Strategic Value Uplift. This forms a CRS → valuation bridge so that scoring and
+      valuation do not drift independently.
+    </div>
+    <div class="box">
+      <strong>TRL → WACC adjustment:</strong> The risk-adjusted DCF applies a TRL-driven premium on top of the
+      user-entered discount rate, so early-stage technology is not discounted at the same WACC as a mature one.
+      Premiums are additive: TRL 1–3 <strong>+10%</strong>, TRL 4–5 <strong>+7%</strong>, TRL 6–7 <strong>+4%</strong>,
+      TRL 8 <strong>+2%</strong>, TRL 9 <strong>0%</strong>. Evaluators can therefore set a single base WACC and
+      rely on the engine to stage-correct it rather than manually picking different rates per startup.
+    </div>
+
+    <h2>7) Reporting Experience</h2>
+    <ul>
+      <li>Report is intentionally generated only on explicit click for better UX.</li>
+      <li>A short calculating state (~700 ms placeholder) appears before report render, so users see a deliberate
+      transition rather than a flash.</li>
+      <li>Generated report persists when switching tabs (top-tab navigation to the Report page does not clear it)
+      until the user explicitly regenerates from Review or Data Room.</li>
+    </ul>
+    <div class="box">
+      <strong>Two generate triggers:</strong> Reports can be published from either the <span class="mono">Generate full
+      evaluation report</span> button on the Review page, or the <span class="mono">Generate report →</span> button in
+      the bottom navigation of the Data Room page. Both run the same pipeline — computing scores, verdict, DWCS,
+      valuation, and engagement recommendation — and land on the Report tab.
+    </div>
+    <p>Report output includes:</p>
+    <ul>
+      <li>Module breakdown bars and radar chart (each with an evidence-confidence badge)</li>
+      <li>Team/IP sub-indicator bars</li>
+      <li><strong>DWCS panel</strong> — Dynamic Weight Calibration showing stage-adjusted module weights</li>
+      <li>Risk flags and risk matrix</li>
+      <li>Valuation cards, comparison chart, and CRS-driven method recommendation</li>
+      <li>Engagement decision cards with EIL hard-gate status</li>
+      <li>Portfolio snapshot table sorted by <strong>Priority Score</strong></li>
+    </ul>
+
+    <h2>8) Saved Startups, Demo Data, and Delete Safety</h2>
+    <ul>
+      <li>Saved startups are stored in browser local storage under
+      <span class="mono">engsui.codex.v1</span>, with archived items under
+      <span class="mono">engsui.codex.v1.trash</span>.</li>
+      <li>Demo startups are seeded on first run and marked with a Demo badge for quick exploration.</li>
+      <li>Delete flow asks for confirmation and moves the item to trash rather than hard-deleting —
+      so accidental deletes are always recoverable.</li>
+    </ul>
+    <div class="box">
+      <strong>Undo window (30 s, live countdown):</strong> After any delete, a toast appears at bottom-right with a
+      live-ticking countdown (updated every 250 ms) and an <span class="mono">Undo</span> action. The toast auto-hides
+      after 7 seconds; the underlying undo window is 30 s. The toast uses <em>white-space: nowrap</em> so the
+      countdown text never wraps awkwardly.
+    </div>
+    <div class="box">
+      <strong>Trash retention (5 days, auto-purge):</strong> Archived items live in the trash for 5 days. On every page
+      load and save, <span class="mono">purgeExpiredTrash()</span> silently removes items past that retention window.
+      This prevents indefinite accumulation of stale evaluations while still giving a generous safety net.
+    </div>
+    <div class="box">
+      <strong>Demo badge stripping:</strong> If an evaluator edits and re-saves a demo startup, the Demo badge is
+      removed on save. Once edited, the row is treated as an original evaluation, not seeded demo content.
+    </div>
+
+    <h2>9) Data Room (Non-Scoring Evidence Overlay)</h2>
+    <p>
+      The Data Room is the last page before the report. It captures evidence metadata —
+      things an evaluator wants recorded alongside a decision but that should not distort
+      the 120-point score. Every Data Room field uses the <span class="mono">vd-*</span>
+      id prefix and is excluded from the scoring engine.
+    </p>
+    <ul>
+      <li><strong>Evaluation date, evaluator name, source documents reviewed</strong> — audit-trail metadata.</li>
+      <li><strong>Peer comparables, industry benchmarks</strong> — context for the valuation range, not inputs to it.</li>
+      <li><strong>Free-text notes</strong> — diligence observations, founder quotes, open questions, follow-ups.</li>
+    </ul>
+    <div class="box">
+      <strong>Design rationale:</strong> Evidence and scoring are deliberately separated. If a comparables multiple
+      drifted into the score it would double-count against fields like Market TAM/SAM; if an evaluator note became
+      scored it would import subjective judgement into a framework whose value is reproducibility. Everything in
+      the Data Room is preserved in the export/import JSON so the evidence trail travels with the evaluation.
+    </div>
+
+    <h2>10) Permanent Storage — JSON Export &amp; Import</h2>
+    <p>
+      The tool is single-user and browser-local by design (no backend). To prevent loss when browser data is
+      cleared or the user switches machines, saved evaluations can be exported to a plain JSON file and later
+      re-imported — onto any modern browser, on any machine. Users typically save the file into
+      OneDrive, Google Drive, or a USB/local folder.
+    </p>
+    <ul>
+      <li><strong>Export all</strong> — downloads a single versioned document
+      (<span class="mono">engsui-startups-YYYY-MM-DD.json</span>) containing both the active list and trash.</li>
+      <li><strong>Per-row export</strong> — a small <span class="mono">↓</span> icon on each saved row downloads just
+      that one startup as its own JSON file, convenient for sharing a single evaluation with a colleague.</li>
+      <li><strong>Import…</strong> — accepts a <span class="mono">.json</span> file, validates schema, and offers
+      <em>Merge</em> (default, dedupe by id with later-<span class="mono">updated</span> wins) or <em>Replace</em>
+      (wipe current state, load imported data verbatim — behind a second confirmation because it is destructive).</li>
+    </ul>
+    <div class="box">
+      <strong>Schema v1.0:</strong> <span class="mono">{ schemaVersion, tool, exportedAt, fieldIdsSnapshot,
+      savedStartups[], archivedStartups[] }</span>. <span class="mono">fieldIdsSnapshot</span> records the complete
+      field ID list at export time so future schema evolutions can detect drift during import and migrate safely.
+    </div>
+    <div class="box">
+      <strong>Last-export reminder banner:</strong> The tool checks
+      <span class="mono">engsui.codex.v1.lastExport</span> on load. If the last export was &gt; 7 days ago an amber
+      banner appears; &gt; 30 days ago (or never, with ≥ 1 saved startup) a red banner appears. The banner is
+      dismissable per-session and re-appears on the next session until an export refreshes the timestamp.
+    </div>
+    <div class="box">
+      <strong>Out of scope:</strong> No backend server, no File System Access API auto-sync (Chromium-only), no
+      encryption at rest. The JSON export is plaintext — if sensitivity is later flagged, an optional
+      passphrase-based AES-GCM wrapper can be added without changing the export UI.
+    </div>
+
+    <h2>11) Methodology Reference Cross-Link</h2>
+    <p>
+      The sticky bottom navigation exposes a <span class="mono">Methodology ↗</span> link that opens the
+      scoring-mechanism reference in a new tab. That reference is the canonical source for the full 120-point
+      scoring framework: every sub-indicator, its max points, its verbal anchor scale, and its inclusion rationale.
+      When evaluators disagree with a computed module score, the Methodology page is where the argument is
+      settled — not inside the evaluation form.
+    </p>
+    <div class="box">
+      <strong>Colour system alignment:</strong> The three surfaces — the evaluation tool, the scoring-mechanism
+      reference, and this functioning guide — share a single institutional palette (navy header, slate text,
+      functional green/blue/amber/red for the five verdict bands). Colour is used to encode meaning, not for
+      decoration. A reader moving between the three pages should feel a single system, not three disconnected
+      tools.
+    </div>
+
+    <h2>12) Repository Folder Roles</h2>
+    <ul>
+      <li><span class="mono">new-engsui-platform</span>: active implementation of the evaluation tool, including scoring, valuation, reporting, saved startups, and Data Room workflow</li>
+      <li><span class="mono">scoring-mechanism</span>: reference UI that explains the scoring hierarchy, point allocation, and module-level rationale</li>
+      <li><span class="mono">platform-functioning-guide.html</span>: standalone functional documentation for the current static implementation</li>
+    </ul>
+    <div class="box">
+      <strong>Repository note:</strong> <span class="mono">new-engsui-platform</span> currently contains its own
+      <span class="mono">.git</span> directory. This usually means the app was originally developed as a standalone
+      project and then placed inside this parent repository while retaining its own Git history.
+    </div>
+
+    <h2>13) Dynamic Weight Calibration (DWCS)</h2>
+    <p>
+      A startup at TRL 3 should not be evaluated with the same module priorities as one at TRL 8. DWCS applies
+      stage-dependent multipliers to the seven module weights and re-normalises them to 120 points, producing a
+      stage-adjusted score alongside the standard CRS.
+    </p>
+    <ul>
+      <li><strong>Early stage (TRL 1–4):</strong> Team and Technology weights are emphasised; Business Model and Adoption are de-emphasised.</li>
+      <li><strong>Mid stage (TRL 5–7):</strong> Market Validation and IP gain weight; the framework approaches the baseline allocation.</li>
+      <li><strong>Late stage (TRL 8–9):</strong> Business Model and Adoption Feasibility dominate; Team weight is reduced since execution capacity is already demonstrated.</li>
+    </ul>
+    <p>
+      The report renders a DWCS panel showing baseline vs. adjusted weights per module, the adjusted CRS, and a
+      one-line interpretation. Standard CRS remains the primary headline number — DWCS is a second lens, not a
+      replacement.
+    </p>
+
+    <h2>14) Evidence Confidence Layer</h2>
+    <p>
+      Every module page exposes an evidence-confidence selector (High / Medium / Low). This annotates the score
+      with a qualitative signal about how much the evaluator trusts the underlying inputs.
+    </p>
+    <ul>
+      <li><strong>High:</strong> primary documentation reviewed — audited financials, independent FTO report, third-party pilot validation.</li>
+      <li><strong>Medium:</strong> founder-provided data, single-source, plausible but not externally corroborated.</li>
+      <li><strong>Low:</strong> verbal, unverified, or based on projections without evidence.</li>
+    </ul>
+    <p>
+      Confidence badges appear next to each module bar in the report and feed a cross-module indicator of overall
+      diligence quality. A high-score/low-confidence profile is itself a risk flag — it prompts further
+      investigation rather than action.
+    </p>
+
+    <h2>15) Portfolio Priority Score</h2>
+    <p>
+      Within the saved-startups portfolio, each entry gets a Priority Score used to sort the table:
+    </p>
+    <div class="box">
+      Priority = 40% × CRS + 20% × EIL Fit + 15% × Technology + 15% × Market + 10% × IP (all normalised to 0–100)
+    </div>
+    <p>
+      The weighting deliberately emphasises CRS and EIL Fit to surface strategically aligned opportunities first,
+      while Technology / Market / IP provide secondary differentiation inside the same CRS band. Priority is
+      bucketed into High / Mid / Low and colour-coded in the portfolio table.
+    </p>
+
+    <h2>16) Practical Summary</h2>
+    <p>
+      In practice, the platform is a decision-support system that converts startup diligence into standardized scores,
+      valuation ranges, and actionable engagement recommendations with transparent assumptions.
+    </p>
+
+    <p class="footer">
+      Generated for internal documentation. Version aligned with current static HTML/CSS/JS implementation.
+    </p>
+    </main>
+  </div>
+</body>
+</html>
