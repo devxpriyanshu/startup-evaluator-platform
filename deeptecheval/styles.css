@@ -1819,14 +1819,83 @@ textarea:focus-visible,
 }
 
 /* ============================================================================
-   REPORT LOCK — email-gated full report
+   REPORT LOCK — sample report visible, banner above asks for email
    ============================================================================ */
-#report-body.locked {
-  filter: blur(8px);
-  pointer-events: none;
-  user-select: none;
-  position: relative;
+.report-lock-banner {
+  background: linear-gradient(135deg, #eef2ff 0%, #ffffff 100%);
+  border: 1px solid #c7d2fe;
+  border-left: 4px solid var(--blue);
+  border-radius: 14px;
+  padding: 22px 24px;
+  margin: 0 0 20px;
+  box-shadow: 0 4px 16px rgba(99, 102, 241, 0.10);
 }
+.lock-banner-row {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 24px;
+  align-items: center;
+}
+.lock-banner-eyebrow {
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--blue);
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.lock-banner-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.3;
+  margin-bottom: 6px;
+  letter-spacing: -0.01em;
+}
+.lock-banner-sub {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.55;
+}
+.lock-banner-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.lock-banner-form input[type=email] {
+  padding: 10px 12px;
+  border: 1px solid var(--border-dark);
+  border-radius: 8px;
+  font-size: 13px;
+  background: #fff;
+}
+.lock-banner-form .button-primary {
+  background: var(--blue) !important;
+  color: #fff !important;
+  border: none !important;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.lock-banner-form .button-primary:hover { background: #4f46e5 !important; }
+.lock-banner-fineprint {
+  font-size: 10px;
+  color: var(--text-tertiary);
+  margin-top: 12px;
+  text-align: center;
+}
+.lock-banner-fineprint a { color: var(--blue); text-decoration: none; }
+
+@media (max-width: 640px) {
+  .report-lock-banner { padding: 16px 14px; }
+  .lock-banner-row { grid-template-columns: 1fr; gap: 14px; }
+  .lock-banner-title { font-size: 15px !important; }
+}
+
+/* Legacy classes — keep no-op so old states don't break */
+#report-body.locked { filter: none; pointer-events: auto; }
 .report-lock-overlay {
   position: relative;
   margin: -8px 0 16px;
@@ -1912,4 +1981,84 @@ textarea:focus-visible,
   .report-lock-sub { font-size: 12px !important; }
   .report-lock-form { flex-direction: column; gap: 6px; }
   .report-lock-form .button-primary { width: 100%; }
+}
+
+/* ============================================================================
+   MODERN THEME OVERRIDE — sleek SaaS palette
+   Indigo + slate + warm-white. Reduce gradient noise. Cleaner shadows.
+   ============================================================================ */
+:root {
+  --navy: #0f172a;            /* slate-900 — primary dark */
+  --navy-2: #1e293b;          /* slate-800 */
+  --blue: #6366f1;            /* indigo-500 — accent */
+  --blue-soft: #eef2ff;       /* indigo-50 */
+  --amber: #d97706;           /* amber-600 */
+  --green: #10b981;           /* emerald-500 */
+  --red: #ef4444;             /* red-500 */
+  --purple: #8b5cf6;
+  --orange: #f97316;
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8fafc;    /* slate-50 */
+  --bg-tertiary: #f1f5f9;     /* slate-100 */
+  --border: #e2e8f0;          /* slate-200 */
+  --border-dark: #cbd5e1;
+  --border-strong: #94a3b8;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;  /* slate-600 */
+  --text-tertiary: #64748b;
+  --radius-lg: 14px;
+  --radius-md: 10px;
+  --radius-sm: 8px;
+  --shadow: 0 1px 3px rgba(15, 23, 42, 0.06), 0 8px 24px rgba(15, 23, 42, 0.06);
+  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.04);
+  --shadow-header: 0 10px 30px rgba(99, 102, 241, 0.15);
+}
+body {
+  background: #fafafa !important;          /* clean warm-white, no gradient noise */
+}
+.header {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 60%, #312e81 100%) !important;
+  border: none !important;
+  box-shadow: var(--shadow-header) !important;
+}
+.tab-nav {
+  background: #ffffff !important;
+  backdrop-filter: none !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: var(--shadow-sm) !important;
+}
+.tab-button.active {
+  background: var(--blue) !important;
+  color: #ffffff !important;
+  border-color: var(--blue) !important;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.30) !important;
+}
+.tab-button.report-tab { color: var(--green) !important; }
+.tab-button.report-tab.active { background: var(--green) !important; border-color: var(--green) !important; color: #fff !important; }
+.card {
+  background: #ffffff !important;
+  backdrop-filter: none !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: var(--shadow) !important;
+}
+.button {
+  border: 1px solid var(--border-dark);
+  background: #ffffff;
+  color: var(--text-primary);
+  border-radius: var(--radius-md);
+}
+.button-primary {
+  background: var(--blue) !important;
+  color: #ffffff !important;
+  border-color: var(--blue) !important;
+}
+.button-primary:hover { background: #4f46e5 !important; border-color: #4f46e5 !important; }
+.section-title { border-left-color: var(--blue) !important; }
+.weights-rationale { background: #fff !important; border: 1px solid var(--border) !important; }
+.config-badge { background: var(--blue-soft); color: var(--blue); border: 1px solid #c7d2fe; }
+.credit-footer { border-top: 1px solid var(--border); background: transparent; }
+
+/* Waitlist section uses indigo gradient */
+.waitlist-section {
+  background: linear-gradient(135deg, #0f172a 0%, #312e81 50%, #6366f1 100%) !important;
 }

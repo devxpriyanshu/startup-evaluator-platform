@@ -1443,50 +1443,71 @@
     applyReportLock();
   }
 
-  /* ---------- Report lock (email-gated full report) ---------- */
+  /* ---------- Report lock (email-gated personalised report) ---------- */
   const EMAIL_UNLOCK_KEY = 'dte.emailUnlocked';
+  const SAMPLE_NAME_SENTINEL = 'GreenH2 Technologies';
+
   function isReportUnlocked() {
     try { return localStorage.getItem(EMAIL_UNLOCK_KEY) === '1'; } catch (_) { return false; }
   }
+
+  // Capture current form data so we can swap to sample + restore later.
+  let _userSnapshotForLock = null;
+
   function applyReportLock() {
     const body = $('report-body');
     if (!body) return;
-    // Strip any previous overlay
-    const prev = document.getElementById('report-lock-overlay');
+    // Strip any previous banner
+    const prev = document.getElementById('report-lock-banner');
     if (prev) prev.remove();
-    if (isReportUnlocked()) {
-      body.classList.remove('locked');
-      return;
+    body.classList.remove('locked');
+
+    if (isReportUnlocked()) return;   // user paid the email price; full real report
+
+    // Locked path: show SAMPLE report fully visible so user sees the layout,
+    // their personal one stays hidden behind the email gate.
+    const userName = gs('p-name', 'your startup');
+    const isSampleAlready = userName === SAMPLE_NAME_SENTINEL;
+
+    if (!isSampleAlready && !_userSnapshotForLock) {
+      _userSnapshotForLock = snapshotForm();
+      const sample = (savedStartups || []).find(function (s) { return s.name === SAMPLE_NAME_SENTINEL; });
+      if (sample) {
+        loadStartup(sample.id);
+        setTimeout(function () { generateReport(); }, 50);
+        return;   // generateReport will re-call applyReportLock
+      }
     }
-    body.classList.add('locked');
-    const name = gs('p-name', 'your startup');
-    const overlay = document.createElement('div');
-    overlay.id = 'report-lock-overlay';
-    overlay.className = 'report-lock-overlay';
-    overlay.innerHTML = (
-      '<div class="report-lock-card">' +
-        '<div class="report-lock-eyebrow">Personalised report ready</div>' +
-        '<div class="report-lock-title">Unlock the full report for ' + esc(name) + '</div>' +
-        '<div class="report-lock-sub">' +
-          'Free beta unlocks the complete scoring breakdown, valuation range, ' +
-          'engagement recommendation and risk flags. One email — no spam.' +
+
+    // Inject banner above report body
+    const banner = document.createElement('div');
+    banner.id = 'report-lock-banner';
+    banner.className = 'report-lock-banner';
+    const yourName = _userSnapshotForLock ? (_userSnapshotForLock['p-name'] || 'your startup') : userName;
+    banner.innerHTML = (
+      '<div class="lock-banner-row">' +
+        '<div class="lock-banner-text">' +
+          '<div class="lock-banner-eyebrow">Sample report &middot; GreenH2 Technologies demo</div>' +
+          '<div class="lock-banner-title">This is what your DeepTechEval report looks like</div>' +
+          '<div class="lock-banner-sub">' +
+            'Below is a fully rendered evaluation using sample data. To view the personalised ' +
+            'report for <strong>' + esc(yourName) + '</strong>, enter your email — free during beta.' +
+          '</div>' +
         '</div>' +
-        '<form name="report-unlock" method="POST" data-netlify="true" class="report-lock-form">' +
+        '<form name="report-unlock" method="POST" data-netlify="true" class="lock-banner-form">' +
           '<input type="hidden" name="form-name" value="report-unlock" />' +
-          '<input type="hidden" name="startup-name" value="' + esc(name) + '" />' +
+          '<input type="hidden" name="startup-name" value="' + esc(yourName) + '" />' +
           '<input type="email" name="email" required placeholder="analyst@yourfund.com" />' +
-          '<button type="submit" class="button button-primary">Unlock report →</button>' +
+          '<button type="submit" class="button button-primary">Unlock my report →</button>' +
         '</form>' +
-        '<div class="report-lock-sample">' +
-          '<a href="#" id="report-lock-sample-link">See a sample report (Acme Hydrogen demo) →</a>' +
-        '</div>' +
-        '<div class="report-lock-fineprint">Already unlocked? <a href="#" id="report-lock-restore">Restore access</a></div>' +
+      '</div>' +
+      '<div class="lock-banner-fineprint">' +
+        'Already unlocked? <a href="#" id="report-lock-restore">Restore access</a>' +
       '</div>'
     );
-    body.parentNode.insertBefore(overlay, body);
+    body.parentNode.insertBefore(banner, body);
 
-    // Intercept form submit — capture via Netlify Forms in background, unlock locally
-    const form = overlay.querySelector('form');
+    const form = banner.querySelector('form');
     if (form) {
       form.addEventListener('submit', function (ev) {
         ev.preventDefault();
@@ -1499,34 +1520,25 @@
           });
         } catch (_) {}
         try { localStorage.setItem(EMAIL_UNLOCK_KEY, '1'); } catch (_) {}
-        setStatus('Report unlocked. Thanks for joining the beta.');
-        applyReportLock();
-      });
-    }
-
-    // Sample-report link → load demo (GreenH2) into fields + re-generate
-    const sampleLink = overlay.querySelector('#report-lock-sample-link');
-    if (sampleLink) {
-      sampleLink.addEventListener('click', function (ev) {
-        ev.preventDefault();
-        const demo = savedStartups.find(function (s) { return s.name === 'GreenH2 Technologies'; });
-        if (demo) {
-          loadStartup(demo.id);
-          setStatus('Sample loaded — scroll to view a fully filled-in report');
-          requestReportGeneration();
-        } else {
-          setStatus('Sample data unavailable — clear localStorage to reseed demos');
+        setStatus('Unlocked. Loading your personalised report…');
+        if (_userSnapshotForLock) {
+          restoreForm(_userSnapshotForLock);
+          _userSnapshotForLock = null;
         }
+        generateReport();
       });
     }
-
-    const restoreLink = overlay.querySelector('#report-lock-restore');
+    const restoreLink = banner.querySelector('#report-lock-restore');
     if (restoreLink) {
       restoreLink.addEventListener('click', function (ev) {
         ev.preventDefault();
         try { localStorage.setItem(EMAIL_UNLOCK_KEY, '1'); } catch (_) {}
-        applyReportLock();
         setStatus('Access restored');
+        if (_userSnapshotForLock) {
+          restoreForm(_userSnapshotForLock);
+          _userSnapshotForLock = null;
+        }
+        generateReport();
       });
     }
   }
