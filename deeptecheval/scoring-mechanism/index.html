@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DeepTechEval — Complete Scoring Hierarchy Map</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="W">
+  <div class="root-hdr">
+    <div>
+      <div class="root-ttl">DeepTechEval — Complete Scoring Hierarchy Map</div>
+      <div class="root-sub">7 modules · 40+ sub-indicators · Full point allocation breakdown</div>
+    </div>
+    <div style="text-align:right">
+      <div class="root-tot">120</div>
+      <div class="root-totl">total points</div>
+    </div>
+  </div>
+
+  <div class="wbar" id="wbar"></div>
+  <div class="wlgnd" id="wlgnd"></div>
+
+  <div class="thrsh">
+    <div class="tc" style="background:#c7e9d0"><div class="tv" style="color:#0b5323">≥ 102 pts (85%)</div><div class="tl" style="color:#0b5323">Investment-grade</div></div>
+    <div class="tc" style="background:#d4edda"><div class="tv" style="color:#155724">90–101 pts (75–84%)</div><div class="tl" style="color:#1a6b38">Commercially ready</div></div>
+    <div class="tc" style="background:#e6f1fb"><div class="tv" style="color:#0c447c">70–89 pts (58–74%)</div><div class="tl" style="color:#185fa5">Promising — validate</div></div>
+    <div class="tc" style="background:#fff3cd"><div class="tv" style="color:#856404">50–69 pts (42–57%)</div><div class="tl" style="color:#8c5010">High risk — conditional</div></div>
+    <div class="tc" style="background:#f8d7da"><div class="tv" style="color:#7b1d1d">&lt; 50 pts (&lt; 42%)</div><div class="tl" style="color:#a32d2d">Not commercially viable</div></div>
+  </div>
+
+  <div class="ctrl">
+    <button class="cbtn" onclick="toggleAll(true)">Expand all modules</button>
+    <button class="cbtn" onclick="toggleAll(false)">Collapse all</button>
+    <span style="font-size:10px;color:var(--color-text-tertiary);align-self:center">Click any module header to expand · Click a sub-indicator bar to see scoring logic</span>
+  </div>
+
+  <div id="mods"></div>
+
+  <div class="verdict-hdr">Engagement decision thresholds — module score gates (with the investor hard floors)</div>
+  <div class="vd-grid">
+    <div class="vd" style="background:#d4edda;border-color:#a3d4b5"><div class="vs" style="color:#155724">Equity</div><div class="vl" style="color:#1a6b38">CRS ≥ 85 · Strategic Fit ≥ 7 · EPC Fit ≥ 3</div></div>
+    <div class="vd" style="background:#e6f1fb;border-color:#b5d4f4"><div class="vs" style="color:#0c447c">License</div><div class="vl" style="color:#185fa5">CRS ≥ 70 · IP ≥ 10 · Strategic Fit ≥ 5 · Willing to license</div></div>
+    <div class="vd" style="background:#faeeda;border-color:#fac775"><div class="vs" style="color:#633806">Engineering partner</div><div class="vl" style="color:#ba7517">CRS ≥ 55 · EPC Fit ≥ 3 · Strategic Fit ≥ 4</div></div>
+    <div class="vd" style="background:#fff3cd;border-color:#fac775"><div class="vs" style="color:#8c5010">Watch</div><div class="vl" style="color:#856404">42% ≤ CRS &lt; 55% · or failed upper gates</div></div>
+    <div class="vd" style="background:#f8d7da;border-color:#f7c1c1"><div class="vs" style="color:#7b1d1d">Reject</div><div class="vl" style="color:#a32d2d">CRS &lt; 50 · or Tech &lt; 10 · or Strategic Fit &lt; 3 (hard floor)</div></div>
+  </div>
+  <div style="font-size:10px;color:var(--color-text-tertiary);padding:.4rem .75rem .25rem;line-height:1.5">
+    <strong>the investor hard floor:</strong> Strategic Fit &lt; 3 forces a reject regardless of CRS — a technology outside the investor's strategic mandate is not fundable by DeepTechEval even if it is commercially excellent on the general framework. License and Engineering paths additionally require Strategic Fit ≥ 5 and ≥ 4 respectively.
+  </div>
+
+  <!-- DWCS panel -->
+  <div class="verdict-hdr" style="margin-top:14px">Dynamic Weight Calibration System (DWCS) — stage-adjusted CRS</div>
+  <div style="padding:0 14px 10px">
+    <div style="font-size:11px;color:var(--color-text-secondary);margin-bottom:8px;line-height:1.5">
+      A startup at TRL 3 should not be evaluated with the same module priorities as one at TRL 8. DWCS applies
+      TRL-stage multipliers to the seven module weights, re-normalises to 120 pts, and produces a
+      stage-adjusted CRS alongside the standard CRS. Standard CRS remains the headline number — DWCS is a second lens.
+    </div>
+    <table style="width:100%;border-collapse:collapse;font-size:11px">
+      <thead>
+        <tr style="background:var(--color-background-secondary)">
+          <th style="padding:5px 8px;text-align:left;border:0.5px solid var(--color-border-tertiary)">Stage</th>
+          <th style="padding:5px 8px;text-align:center;border:0.5px solid var(--color-border-tertiary)">Tech ×</th>
+          <th style="padding:5px 8px;text-align:center;border:0.5px solid var(--color-border-tertiary)">IP ×</th>
+          <th style="padding:5px 8px;text-align:center;border:0.5px solid var(--color-border-tertiary)">Team ×</th>
+          <th style="padding:5px 8px;text-align:center;border:0.5px solid var(--color-border-tertiary)">Market ×</th>
+          <th style="padding:5px 8px;text-align:center;border:0.5px solid var(--color-border-tertiary)">Adoption ×</th>
+          <th style="padding:5px 8px;text-align:center;border:0.5px solid var(--color-border-tertiary)">Business ×</th>
+          <th style="padding:5px 8px;text-align:center;border:0.5px solid var(--color-border-tertiary)">the investor ×</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="padding:5px 8px;border:0.5px solid var(--color-border-tertiary);font-weight:500">Early (TRL 1–3)</td>
+          <td style="padding:5px 8px;text-align:center;border:0.5px solid var(--color-border-tertiary);color:#185fa5">×1.3</td>
+          <td style="padding:5px 8px;text-align:center;border:0.5px solid var(--color-border-tertiary);color:#185fa5">×1.3</td>
+          <td style="padding:5px 8px;text-align:center;border:0.5px solid var(--color-border-tertiary);color:#185fa5">×1.1</td>
+          <td style="padding:5px 8px;text-align:center;border:0.5px solid var(--color-border-tertiary);color:#856404">×0.7</td>
+          <td style="padding:5px 8px;text-align:center;border:0.5px solid var(--color-border-tertiary);color:#856404">×0.7</td>
+          <td style="padding:5px 8px;text-align:center;border:0.5px solid var(--color-border-tertiary);color:#a32d2d">×0.5</td>
+          <td style="padding:5px 8px;text-align:center;border:0.5px solid var(--color-border-tertiary)">×1.0</td>
+        </tr>
+        <tr style="background:var(--color-background-secondary)">
+          <td style="padding:5px 8px;border:0.5px solid var(--color-border-tertiary);font-weight:500">Mid (TRL 4–6)</td>
+          <td style="padding:5px 8px;text-align:center;border:0.5px solid var(--color-border-tertiary)">×1.0</td>
+          <td style="padding:5px 8px;text-align:center;border:0.5px solid var(--color-border-tertiary);color:#185fa5">×1.1</td>
+          <td style="padding:5px 8px;text-align:center;border:0.5px solid var(--color-border-tertiary);color:#185fa5">×1.1</td>
+          <td style="padding:5px 8px;text-align:center;border:0.5px solid var(--color-border-tertiary)">×1.0</td>
+          <td style="padding:5px 8px;text-align:center;border:0.5px solid var(--color-border-tertiary)">×1.0</td>
+          <td style="padding:5px 8px;text-align:center;border:0.5px solid var(--color-border-tertiary);color:#856404">×0.9</td>
+          <td style="padding:5px 8px;text-align:center;border:0.5px solid var(--color-border-tertiary)">×1.0</td>
+        </tr>
+        <tr>
+          <td style="padding:5px 8px;border:0.5px solid var(--color-border-tertiary);font-weight:500">Late (TRL 7–9)</td>
+          <td style="padding:5px 8px;text-align:center;border:0.5px solid var(--color-border-tertiary);color:#856404">×0.8</td>
+          <td style="padding:5px 8px;text-align:center;border:0.5px solid var(--color-border-tertiary);color:#856404">×0.9</td>
+          <td style="padding:5px 8px;text-align:center;border:0.5px solid var(--color-border-tertiary)">×1.0</td>
+          <td style="padding:5px 8px;text-align:center;border:0.5px solid var(--color-border-tertiary);color:#185fa5">×1.2</td>
+          <td style="padding:5px 8px;text-align:center;border:0.5px solid var(--color-border-tertiary);color:#185fa5">×1.2</td>
+          <td style="padding:5px 8px;text-align:center;border:0.5px solid var(--color-border-tertiary);color:#185fa5">×1.3</td>
+          <td style="padding:5px 8px;text-align:center;border:0.5px solid var(--color-border-tertiary)">×1.0</td>
+        </tr>
+      </tbody>
+    </table>
+    <div style="font-size:10px;color:var(--color-text-tertiary);margin-top:6px;line-height:1.5">
+      Formula: adjusted CRS = round( Σ(moduleScore × multiplier) / Σ(moduleCap × multiplier) × 120 ).
+      Re-normalisation ensures the result stays on the 0–120 scale and is directly comparable to raw CRS.
+      Strategic Fit is always ×1.0 — it is a strategic gate, not a stage-dependent criterion.
+    </div>
+  </div>
+
+  <!-- Evidence Confidence panel -->
+  <div class="verdict-hdr" style="margin-top:14px">Evidence Confidence Layer — per-module diligence quality signal</div>
+  <div style="padding:0 14px 10px">
+    <div style="font-size:11px;color:var(--color-text-secondary);margin-bottom:8px;line-height:1.5">
+      Every module exposes a High / Medium / Low confidence selector annotating how much the evaluator trusts the underlying inputs.
+      A high-score / low-confidence profile is itself a risk flag — it prompts further investigation rather than action.
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">
+      <div style="background:#e8f5ec;border:0.5px solid #9fe1cb;border-radius:6px;padding:8px 10px">
+        <div style="font-size:12px;font-weight:600;color:#155724;margin-bottom:4px">High confidence</div>
+        <div style="font-size:11px;color:#1a6b38;line-height:1.5">Primary documentation reviewed — audited financials, independent FTO report, third-party pilot validation, published peer-reviewed data.</div>
+      </div>
+      <div style="background:#faeeda;border:0.5px solid #fac775;border-radius:6px;padding:8px 10px">
+        <div style="font-size:12px;font-weight:600;color:#633806;margin-bottom:4px">Medium confidence</div>
+        <div style="font-size:11px;color:#ba7517;line-height:1.5">Founder-provided data, single-source, plausible but not externally corroborated. Typical for early-stage diligence with no independent audit.</div>
+      </div>
+      <div style="background:#fcebeb;border:0.5px solid #f09595;border-radius:6px;padding:8px 10px">
+        <div style="font-size:12px;font-weight:600;color:#791f1f;margin-bottom:4px">Low confidence</div>
+        <div style="font-size:11px;color:#a32d2d;line-height:1.5">Verbal, unverified, or based on projections without supporting evidence. Score should be treated as indicative only — further diligence required before any investment decision.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CRS-to-Valuation Bridge panel -->
+  <div class="verdict-hdr" style="margin-top:14px">CRS → Valuation Method Bridge — stage-to-method mapping</div>
+  <div style="padding:0 14px 10px">
+    <div style="font-size:11px;color:var(--color-text-secondary);margin-bottom:8px;line-height:1.5">
+      Valuation method is selected primarily by CRS, with TRL as a secondary guard. Commercial readiness is a better
+      proxy for which valuation lens reflects reality than TRL alone — a high-TRL startup with a weak team and no
+      market proof should be valued via Scorecard, not DCF.
+    </div>
+    <table style="width:100%;border-collapse:collapse;font-size:11px">
+      <thead>
+        <tr style="background:var(--color-background-secondary)">
+          <th style="padding:5px 8px;text-align:left;border:0.5px solid var(--color-border-tertiary)">CRS band</th>
+          <th style="padding:5px 8px;text-align:left;border:0.5px solid var(--color-border-tertiary)">TRL guard</th>
+          <th style="padding:5px 8px;text-align:left;border:0.5px solid var(--color-border-tertiary)">Recommended method</th>
+          <th style="padding:5px 8px;text-align:left;border:0.5px solid var(--color-border-tertiary)">Rationale</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="padding:5px 8px;border:0.5px solid var(--color-border-tertiary);font-weight:500;color:#0b5323">≥ 85 pts (Investment-grade)</td>
+          <td style="padding:5px 8px;border:0.5px solid var(--color-border-tertiary)">TRL ≥ 7</td>
+          <td style="padding:5px 8px;border:0.5px solid var(--color-border-tertiary);font-weight:500">Risk-adjusted DCF · Revenue Multiple</td>
+          <td style="padding:5px 8px;border:0.5px solid var(--color-border-tertiary);color:var(--color-text-secondary)">Proven cashflows justify forward-looking DCF; revenue multiples apply once model is repeatable</td>
+        </tr>
+        <tr style="background:var(--color-background-secondary)">
+          <td style="padding:5px 8px;border:0.5px solid var(--color-border-tertiary);font-weight:500;color:#155724">70–84 pts (Commercially ready)</td>
+          <td style="padding:5px 8px;border:0.5px solid var(--color-border-tertiary)">TRL ≥ 5</td>
+          <td style="padding:5px 8px;border:0.5px solid var(--color-border-tertiary);font-weight:500">VC Method · Strategic Value Uplift</td>
+          <td style="padding:5px 8px;border:0.5px solid var(--color-border-tertiary);color:var(--color-text-secondary)">Exit-based VC method suits pre-revenue or early-revenue with credible growth; strategic uplift for the investor's EPC deployment value</td>
+        </tr>
+        <tr>
+          <td style="padding:5px 8px;border:0.5px solid var(--color-border-tertiary);font-weight:500;color:#185fa5">58–69 pts (Promising)</td>
+          <td style="padding:5px 8px;border:0.5px solid var(--color-border-tertiary)">Any TRL</td>
+          <td style="padding:5px 8px;border:0.5px solid var(--color-border-tertiary);font-weight:500">Scorecard Method</td>
+          <td style="padding:5px 8px;border:0.5px solid var(--color-border-tertiary);color:var(--color-text-secondary)">Qualitative method calibrated to sector comparables; limited financial data at this stage makes DCF unreliable</td>
+        </tr>
+        <tr style="background:var(--color-background-secondary)">
+          <td style="padding:5px 8px;border:0.5px solid var(--color-border-tertiary);font-weight:500;color:#856404">&lt; 58 pts (High risk / Not viable)</td>
+          <td style="padding:5px 8px;border:0.5px solid var(--color-border-tertiary)">Any TRL</td>
+          <td style="padding:5px 8px;border:0.5px solid var(--color-border-tertiary);font-weight:500">Berkus Method</td>
+          <td style="padding:5px 8px;border:0.5px solid var(--color-border-tertiary);color:var(--color-text-secondary)">Concept-stage; assigns value to five de-risking milestones rather than projecting revenue — appropriate when cashflow assumptions would be fiction</td>
+        </tr>
+      </tbody>
+    </table>
+    <div style="font-size:10px;color:var(--color-text-tertiary);margin-top:6px;line-height:1.5">
+      All six methods (DCF, VC, Strategic Value Uplift, Revenue Multiple, Berkus, Scorecard) are computed in parallel.
+      The bridge selects which result to surface as the primary headline — others remain visible as cross-checks.
+      Evaluators may override the recommended method with written justification.
+    </div>
+
+    <!-- Stage-to-method reference -->
+    <div style="margin-top:14px;font-size:11px;color:var(--color-text-secondary);line-height:1.5">
+      The CRS rule above is calibrated against these canonical stage/method pairings. Use this as a sanity check when the CRS-driven recommendation feels off for a particular company.
+    </div>
+    <table style="width:100%;border-collapse:collapse;font-size:11px;margin-top:6px">
+      <thead>
+        <tr style="background:var(--color-background-secondary)">
+          <th style="padding:5px 8px;text-align:left;border:0.5px solid var(--color-border-tertiary)">Stage</th>
+          <th style="padding:5px 8px;text-align:left;border:0.5px solid var(--color-border-tertiary)">Typical TRL</th>
+          <th style="padding:5px 8px;text-align:left;border:0.5px solid var(--color-border-tertiary)">Preferred method(s)</th>
+          <th style="padding:5px 8px;text-align:left;border:0.5px solid var(--color-border-tertiary)">Why</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="padding:5px 8px;border:0.5px solid var(--color-border-tertiary);font-weight:500">Idea stage</td>
+          <td style="padding:5px 8px;border:0.5px solid var(--color-border-tertiary)">1–3</td>
+          <td style="padding:5px 8px;border:0.5px solid var(--color-border-tertiary);font-weight:500">Berkus (primary) · Scorecard</td>
+          <td style="padding:5px 8px;border:0.5px solid var(--color-border-tertiary);color:var(--color-text-secondary)">No revenue, no product; value five de-risking milestones (Berkus) or benchmark against sector medians (Scorecard).</td>
+        </tr>
+        <tr style="background:var(--color-background-secondary)">
+          <td style="padding:5px 8px;border:0.5px solid var(--color-border-tertiary);font-weight:500">Prototype</td>
+          <td style="padding:5px 8px;border:0.5px solid var(--color-border-tertiary)">4–5</td>
+          <td style="padding:5px 8px;border:0.5px solid var(--color-border-tertiary);font-weight:500">Scorecard</td>
+          <td style="padding:5px 8px;border:0.5px solid var(--color-border-tertiary);color:var(--color-text-secondary)">Technology exists but no commercial signal; qualitative adjustment around a sector base is the most defensible number.</td>
+        </tr>
+        <tr>
+          <td style="padding:5px 8px;border:0.5px solid var(--color-border-tertiary);font-weight:500">Pilot</td>
+          <td style="padding:5px 8px;border:0.5px solid var(--color-border-tertiary)">6–7</td>
+          <td style="padding:5px 8px;border:0.5px solid var(--color-border-tertiary);font-weight:500">VC Method (Scorecard as cross-check)</td>
+          <td style="padding:5px 8px;border:0.5px solid var(--color-border-tertiary);color:var(--color-text-secondary)">First customers / LOIs exist; exit-based VC lens with target IRR prices the equity against credible growth.</td>
+        </tr>
+        <tr style="background:var(--color-background-secondary)">
+          <td style="padding:5px 8px;border:0.5px solid var(--color-border-tertiary);font-weight:500">Early revenue</td>
+          <td style="padding:5px 8px;border:0.5px solid var(--color-border-tertiary)">7–8</td>
+          <td style="padding:5px 8px;border:0.5px solid var(--color-border-tertiary);font-weight:500">Revenue Multiple (current ARR) · Peer Multiple</td>
+          <td style="padding:5px 8px;border:0.5px solid var(--color-border-tertiary);color:var(--color-text-secondary)">ARR is real and repeatable but profit is still volatile — multiples dominate; DCF inputs are not yet stable enough.</td>
+        </tr>
+        <tr>
+          <td style="padding:5px 8px;border:0.5px solid var(--color-border-tertiary);font-weight:500">Growth</td>
+          <td style="padding:5px 8px;border:0.5px solid var(--color-border-tertiary)">8–9</td>
+          <td style="padding:5px 8px;border:0.5px solid var(--color-border-tertiary);font-weight:500">Revenue Multiple · Peer Multiple</td>
+          <td style="padding:5px 8px;border:0.5px solid var(--color-border-tertiary);color:var(--color-text-secondary)">Revenue multiple can move from current to Y3 ARR if near-term ramp is highly credible; peer comparables remain the triangulation anchor.</td>
+        </tr>
+        <tr style="background:var(--color-background-secondary)">
+          <td style="padding:5px 8px;border:0.5px solid var(--color-border-tertiary);font-weight:500">Mature</td>
+          <td style="padding:5px 8px;border:0.5px solid var(--color-border-tertiary)">9</td>
+          <td style="padding:5px 8px;border:0.5px solid var(--color-border-tertiary);font-weight:500">Risk-adjusted DCF (primary) · Peer Multiple</td>
+          <td style="padding:5px 8px;border:0.5px solid var(--color-border-tertiary);color:var(--color-text-secondary)">Cash flows are proven and repeatable; DCF is defensible. Peer Multiple remains the sanity check.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Why Revenue Multiple is the default startup lens -->
+    <div style="margin-top:14px;padding:10px 12px;background:#f1f6fb;border:0.5px solid #d9e2ec;border-radius:6px;font-size:11px;color:var(--color-text-primary);line-height:1.6">
+      <div style="font-weight:600;margin-bottom:4px">Why Revenue Multiple is the most common startup lens</div>
+      Most startups have unstable profits, negative cash flow, and unpredictable growth — conditions that make DCF's terminal value and WACC assumptions speculative. Revenue is directly observable and listed peer multiples are publicly available, so Revenue Multiple and Peer Multiple are the default from early-revenue through growth stages. DCF becomes the primary lens only once cash flows are proven and repeatable (mature stage).
+    </div>
+
+    <!-- Revenue Multiple projection basis -->
+    <div style="margin-top:10px;padding:10px 12px;background:#fff8e6;border:0.5px solid #fac775;border-radius:6px;font-size:11px;color:var(--color-text-primary);line-height:1.6">
+      <div style="font-weight:600;margin-bottom:4px">Revenue Multiple — projection basis (choose in Valuation Config)</div>
+      <ul style="margin:4px 0 0 18px;padding:0">
+        <li><strong>Current ARR (trailing)</strong> — mature, revenue-generating companies (TRL ≥ 8 with 5+ years of revenue). Mirrors how listed comparables are priced. Haircut auto-capped at 20% (illiquidity discount) since trailing revenue carries no forward-projection risk.</li>
+        <li><strong>Year 3 ARR</strong> — growth-stage companies where current revenue is small but near-term ramp is credible (Series A/B).</li>
+        <li><strong>Year 7 ARR</strong> — long-horizon VC lens; use when forward hyper-growth is the thesis and a credible plan exists.</li>
+      </ul>
+      <div style="margin-top:6px;font-size:10px;color:var(--color-text-tertiary)">
+        The report raises an advisory flag when TRL ≥ 8 and current ARR &gt; 0 but the basis is still set to Y3/Y7 — a common defaults-mismatch that undervalues mature companies.
+      </div>
+    </div>
+  </div>
+
+  <!-- Portfolio Priority Score panel -->
+  <div class="verdict-hdr" style="margin-top:14px">Portfolio Priority Score — saved-startup ranking formula</div>
+  <div style="padding:0 14px 14px">
+    <div style="font-size:11px;color:var(--color-text-secondary);margin-bottom:8px;line-height:1.5">
+      Each saved startup receives a Priority Score (0–100) used to sort the portfolio table. Weights emphasise CRS and Strategic Fit to surface strategically aligned opportunities first; Technology, Market, and IP provide secondary differentiation within the same CRS band.
+    </div>
+    <div style="background:var(--color-background-secondary);border:0.5px solid var(--color-border-secondary);border-radius:6px;padding:10px 14px;font-size:12px;color:var(--color-text-primary);font-family:ui-monospace,monospace">
+      Priority = 40% × CRS + 20% × Strategic Fit + 15% × Technology + 15% × Market + 10% × IP<br>
+      <span style="font-size:10px;color:var(--color-text-tertiary)">(all module scores normalised to 0–100 before weighting)</span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px">
+      <div style="background:#e8f5ec;border:0.5px solid #9fe1cb;border-radius:4px;padding:6px 8px;text-align:center">
+        <div style="font-size:12px;font-weight:600;color:#155724">High</div>
+        <div style="font-size:11px;color:#1a6b38">Priority ≥ 75</div>
+      </div>
+      <div style="background:#faeeda;border:0.5px solid #fac775;border-radius:4px;padding:6px 8px;text-align:center">
+        <div style="font-size:12px;font-weight:600;color:#633806">Mid</div>
+        <div style="font-size:11px;color:#ba7517">55 ≤ Priority &lt; 75</div>
+      </div>
+      <div style="background:#fcebeb;border:0.5px solid #f09595;border-radius:4px;padding:6px 8px;text-align:center">
+        <div style="font-size:12px;font-weight:600;color:#791f1f">Low</div>
+        <div style="font-size:11px;color:#a32d2d">Priority &lt; 55</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="font-size:10px;color:var(--color-text-tertiary);text-align:center;padding:.75rem;border-top:0.5px solid var(--color-border-tertiary);margin-top:10px">DeepTechEval Deep-Tech Startup Evaluation Framework · Scoring Hierarchy Reference v3 · Strategy &amp; Innovation · Internal Use Only</div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
