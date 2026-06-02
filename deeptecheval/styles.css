@@ -1756,3 +1756,64 @@ textarea:focus-visible,
   .waitlist-sub { font-size: 12px !important; }
   .waitlist-tier li { font-size: 11px; }
 }
+
+/* ============================================================================
+   REPORT GATE — shown when min inputs missing
+   ============================================================================ */
+.report-gate {
+  text-align: center;
+  padding: 28px 22px;
+  max-width: 540px;
+  margin: 0 auto;
+}
+.report-gate-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+.report-gate-sub {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  margin-bottom: 18px;
+}
+.report-gate-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto 22px;
+  max-width: 420px;
+  text-align: left;
+  display: grid;
+  gap: 6px;
+}
+.report-gate-list li {
+  font-size: 13px;
+  color: var(--text-primary);
+  padding: 9px 14px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--blue);
+  border-radius: 8px;
+}
+.report-gate-x {
+  display: inline-block;
+  width: 14px;
+  color: var(--red);
+  font-weight: 700;
+}
+.report-gate-cta-row {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.report-gate-cta-row .button { font-size: 12px; }
+
+@media (max-width: 640px) {
+  .report-gate { padding: 18px 12px; }
+  .report-gate-title { font-size: 15px !important; }
+  .report-gate-sub { font-size: 12px !important; }
+  .report-gate-list li { font-size: 12px; padding: 8px 10px; }
+}

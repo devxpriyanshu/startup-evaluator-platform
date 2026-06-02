@@ -441,7 +441,12 @@
       if (bar) bar.style.display = 'none';
       // Keep previously generated report visible across tab switches.
       if (!hasGeneratedReport) {
-        showReportPlaceholder('Click “Generate full evaluation report ↗” to calculate and publish results.');
+        const gate = reportGateCheck();
+        if (!gate.ok) {
+          showReportGate(gate.missing);
+        } else {
+          showReportPlaceholder('Click “Generate full evaluation report ↗” to calculate and publish results.');
+        }
       }
     }
     else {
@@ -894,10 +899,58 @@
     btn.textContent = isBusy ? 'Calculating report…' : 'Generate full evaluation report ↗';
   }
 
+  // Soft gate: report requires startup name + at least one module scored.
+  // Returns { ok: bool, missing: [labels] }.
+  function reportGateCheck() {
+    const missing = [];
+    const name = gs('p-name', '').trim();
+    if (!name) missing.push('Startup name (Profile tab)');
+    const sector = gs('p-sec', '').trim();
+    if (!sector) missing.push('Sector selection (Profile tab)');
+    const anyScore = techScore() + ipScore() + teamScore() + marketScore()
+                   + adoptScore() + bizScore() + eilScore();
+    if (anyScore <= 0) missing.push('At least one module scored (M1–M7)');
+    return { ok: missing.length === 0, missing };
+  }
+
+  function showReportGate(missing) {
+    const ph = $('report-placeholder');
+    const body = $('report-body');
+    if (body) body.classList.add('hidden');
+    if (ph) {
+      ph.style.display = '';
+      ph.innerHTML = (
+        '<div class="report-gate">' +
+          '<div class="report-gate-title">Complete a quick startup profile to view the full report</div>' +
+          '<div class="report-gate-sub">DeepTechEval needs minimum inputs before scoring, valuation and engagement recommendations can be generated.</div>' +
+          '<ul class="report-gate-list">' +
+            missing.map(function (m) {
+              return '<li><span class="report-gate-x">•</span> ' + m + '</li>';
+            }).join('') +
+          '</ul>' +
+          '<div class="report-gate-cta-row">' +
+            '<button class="button button-primary" id="report-gate-back">← Start with Profile</button>' +
+            '<a class="button" href="#waitlist">Join Pro waitlist</a>' +
+          '</div>' +
+        '</div>'
+      );
+      var back = document.getElementById('report-gate-back');
+      if (back) back.addEventListener('click', function () { showPage(0); });
+    }
+    hasGeneratedReport = false;
+  }
+
   function requestReportGeneration() {
     if (reportGenerationTimer) {
       clearTimeout(reportGenerationTimer);
       reportGenerationTimer = null;
+    }
+    const gate = reportGateCheck();
+    if (!gate.ok) {
+      showPage(REPORT_PAGE);
+      showReportGate(gate.missing);
+      setReportBusyState(false);
+      return;
     }
     showPage(REPORT_PAGE);
     showReportPlaceholder('Calculating scores, valuation, and recommendations…');
