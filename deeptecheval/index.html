@@ -1669,5 +1669,11 @@
         </div>
       </div>
     </dialog>
+
+    <!-- Hidden static form so Netlify build crawler registers 'report-unlock' -->
+    <form name="report-unlock" data-netlify="true" hidden>
+      <input type="email" name="email" />
+      <input type="text" name="startup-name" />
+    </form>
   </body>
 </html>

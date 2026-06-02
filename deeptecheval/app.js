@@ -1438,6 +1438,97 @@
 
     // footer
     $('report-footer').innerHTML = `DeepTechEval Platform · Evaluator: ${esc(gs('p-eval', 'the investor Strategy'))} · ${new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' })} · Confidential — internal use only`;
+
+    // commercial lock — blur the real report unless email captured
+    applyReportLock();
+  }
+
+  /* ---------- Report lock (email-gated full report) ---------- */
+  const EMAIL_UNLOCK_KEY = 'dte.emailUnlocked';
+  function isReportUnlocked() {
+    try { return localStorage.getItem(EMAIL_UNLOCK_KEY) === '1'; } catch (_) { return false; }
+  }
+  function applyReportLock() {
+    const body = $('report-body');
+    if (!body) return;
+    // Strip any previous overlay
+    const prev = document.getElementById('report-lock-overlay');
+    if (prev) prev.remove();
+    if (isReportUnlocked()) {
+      body.classList.remove('locked');
+      return;
+    }
+    body.classList.add('locked');
+    const name = gs('p-name', 'your startup');
+    const overlay = document.createElement('div');
+    overlay.id = 'report-lock-overlay';
+    overlay.className = 'report-lock-overlay';
+    overlay.innerHTML = (
+      '<div class="report-lock-card">' +
+        '<div class="report-lock-eyebrow">Personalised report ready</div>' +
+        '<div class="report-lock-title">Unlock the full report for ' + esc(name) + '</div>' +
+        '<div class="report-lock-sub">' +
+          'Free beta unlocks the complete scoring breakdown, valuation range, ' +
+          'engagement recommendation and risk flags. One email — no spam.' +
+        '</div>' +
+        '<form name="report-unlock" method="POST" data-netlify="true" class="report-lock-form">' +
+          '<input type="hidden" name="form-name" value="report-unlock" />' +
+          '<input type="hidden" name="startup-name" value="' + esc(name) + '" />' +
+          '<input type="email" name="email" required placeholder="analyst@yourfund.com" />' +
+          '<button type="submit" class="button button-primary">Unlock report →</button>' +
+        '</form>' +
+        '<div class="report-lock-sample">' +
+          '<a href="#" id="report-lock-sample-link">See a sample report (Acme Hydrogen demo) →</a>' +
+        '</div>' +
+        '<div class="report-lock-fineprint">Already unlocked? <a href="#" id="report-lock-restore">Restore access</a></div>' +
+      '</div>'
+    );
+    body.parentNode.insertBefore(overlay, body);
+
+    // Intercept form submit — capture via Netlify Forms in background, unlock locally
+    const form = overlay.querySelector('form');
+    if (form) {
+      form.addEventListener('submit', function (ev) {
+        ev.preventDefault();
+        const data = new FormData(form);
+        try {
+          fetch('/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams(data).toString()
+          });
+        } catch (_) {}
+        try { localStorage.setItem(EMAIL_UNLOCK_KEY, '1'); } catch (_) {}
+        setStatus('Report unlocked. Thanks for joining the beta.');
+        applyReportLock();
+      });
+    }
+
+    // Sample-report link → load demo (GreenH2) into fields + re-generate
+    const sampleLink = overlay.querySelector('#report-lock-sample-link');
+    if (sampleLink) {
+      sampleLink.addEventListener('click', function (ev) {
+        ev.preventDefault();
+        const demo = savedStartups.find(function (s) { return s.name === 'GreenH2 Technologies'; });
+        if (demo) {
+          loadStartup(demo.id);
+          setStatus('Sample loaded — scroll to view a fully filled-in report');
+          requestReportGeneration();
+        } else {
+          setStatus('Sample data unavailable — clear localStorage to reseed demos');
+        }
+      });
+    }
+
+    const restoreLink = overlay.querySelector('#report-lock-restore');
+    if (restoreLink) {
+      restoreLink.addEventListener('click', function (ev) {
+        ev.preventDefault();
+        try { localStorage.setItem(EMAIL_UNLOCK_KEY, '1'); } catch (_) {}
+        applyReportLock();
+        setStatus('Access restored');
+      });
+    }
   }
 
   function renderDwcs() {
@@ -2115,6 +2206,11 @@
     document.querySelectorAll('.tab-button').forEach((t) => {
       t.addEventListener('click', () => {
         const p = parseInt(t.dataset.page, 10);
+        // Block direct jump to Report tab — must reach via sequential Next flow.
+        if (p === REPORT_PAGE && currentPage !== REPORT_PAGE) {
+          setStatus('Complete the modules sequentially using Next → to unlock the report');
+          return;
+        }
         showPage(p);
       });
     });
