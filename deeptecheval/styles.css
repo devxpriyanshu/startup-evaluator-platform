@@ -2062,3 +2062,164 @@ body {
 .waitlist-section {
   background: linear-gradient(135deg, #0f172a 0%, #312e81 50%, #6366f1 100%) !important;
 }
+
+/* ============================================================================
+   MOBILE-FIRST NAV REBUILD  (2026-06)
+   Sticky stepper + slide-up module sheet replace the cramped 11-tab strip.
+   Header scrolls away, stepper pins, prev/next dock to a fixed thumb bar.
+   Desktop is untouched (stepper + sheet are display:none outside the query).
+   ============================================================================ */
+.m-stepper,
+.m-sheet,
+.m-sheet-backdrop { display: none; }
+
+.m-prog {
+  position: absolute; left: 0; bottom: 0; height: 3px;
+  width: 10%; background: #4f46e5;
+  border-radius: 0 3px 3px 0;
+  transition: width 0.28s ease;
+}
+
+@media (max-width: 760px) {
+  /* --- iOS zoom guard: focusable controls must be ≥16px --- */
+  input, select, textarea,
+  .field-group input, .field-group select, .field-group textarea {
+    font-size: 16px !important;
+  }
+
+  /* --- compact header that scrolls away --- */
+  .header {
+    padding: 14px 16px !important;
+    border-radius: 14px !important;
+    gap: 8px !important;
+  }
+  .header-title { font-size: 15px !important; line-height: 1.3 !important; }
+  .header-subtitle { display: none !important; }
+  .header-meta { font-size: 11px !important; text-align: left !important; padding-top: 2px; }
+
+  /* --- hide desktop tab strip + global progress bar; stepper takes over --- */
+  .tab-nav { display: none !important; }
+  .progress-bar { display: none !important; }
+
+  /* --- sticky stepper (the persistent mobile nav) --- */
+  .m-stepper {
+    position: sticky; top: 0; z-index: 50;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 12px; width: 100%;
+    margin: 10px 0 0;
+    padding: 13px 16px;
+    background: rgba(255, 255, 255, 0.97);
+    -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+    border: 1px solid var(--border);
+    border-radius: 13px;
+    box-shadow: 0 6px 18px rgba(12, 35, 64, 0.10);
+    cursor: pointer; text-align: left; overflow: hidden;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .m-stepper-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .m-stepper-step {
+    font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em;
+    text-transform: uppercase; color: #4f46e5;
+  }
+  .m-stepper-name {
+    font-size: 15.5px; font-weight: 700; color: var(--text-primary);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .m-stepper-caret {
+    flex: none; font-size: 13px; color: var(--text-tertiary);
+    width: 30px; height: 30px; display: grid; place-items: center;
+    background: var(--bg-tertiary); border-radius: 8px;
+  }
+
+  /* --- content breathing room above the fixed bottom bar --- */
+  /* overflow-x:clip (not hidden) so .shell is NOT a scroll container — otherwise
+     the earlier overflow-x:hidden guard would break the sticky stepper. */
+  .shell { padding-bottom: 88px !important; overflow-x: clip !important; }
+  .body { padding: 14px 0 0 !important; }
+
+  /* --- fixed bottom prev/next bar (thumb zone) --- */
+  .bottom-nav {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 55;
+    display: flex !important; flex-direction: row !important;
+    align-items: center; gap: 10px;
+    margin: 0 !important;
+    padding: 10px 14px calc(10px + env(safe-area-inset-bottom)) !important;
+    background: rgba(255, 255, 255, 0.97);
+    -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+    border: none !important;
+    border-top: 1px solid var(--border) !important;
+    border-radius: 16px 16px 0 0 !important;
+    box-shadow: 0 -6px 22px rgba(12, 35, 64, 0.13) !important;
+  }
+  .bottom-nav > #prev-page { flex: 1; justify-self: stretch; }
+  .bottom-label { display: none !important; }
+  .bottom-nav-right {
+    flex: 1; display: flex !important; flex-direction: row !important;
+    grid-template-columns: none !important; gap: 0;
+  }
+  .bottom-nav-right .methodology-footer-link { display: none !important; }
+  .bottom-nav-right #next-page { flex: 1; width: 100%; }
+  #prev-page, #next-page { min-height: 48px !important; font-size: 14px !important; }
+
+  /* --- slide-up module sheet --- */
+  .m-sheet-backdrop {
+    display: block; position: fixed; inset: 0; z-index: 60;
+    background: rgba(8, 20, 38, 0.5);
+    opacity: 0; transition: opacity 0.24s ease;
+  }
+  .m-sheet-backdrop.open { opacity: 1; }
+  .m-sheet {
+    display: block; position: fixed; left: 0; right: 0; bottom: 0; z-index: 61;
+    max-height: 82vh; overflow-y: auto;
+    background: #fff;
+    border-radius: 20px 20px 0 0;
+    padding-bottom: calc(8px + env(safe-area-inset-bottom));
+    box-shadow: 0 -10px 40px rgba(8, 20, 38, 0.28);
+    transform: translateY(100%);
+    transition: transform 0.28s cubic-bezier(0.32, 0.72, 0, 1);
+  }
+  .m-sheet.open { transform: translateY(0); }
+  .m-sheet-grip {
+    width: 38px; height: 4px; border-radius: 2px;
+    background: var(--border-dark);
+    margin: 10px auto 4px;
+  }
+  .m-sheet-head {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 8px 18px 12px;
+    font-size: 12px; font-weight: 700; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--text-tertiary);
+    border-bottom: 1px solid var(--border);
+  }
+  .m-sheet-close {
+    border: none; background: var(--bg-tertiary); color: var(--text-secondary);
+    width: 30px; height: 30px; border-radius: 8px;
+    font-size: 20px; line-height: 1; cursor: pointer;
+  }
+  .m-sheet-item {
+    display: flex; align-items: center; gap: 13px; width: 100%;
+    padding: 14px 18px; border: none; background: none;
+    font: inherit; text-align: left; cursor: pointer;
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--bg-tertiary);
+    -webkit-tap-highlight-color: transparent;
+  }
+  .m-sheet-item .num {
+    flex: none; width: 28px; height: 28px; border-radius: 8px;
+    display: grid; place-items: center;
+    background: var(--bg-tertiary); color: var(--text-tertiary);
+    font-size: 12.5px; font-weight: 700;
+  }
+  .m-sheet-item .m-sheet-label { font-size: 14.5px; font-weight: 600; }
+  .m-sheet-item.active { color: #4f46e5; }
+  .m-sheet-item.active .num { background: #4f46e5; color: #fff; }
+  .m-sheet-item.is-report .num { background: #dcfce7; color: var(--green); }
+  .m-sheet-item.is-report.active .num { background: var(--green); color: #fff; }
+  .m-sheet-links {
+    display: flex; gap: 10px; padding: 14px 18px 4px;
+  }
+  .m-sheet-links .button { flex: 1; text-align: center; min-height: 44px; line-height: 1.6; }
+
+  /* report page hides the bottom bar (JS) — restore page bottom padding there */
+}
+

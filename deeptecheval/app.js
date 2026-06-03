@@ -455,7 +455,64 @@
       if (next) next.textContent = n === REPORT_PAGE - 1 ? 'Generate report →' : 'Next →';
       if (lbl) lbl.textContent = 'Step ' + (n + 1) + ' of ' + (TOTAL_PAGES - 1);
     }
+    updateMobileStepper(n);
   }
+
+  /* ---------- mobile stepper + module sheet ---------- */
+  const SHEET_NAMES = [
+    'Profile', 'M1 · Technology', 'M2 · IP', 'M3 · Team', 'M4 · Market',
+    'M5 · Adoption', 'M6 · Business', 'M7 · Strategic Fit',
+    'Valuation Config', 'Data Room', 'Report'
+  ];
+  function updateMobileStepper(n) {
+    const step = $('m-stepper-step'), name = $('m-stepper-name'), prog = $('m-prog');
+    if (name) name.textContent = SHEET_NAMES[n] || '';
+    if (step) step.textContent = n === REPORT_PAGE ? 'Final report' : 'Step ' + (n + 1) + ' / ' + (TOTAL_PAGES - 1);
+    if (prog) prog.style.width = Math.round(((n + 1) / TOTAL_PAGES) * 100) + '%';
+    document.querySelectorAll('.m-sheet-item').forEach((it) => {
+      it.classList.toggle('active', parseInt(it.dataset.page, 10) === n);
+    });
+  }
+  function openSheet() {
+    const sheet = $('m-sheet'), bd = $('m-sheet-backdrop'), trig = $('m-stepper');
+    if (!sheet || !bd) return;
+    bd.hidden = false; sheet.hidden = false;
+    requestAnimationFrame(() => { bd.classList.add('open'); sheet.classList.add('open'); });
+    if (trig) trig.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeSheet() {
+    const sheet = $('m-sheet'), bd = $('m-sheet-backdrop'), trig = $('m-stepper');
+    if (!sheet || !bd) return;
+    bd.classList.remove('open'); sheet.classList.remove('open');
+    if (trig) trig.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+    setTimeout(() => { bd.hidden = true; sheet.hidden = true; }, 240);
+  }
+  function buildMobileSheet() {
+    const list = $('m-sheet-list');
+    if (!list) return;
+    list.innerHTML = '';
+    document.querySelectorAll('.tab-button').forEach((tab) => {
+      const p = parseInt(tab.dataset.page, 10);
+      const item = document.createElement('button');
+      item.type = 'button';
+      item.className = 'm-sheet-item' + (tab.classList.contains('report-tab') ? ' is-report' : '');
+      item.dataset.page = p;
+      item.innerHTML = '<span class="num">' + (p === REPORT_PAGE ? '↗' : (p + 1)) + '</span>' +
+        '<span class="m-sheet-label">' + tab.textContent.trim() + '</span>';
+      item.addEventListener('click', () => { closeSheet(); tab.click(); });
+      list.appendChild(item);
+    });
+  }
+  function bindMobileNav() {
+    const trig = $('m-stepper'), bd = $('m-sheet-backdrop'), close = $('m-sheet-close');
+    if (trig) trig.addEventListener('click', openSheet);
+    if (bd) bd.addEventListener('click', closeSheet);
+    if (close) close.addEventListener('click', closeSheet);
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeSheet(); });
+  }
+
   function go(d) {
     const nx = currentPage + d;
     if (nx === REPORT_PAGE && d > 0) {
@@ -2279,6 +2336,8 @@
     buildSectorTable();
     wireSliders();
     bindNav();
+    buildMobileSheet();
+    bindMobileNav();
     loadSavedList();
     renderSavedList();
     renderExportReminder();

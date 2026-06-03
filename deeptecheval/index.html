@@ -2,7 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#0c2340" />
     <title>DeepTechEval — Deep-Tech Startup Evaluation &amp; Valuation Framework</title>
     <meta name="description" content="Free 7-module 120-point scoring framework for deep-tech startup commercialisation readiness. Auto-selects from 6 valuation methods (DCF, VC, Berkus, Scorecard, Peer, Revenue Multiple). For VC analysts, accelerators, corporate venture teams." />
     <meta name="keywords" content="deep-tech, startup evaluation, valuation framework, VC tools, due diligence, TRL, climate tech, scorecard valuation, DCF, commercial readiness" />
@@ -47,6 +48,17 @@
         <button class="tab-button" data-page="9">Data Room</button>
         <button class="tab-button report-tab" data-page="10">Report ↗</button>
       </nav>
+
+      <!-- Mobile-only stepper nav (replaces tab strip on phones). Opens module sheet. -->
+      <button class="m-stepper" id="m-stepper" type="button"
+              aria-haspopup="dialog" aria-controls="m-sheet" aria-expanded="false">
+        <span class="m-stepper-text">
+          <span class="m-stepper-step" id="m-stepper-step">Step 1 / 10</span>
+          <span class="m-stepper-name" id="m-stepper-name">Profile</span>
+        </span>
+        <span class="m-stepper-caret" aria-hidden="true">▾</span>
+        <i class="m-prog" id="m-prog"></i>
+      </button>
 
       <main class="body">
         <section class="page active" id="page-0">
@@ -1609,6 +1621,22 @@
         <a href="mailto:hello@deeptecheval.com">Contact</a>
       </div>
     </div>
+
+    <!-- Mobile module sheet (slide-up). Items + Guide/Methodology links built by JS. -->
+    <div class="m-sheet-backdrop" id="m-sheet-backdrop" hidden></div>
+    <aside class="m-sheet" id="m-sheet" role="dialog" aria-modal="true" aria-label="Jump to module" hidden>
+      <div class="m-sheet-grip" aria-hidden="true"></div>
+      <div class="m-sheet-head">
+        <span>Jump to section</span>
+        <button class="m-sheet-close" id="m-sheet-close" type="button" aria-label="Close">&times;</button>
+      </div>
+      <nav class="m-sheet-list" id="m-sheet-list"></nav>
+      <div class="m-sheet-links">
+        <a class="button" href="/guide/" target="_blank" rel="noopener">Guide ↗</a>
+        <a class="button" href="/scoring-mechanism/" target="_blank" rel="noopener">Methodology ↗</a>
+      </div>
+    </aside>
+
     <div id="toast-status" class="toast-status" role="status" aria-live="polite" hidden></div>
 
     <dialog class="app-dialog" id="dialog-key-metrics">
