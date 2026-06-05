@@ -58,7 +58,7 @@
         'p-target': 'Refineries upgrading hydrogen production systems',
         'p-incubator': 'IIT Bombay SINE',
         'p-sec': 'hydrogen', 'p-stage': 'sa', 'p-hq': 'Bengaluru, Karnataka',
-        'p-eval': 'the investor Strategy · Demo', 'p-founder-ask': '55', 'p-notes': 'Strong EPCM alignment; National Hydrogen Mission anchor candidate.',
+        'p-eval': 'DeepTechEval Analyst · Demo', 'p-founder-ask': '55', 'p-notes': 'Strong EPCM alignment; National Hydrogen Mission anchor candidate.',
         't-trl': '8', 't-pilot': '8', 't-iv': '1', 't-data': '5', 't-uniq': '5', 't-scale': '4', 't-mfg': '3', 't-rel': '4',
         't-benchmarks': 'Third-party benchmark (TÜV SÜD); 8,000 hr endurance test passed',
         'ip-status': '7', 'ip-breadth': '4', 'ip-quality': '4', 'ip-fto': '4', 'ip-pub': '4', 'ip-origin': '4', 'ip-sec': '4',
@@ -77,7 +77,7 @@
         'p-target': 'Cement majors and integrated steel producers',
         'p-incubator': 'IIT Madras Incubation Cell',
         'p-sec': 'ccus', 'p-stage': 'psa', 'p-hq': 'Chennai, Tamil Nadu',
-        'p-eval': 'the investor Strategy · Demo', 'p-founder-ask': '22', 'p-notes': 'Pilot with mid-size cement plant signed; paid field trial underway.',
+        'p-eval': 'DeepTechEval Analyst · Demo', 'p-founder-ask': '22', 'p-notes': 'Pilot with mid-size cement plant signed; paid field trial underway.',
         't-trl': '6', 't-pilot': '6', 't-iv': '1', 't-data': '4', 't-uniq': '4', 't-scale': '3', 't-mfg': '2', 't-rel': '3',
         't-benchmarks': 'CPCB pilot monitoring data; third-party solvent analysis (NCL Pune)',
         'ip-status': '4', 'ip-breadth': '3', 'ip-quality': '3', 'ip-fto': '3', 'ip-pub': '3', 'ip-origin': '4', 'ip-sec': '3',
@@ -95,7 +95,7 @@
         'p-desc': 'Thin-film perovskite-silicon tandem PV panels for rooftop retrofits — early prototype stage.',
         'p-target': 'Commercial rooftop developers',
         'p-incubator': 'IIT Delhi Bioincubator',
-        'p-sec': 'solar', 'p-stage': 'seed', 'p-hq': 'Delhi', 'p-eval': 'the investor Strategy · Demo',
+        'p-sec': 'solar', 'p-stage': 'seed', 'p-hq': 'Delhi', 'p-eval': 'DeepTechEval Analyst · Demo',
         'p-founder-ask': '8', 'p-notes': 'Lab-stage; reliability data missing; founders part-time.',
         't-trl': '3', 't-pilot': '2', 't-iv': '0', 't-data': '2', 't-uniq': '3', 't-scale': '2', 't-mfg': '1', 't-rel': '2',
         't-benchmarks': 'Lab simulation + small-area cell testing only',
@@ -118,7 +118,7 @@
         'p-target': 'Research institutions (IITs, IISc, CSIR, DRDO), pharmaceutical OEMs, and industrial filtration integrators',
         'p-incubator': 'SIIC IIT Kanpur (incubated 2012)',
         'p-sec': 'nano', 'p-stage': 'sa', 'p-hq': 'Kanpur, Uttar Pradesh',
-        'p-eval': 'the investor Strategy · Demo', 'p-founder-ask': '20',
+        'p-eval': 'DeepTechEval Analyst · Demo', 'p-founder-ask': '20',
         'p-notes': 'Bootstrapped 15-yr operation: 500+ global machine installations, FY25 revenue ₹7.41 Cr, DSIR-recognised R&D, 27 employees. Founder Dr. Sandip Patil (IIT Kanpur PhD). Only external funding: $70K ACT grant (2020). Customers include multiple IITs, IISc, BITS Pilani, CSIR (CECRI, IICT), Ministry of Defence, Sankara Netralaya, Eucare Pharma — no confirmed PSU (ONGC/IOCL/NTPC) relationships. Validation case: strong execution + indirect strategic fit (nanofiber filtration adjacent to refinery emission control / industrial HVAC, not a core energy technology).',
         't-trl': '9', 't-pilot': '10', 't-iv': '1', 't-data': '4', 't-uniq': '3', 't-scale': '4', 't-mfg': '4', 't-rel': '5',
         't-benchmarks': 'DSIR-recognised R&D facility; 500+ commercial installations worldwide over 15 years; machines deployed at IITs, IISc, CSIR labs, DRDO, and international universities (Oklahoma State, Wyoming, Nebraska, KAUST).',
@@ -133,7 +133,7 @@
     },
     {
       // Real company — consumer AI robotics. Included as a NEGATIVE validation case:
-      // commercially excellent startup that should REJECT on the investor strategic-fit hard gate
+      // commercially excellent startup that should REJECT on strategic investor strategic-fit hard gate
       // (energy-infrastructure thesis, not consumer edtech). Confirms gate works as designed.
       // Sources: miko.ai, Tracxn, LinkedIn, public Series D press (Nov 2025).
       // Financial figures are conservative public estimates; exact ARR not disclosed.
@@ -144,8 +144,8 @@
         'p-target': 'Parents of children aged 5–10 globally; DTC via Amazon, retail partners, and miko.ai.',
         'p-incubator': 'Bootstrapped (founded as Emotix at Mumbai)',
         'p-sec': 'iot', 'p-stage': 'sb', 'p-hq': 'Mumbai, Maharashtra',
-        'p-eval': 'the investor Strategy · Demo', 'p-founder-ask': '',
-        'p-notes': 'Series D raised Nov 2025; cumulative funding ~$102M (IvyCap, Chiratae, + 120 investors). Consumer deep-tech — deliberately included to stress-test the the investor-fit hard gate. Expected outcome: high CRS on tech/market/team, REJECT on engagement (strategic fit < 3).',
+        'p-eval': 'DeepTechEval Analyst · Demo', 'p-founder-ask': '',
+        'p-notes': 'Series D raised Nov 2025; cumulative funding ~$102M (IvyCap, Chiratae, + 120 investors). Consumer deep-tech — deliberately included to stress-test the strategic-investor-fit hard gate. Expected outcome: high CRS on tech/market/team, REJECT on engagement (strategic fit < 3).',
         't-trl': '9', 't-pilot': '10', 't-iv': '1', 't-data': '4', 't-uniq': '4', 't-scale': '5', 't-mfg': '3', 't-rel': '4',
         't-benchmarks': 'CE, FCC, BIS certifications; millions of units shipped across 140+ countries over 8+ years of commercial deployment.',
         'ip-status': '6', 'ip-breadth': '3', 'ip-quality': '2', 'ip-fto': '1', 'ip-pub': '0', 'ip-origin': '1', 'ip-sec': '3',
@@ -169,9 +169,9 @@
     },
     {
       // Real company — Indian carbon-dioxide removal (CDR) startup using Enhanced Rock Weathering (ERW).
-      // Positive the investor-fit validation case: opposite of Miko — lower CRS on IP/business maturity but
+      // Positive strategic-investor-fit validation case: opposite of Miko — lower CRS on IP/business maturity but
       // squarely in the energy-transition thesis (CCUS / Net Zero critical path). Expected: passes
-      // the investor gate, likely "Promising" or "Commercially ready" verdict, engagement = engineering or license.
+      // strategic investor gate, likely "Promising" or "Commercially ready" verdict, engagement = engineering or license.
       // Sources: altcarbon.com, Frontier offtake announcements, climate-tech press.
       // Exact revenue / burn figures not publicly disclosed — values are conservative estimates.
       name: 'Alt Carbon',
@@ -181,8 +181,8 @@
         'p-target': 'Corporate CDR buyers (Frontier coalition, tech majors); tea plantation partners in West Bengal / Northeast India.',
         'p-incubator': 'Bootstrapped',
         'p-sec': 'ccus', 'p-stage': 'seed', 'p-hq': 'Kolkata, West Bengal',
-        'p-eval': 'the investor Strategy · Demo', 'p-founder-ask': '',
-        'p-notes': 'First Indian startup to secure Frontier (Stripe-led) CDR offtake. Founders: Shrey &amp; Sparsh Agarwal. Validation case: strong the investor alignment (CCUS / Net Zero), early-stage business maturity, established ERW science (low IP moat — depends on execution + MRV rigour).',
+        'p-eval': 'DeepTechEval Analyst · Demo', 'p-founder-ask': '',
+        'p-notes': 'First Indian startup to secure Frontier (Stripe-led) CDR offtake. Founders: Shrey &amp; Sparsh Agarwal. Validation case: strong strategic investor alignment (CCUS / Net Zero), early-stage business maturity, established ERW science (low IP moat — depends on execution + MRV rigour).',
         't-trl': '7', 't-pilot': '8', 't-iv': '1', 't-data': '3', 't-uniq': '3', 't-scale': '3', 't-mfg': '2', 't-rel': '3',
         't-benchmarks': 'Third-party MRV via Isometric protocol; Frontier pre-purchase agreement executed; field deployment active on tea plantations.',
         'ip-status': '1', 'ip-breadth': '0', 'ip-quality': '0', 'ip-fto': '1', 'ip-pub': '2', 'ip-origin': '1', 'ip-sec': '2',
@@ -217,7 +217,7 @@
         'p-target': 'Rural / remote off-grid households, telecom tower operators, EV charging infrastructure, green advertising, and building-integrated micro-generation.',
         'p-incubator': 'TIDES, IIT Roorkee (co-founder Avinash Gupta listed as incubatee)',
         'p-sec': 'wind', 'p-stage': 'seed', 'p-hq': 'Mumbai, Maharashtra',
-        'p-eval': 'the investor Strategy · Demo', 'p-founder-ask': '',
+        'p-eval': 'DeepTechEval Analyst · Demo', 'p-founder-ask': '',
         'p-notes': 'Incorporated 5 Jul 2019 (CIN U74999MH2019PTC327691). Directors: Raj Pankaj Oak (DIN 08502363) and Avinash Kumar Gupta (DIN 08502364, B.E. Mechanical, Mumbai University). Authorised capital ₹1.0 lakh, paid-up ₹20,000 — clearly bootstrapped. Last AGM filed Nov 2021 (compliance lag noted). Website currently shows "products coming soon" — pre-commercial / pilot-stage deployment, no named customer case studies disclosed. No public funding rounds confirmed. Flagship Adaptable Disc Turbine has an Indian patent grant; no international patent family confirmed. Scoring bias: most modules held at conservative values because independent performance data, paying-customer evidence, and audited financials are not publicly disclosed.',
         't-trl': '6', 't-pilot': '5', 't-iv': '0', 't-data': '2', 't-uniq': '3', 't-scale': '2', 't-mfg': '2', 't-rel': '2',
         't-benchmarks': 'Indian patent granted for the Adaptable Disc Turbine (low-wind generation). No third-party endurance data, accredited-lab performance report, or named pilot MRV disclosed on the company website or public filings.',
@@ -245,7 +245,7 @@
     {
       // Real company — IIT Roorkee biotech spin-out producing industrial enzymes via
       // solid-state fermentation. Chosen as a second validation case alongside Powerzest
-      // because Fermentech is ALREADY an DeepTechEval seed-grant recipient (so the investor has prior
+      // because Fermentech is ALREADY an DeepTechEval seed-grant recipient (so strategic investor has prior
       // exposure) and has a direct 2G ethanol / biofuels angle via cellulase + xylanase.
       // Verified sources: Tofler (CIN U74999DL2017PTC322401), fermentechlabs.com,
       // a-IDEA NAARM blog, YourStory company page, TIDES IIT Roorkee listing.
@@ -258,8 +258,8 @@
         'p-target': 'Fruit-juice and wine clarification, textile processing, biofuel production (2G ethanol cellulase/xylanase), pharmaceuticals, animal feed supplement, pulp and paper processing.',
         'p-incubator': 'TIDES BioNEST, IIT Roorkee (MAC Building)',
         'p-sec': 'biotech', 'p-stage': 'seed', 'p-hq': 'Roorkee, Uttarakhand',
-        'p-eval': 'the investor Strategy · Demo', 'p-founder-ask': '',
-        'p-notes': 'Incorporated 21 Aug 2017 (CIN U74999DL2017PTC322401, RoC Delhi). Directors: Dr. Sidharth Arora (DIN 07903394, IIT Roorkee PhD, Founder/CEO) and Pushpa Rani (DIN 07903399). Authorised capital ₹10 lakh, paid-up only ₹50,910 — bootstrapped with non-dilutive grant funding. Last AGM filed 30 Sep 2022 — 3-year MCA compliance lag, verify current filing status before diligence. Team of ~5 listed on website (adds Dr. Ankita Bhatt, Umme Habiba, Ganga Rawat, Adesh Shivane). Confirmed grants: DBT Biotechnology Ignition Grant (BIG), BIRAC seed grant via a-IDEA NAARM BioNest programme (2021, to scale enzyme production), and DeepTechEval seed grant — the investor is therefore a known prior funder. Recognition: Slush Helsinki 2018 (Indian delegation), Global Bio India 2019, first prize at BRIC Idea Exposition (IKP Knowledge Park x BIRAC x IIT Roorkee, Nov 2019). No paying-customer case studies, revenue figures, named pilot MRV, or patent grants confirmed publicly — scoring held conservative across Tech/IP/Market/Business with confidence flagged low. strategic fit is the distinctive angle: SSF-derived cellulase + xylanase feed directly into 2G cellulosic ethanol, which is adjacent to the investor EPC scope.',
+        'p-eval': 'DeepTechEval Analyst · Demo', 'p-founder-ask': '',
+        'p-notes': 'Incorporated 21 Aug 2017 (CIN U74999DL2017PTC322401, RoC Delhi). Directors: Dr. Sidharth Arora (DIN 07903394, IIT Roorkee PhD, Founder/CEO) and Pushpa Rani (DIN 07903399). Authorised capital ₹10 lakh, paid-up only ₹50,910 — bootstrapped with non-dilutive grant funding. Last AGM filed 30 Sep 2022 — 3-year MCA compliance lag, verify current filing status before diligence. Team of ~5 listed on website (adds Dr. Ankita Bhatt, Umme Habiba, Ganga Rawat, Adesh Shivane). Confirmed grants: DBT Biotechnology Ignition Grant (BIG), BIRAC seed grant via a-IDEA NAARM BioNest programme (2021, to scale enzyme production), and DeepTechEval seed grant — strategic investor is therefore a known prior funder. Recognition: Slush Helsinki 2018 (Indian delegation), Global Bio India 2019, first prize at BRIC Idea Exposition (IKP Knowledge Park x BIRAC x IIT Roorkee, Nov 2019). No paying-customer case studies, revenue figures, named pilot MRV, or patent grants confirmed publicly — scoring held conservative across Tech/IP/Market/Business with confidence flagged low. strategic fit is the distinctive angle: SSF-derived cellulase + xylanase feed directly into 2G cellulosic ethanol, which is adjacent to strategic investor EPC scope.',
         't-trl': '6', 't-pilot': '4', 't-iv': '1', 't-data': '3', 't-uniq': '3', 't-scale': '2', 't-mfg': '2', 't-rel': '2',
         't-benchmarks': 'Thermo-tolerant and acid-stable phytase developed in novel SSF bioreactor (claimed on company site); BIRAC + DBT BIG grant funding implies some independent technical review. No third-party enzyme-activity characterisation, accredited-lab assay reports, or named pilot-scale MRV disclosed publicly.',
         'ip-status': '3', 'ip-breadth': '1', 'ip-quality': '2', 'ip-fto': '1', 'ip-pub': '2', 'ip-origin': '3', 'ip-sec': '3',
@@ -290,7 +290,7 @@
       // OEM. Included as the most mature validation case in the demo set: disclosed FY24
       // revenue, confirmed institutional seed round, and the world-first floating CNG
       // filling station commissioned by GAIL India (inaugurated by PM Modi) — a direct
-      // energy-PSU reference that stress-tests the the investor-fit / EPC scoring axes.
+      // energy-PSU reference that stress-tests the strategic-investor-fit / EPC scoring axes.
       // Verified sources: Tofler (CIN U45300UP2018PTC102280, FY24 revenue ₹2.14 Cr),
       // acquainfra.com, Tracxn legal entity record, multiple news/PMO disclosures on
       // the Ganga floating CNG station. Scoring leans more confident than earlier demos
@@ -302,8 +302,8 @@
         'p-target': 'Energy PSUs (GAIL, oil & gas), state governments (water supply, municipal pumping, inland waterways), mining operators (dewatering), port/shipping authorities, tourism developers, defence/civil seaplane docks.',
         'p-incubator': 'Bootstrapped + seed institutional funding (no incubator disclosed)',
         'p-sec': 'water', 'p-stage': 'seed', 'p-hq': 'Noida, Uttar Pradesh',
-        'p-eval': 'the investor Strategy · Demo', 'p-founder-ask': '',
-        'p-notes': 'Incorporated 20 Mar 2018 (CIN U45300UP2018PTC102280, RoC Uttar Pradesh). Directors: Achin Agrawal and Ankit Patel (both co-founders, from incorporation), Yash Patel (Mar 2021), Subodh Chawla (Nominee Director, Mar 2021 — indicates institutional investor presence). Founders are Civil/Mechanical engineers from IIT (BHU) Varanasi. Authorised capital ₹65 lakh, paid-up ₹57.8 lakh — meaningful equity base. Last AGM filed 30 Sep 2024 — current on MCA compliance. Disclosed FY24 revenue ₹2.14 Cr (Tofler). Secured $0.5M (≈₹4 Cr) seed round in FY23–24 — round terms not publicly disclosed. Corporate office: I-THUM, Sector 62 Noida; manufacturing at Rania Industrial Area, Kanpur; registered office Jalaun. Commercial installations with multi-year uptime: Hirakud Reservoir water supply (7+ yrs), Beohari Dam supply serving 20,000+ residents (7+ yrs), Ostapal Mine dewatering (Odisha), Bhopal Quarry pontoon, Sabarmati Riverfront seaplane dock, 550th Guru Nanak Jayanti floating Gurudwara (Punjab), Assam project (Oct 2024). Flagship the investor-adjacent reference: Floating CNG Filling Station on Ganga commissioned by GAIL India Limited.',
+        'p-eval': 'DeepTechEval Analyst · Demo', 'p-founder-ask': '',
+        'p-notes': 'Incorporated 20 Mar 2018 (CIN U45300UP2018PTC102280, RoC Uttar Pradesh). Directors: Achin Agrawal and Ankit Patel (both co-founders, from incorporation), Yash Patel (Mar 2021), Subodh Chawla (Nominee Director, Mar 2021 — indicates institutional investor presence). Founders are Civil/Mechanical engineers from IIT (BHU) Varanasi. Authorised capital ₹65 lakh, paid-up ₹57.8 lakh — meaningful equity base. Last AGM filed 30 Sep 2024 — current on MCA compliance. Disclosed FY24 revenue ₹2.14 Cr (Tofler). Secured $0.5M (≈₹4 Cr) seed round in FY23–24 — round terms not publicly disclosed. Corporate office: I-THUM, Sector 62 Noida; manufacturing at Rania Industrial Area, Kanpur; registered office Jalaun. Commercial installations with multi-year uptime: Hirakud Reservoir water supply (7+ yrs), Beohari Dam supply serving 20,000+ residents (7+ yrs), Ostapal Mine dewatering (Odisha), Bhopal Quarry pontoon, Sabarmati Riverfront seaplane dock, 550th Guru Nanak Jayanti floating Gurudwara (Punjab), Assam project (Oct 2024). Flagship strategic investor-adjacent reference: Floating CNG Filling Station on Ganga commissioned by GAIL India Limited.',
         't-trl': '9', 't-pilot': '10', 't-iv': '1', 't-data': '4', 't-uniq': '4', 't-scale': '3', 't-mfg': '3', 't-rel': '4',
         't-benchmarks': 'Multiple commercial deployments with 7+ year continuous uptime (Hirakud Reservoir, Beohari Dam). GAIL-commissioned Floating CNG Filling Station passed CCoE/PESO-level safety diligence (inferred from PM-inauguration context — certification documentation to be sighted in diligence). MoMSME registered; Kanpur manufacturing facility operational.',
         'ip-status': '3', 'ip-breadth': '2', 'ip-quality': '2', 'ip-fto': '2', 'ip-pub': '1', 'ip-origin': '2', 'ip-sec': '3',
@@ -336,7 +336,7 @@
       // and a ₹1,900 Cr post-money valuation that stress-tests Revenue Multiple vs DCF.
       // Sources: Tracxn financial statements FY2019–FY2024, company profile, log9materials.com,
       // MCA filings (CIN U29253KA2015PTC126433), press coverage (YourStory, Inc42, TechCrunch).
-      // Expected the investor engagement: LICENSE (strong IP + energy-storage thesis, limited direct EPC fit).
+      // Expected strategic investor engagement: LICENSE (strong IP + energy-storage thesis, limited direct EPC fit).
       name: 'Log9 Materials',
       form: {
         'p-name': 'Log9 Materials Scientific Pvt Ltd', 'p-yr': '2015',
@@ -344,7 +344,7 @@
         'p-target': 'Commercial EV OEMs (3-wheeler, 4-wheeler fleet operators), defence/government battery procurement, and stationary industrial storage integrators.',
         'p-incubator': 'SINE IIT Bombay (incubated 2015)',
         'p-sec': 'storage', 'p-stage': 'sb', 'p-hq': 'Bengaluru, Karnataka',
-        'p-eval': 'the investor Strategy · Demo', 'p-founder-ask': '',
+        'p-eval': 'DeepTechEval Analyst · Demo', 'p-founder-ask': '',
         'p-notes': 'Incorporated 2015 (CIN U29253KA2015PTC126433). Founders: Akshay Singhal (CEO, IIT Bombay) and Kartik Hajela (COO, IIT Bombay). Total raised $90.3M across rounds (Amara Raja, Mitsui, Petronas Ventures, IIFL Finance, Kalaari Capital). Revenue trajectory: FY20 ₹0.66 Cr → FY21 ₹8.6 Cr → FY22 ₹25.5 Cr → FY23 ₹74.4 Cr → FY24 ₹110.3 Cr (5Y CAGR 226%; 1Y CAGR 48%). EBITDA margin severely negative at −67% in FY24 (₹−73.9 Cr). Total debt ₹203.5 Cr, D/E 1.68. BIS certified under IS 16270. Post-money ~$228M (₹1,900 Cr) at Oct 2023 funding round. Key validation case: growth inflection + deep losses + premium valuation — tests scoring and advisory-flag system under real stress conditions.',
         't-trl': '9', 't-pilot': '10', 't-iv': '1', 't-data': '4', 't-uniq': '4', 't-scale': '4', 't-mfg': '4', 't-rel': '4',
         't-benchmarks': 'BIS certification for LTO cells (IS 16270); commercial deployments in Euler Motors 3-wheelers and Tata Motors pilots; DRDO supply contract; IIT Bombay peer-reviewed publications on LTO electrochemistry; 15,000+ cycle life validated in field use.',
@@ -372,10 +372,10 @@
     },
     {
       // Real company — IIT Madras spin-out, nanotechnology-based Atmospheric Water Generator.
-      // CRITICAL validation case: Engineers India Limited (the investor) is already listed as an
-      // investor/supporter by Tracxn alongside HDFC Capital and RTBI — this is a live the investor
+      // CRITICAL validation case: a strategic corporate investor is already listed as an
+      // investor/supporter by Tracxn alongside HDFC Capital and RTBI — this is a live strategic investor
       // portfolio company. Platform should correctly output EQUITY engagement, confirming what
-      // the investor has already done. Co-founder Prof. Thalappil Pradeep (IISc PhD, Padma Shri, 500+
+      // strategic investor has already done. Co-founder Prof. Thalappil Pradeep (IISc PhD, Padma Shri, 500+
       // publications, 50+ patents) is the scientific anchor. EBITDA-positive since FY22-23 —
       // a rare quality for a deep-tech hardware startup at this revenue scale.
       // Sources: Tracxn company profile Apr 2026, MCA (CIN U74999TN2017PTC118695),
@@ -387,10 +387,10 @@
         'p-target': 'Remote and water-scarce industrial sites (oil & gas plant sites, power stations, mining camps), government/defence water supply for forward areas and strategic locations, disaster-relief and humanitarian water provisioning.',
         'p-incubator': 'RTBI / IITM Incubation Cell, IIT Madras',
         'p-sec': 'water', 'p-stage': 'seed', 'p-hq': 'Chennai, Tamil Nadu',
-        'p-eval': 'the investor Strategy · Demo', 'p-founder-ask': '',
-        'p-notes': 'Incorporated Sep 20, 2017 (CIN U74999TN2017PTC118695; founded 2016). Founders: Ramesh Kumar (CEO, SRM BTech 2014, IIT Madras MS 2020), Ankit Nagar (Director, IIT Kanpur BTech 2016), Prof. Thalappil Pradeep (Director, IISc PhD 1991, Padma Shri, National Science Academy Fellow — scientific anchor). Team of 12 (Feb 2026). CRITICAL: Engineers India Limited (the investor) is listed by Tracxn as an investor/supporter alongside HDFC Capital and RTBI — the investor already has exposure to VayuJal, making this a live validation of the platform\'s engagement output. Cap table (Mar 2022): Prof. Pradeep 40%, Ramesh Kumar 35%, Ankit Nagar 20%, RTBI/IITM 5%; 10,000 shares outstanding. Revenue trajectory: FY20-21 ₹33.2L → FY21-22 ₹56.3L → FY22-23 ₹87.3L → FY23-24 ₹28.3L → FY24-25 ₹63.8L (lumpy, project-based; 5Y CAGR 39%). EBITDA positive from FY22-23 onward (₹4.5L in FY24-25, 7% margin). Net profit ₹2.2L. Total debt ₹62.9L. Negative accumulated equity (₹33.1L deficit). Ranked 11th of 85 global AWG competitors (Tracxn).',
+        'p-eval': 'DeepTechEval Analyst · Demo', 'p-founder-ask': '',
+        'p-notes': 'Incorporated Sep 20, 2017 (CIN U74999TN2017PTC118695; founded 2016). Founders: Ramesh Kumar (CEO, SRM BTech 2014, IIT Madras MS 2020), Ankit Nagar (Director, IIT Kanpur BTech 2016), Prof. Thalappil Pradeep (Director, IISc PhD 1991, Padma Shri, National Science Academy Fellow — scientific anchor). Team of 12 (Feb 2026). CRITICAL: a strategic corporate investor is listed by Tracxn as an investor/supporter alongside HDFC Capital and RTBI — strategic investor already has exposure to VayuJal, making this a live validation of the platform\'s engagement output. Cap table (Mar 2022): Prof. Pradeep 40%, Ramesh Kumar 35%, Ankit Nagar 20%, RTBI/IITM 5%; 10,000 shares outstanding. Revenue trajectory: FY20-21 ₹33.2L → FY21-22 ₹56.3L → FY22-23 ₹87.3L → FY23-24 ₹28.3L → FY24-25 ₹63.8L (lumpy, project-based; 5Y CAGR 39%). EBITDA positive from FY22-23 onward (₹4.5L in FY24-25, 7% margin). Net profit ₹2.2L. Total debt ₹62.9L. Negative accumulated equity (₹33.1L deficit). Ranked 11th of 85 global AWG competitors (Tracxn).',
         't-trl': '8', 't-pilot': '7', 't-iv': '1', 't-data': '3', 't-uniq': '4', 't-scale': '3', 't-mfg': '2', 't-rel': '3',
-        't-benchmarks': 'Commercial AWG products with revenue every year since FY20-21. Prof. Pradeep\'s nanotechnology research internationally peer-reviewed (500+ publications, 50+ IIT Madras patents). RTBI + the investor institutional endorsement provides independent technical validation. No third-party AWG volumetric-output or energy-efficiency certification sheet publicly available on vayujal.com — request in diligence.',
+        't-benchmarks': 'Commercial AWG products with revenue every year since FY20-21. Prof. Pradeep\'s nanotechnology research internationally peer-reviewed (500+ publications, 50+ IIT Madras patents). RTBI + strategic investor institutional endorsement provides independent technical validation. No third-party AWG volumetric-output or energy-efficiency certification sheet publicly available on vayujal.com — request in diligence.',
         'ip-status': '5', 'ip-breadth': '2', 'ip-quality': '3', 'ip-fto': '2', 'ip-pub': '4', 'ip-origin': '4', 'ip-sec': '3',
         'tm-exp': '4', 'tm-biz': '2', 'tm-net': '4', 'tm-comp': '3', 'tm-inst': '5', 'tm-div': '3', 'tm-adv': '3', 'tm-tr': '3', 'tm-ft': '3',
         'm-tam': '4', 'm-sam': '3', 'm-cagr': '22', 'm-disc': '3', 'm-loi': '2', 'm-paying': '1', 'm-uc': '3', 'm-comp': '3', 'm-pol': '4',
@@ -399,15 +399,15 @@
         'e-fit': '4', 'e-epc': '4', 'e-nat': '4', 'e-lic': '3', 'e-ask': '3',
         'conf-m1': 'medium', 'conf-m2': 'medium', 'conf-m3': 'high', 'conf-m4': 'medium', 'conf-m5': 'medium', 'conf-m6': 'medium', 'conf-m7': 'high',
         'vd-date': '2026-04-22', 'vd-cin': 'U74999TN2017PTC118695', 'vd-audit-years': '5',
-        'vd-market-ref': '0', 'vd-market-ref-note': 'No priced equity round disclosed. RTBI (5% cap-table equity) and implied the investor + HDFC Capital involvement appears to be through incubation grants — no post-money valuation available. Revenue Multiple on trailing ARR (₹0.638 Cr × 6× water sector) gives directional ₹3–4 Cr — not a defensible anchor at this scale.',
+        'vd-market-ref': '0', 'vd-market-ref-note': 'No priced equity round disclosed. RTBI (5% cap-table equity) and implied strategic investor + HDFC Capital involvement appears to be through incubation grants — no post-money valuation available. Revenue Multiple on trailing ARR (₹0.638 Cr × 6× water sector) gives directional ₹3–4 Cr — not a defensible anchor at this scale.',
         'vd-profile': 'AWG manufacturer: nanotechnology-based atmospheric water generation. Revenue model = unit sales of AWG products + potential maintenance/service contracts. Scientific anchor is Prof. Thalappil Pradeep\'s nanomaterials IP from IIT Madras (50+ patents). Revenue is project-driven and lumpy (range ₹28L–₹87L in last 5 years). EBITDA turned positive FY22-23 — lean 12-person team is a quality indicator at this scale. Negative accumulated equity (₹33.1L deficit, FY24-25) from early-year losses. Total debt ₹62.9L. Strategic thesis: Prof. Pradeep\'s nanotechnology enables more energy-efficient AWG than conventional desiccant/refrigeration competitors — if defensible at industrial volume, high margin potential.',
-        'vd-captable': 'Three-founder structure (Mar 2022 public snapshot): Prof. Thalappil Pradeep 40%, Ramesh Kumar (CEO) 35%, Ankit Nagar 20%, RTBI via IITM Incubation Cell 5%. Total 10,000 shares outstanding. No priced round has altered this structure publicly. the investor and HDFC Capital are listed as institutional investors by Tracxn but do not appear in the MCA cap table — verify the exact investment instrument (grant agreement, SAFE note, convertible debenture, or equity) in diligence before any further commitment.',
+        'vd-captable': 'Three-founder structure (Mar 2022 public snapshot): Prof. Thalappil Pradeep 40%, Ramesh Kumar (CEO) 35%, Ankit Nagar 20%, RTBI via IITM Incubation Cell 5%. Total 10,000 shares outstanding. No priced round has altered this structure publicly. strategic investor and HDFC Capital are listed as institutional investors by Tracxn but do not appear in the MCA cap table — verify the exact investment instrument (grant agreement, SAFE note, convertible debenture, or equity) in diligence before any further commitment.',
         'vd-peers': 'Uravu Labs (Bengaluru, Seed, $6.07M — closest Indian AWG competitor) · SOURCE Global PBC (Scottsdale, Series D, $361M — largest global) · Infinite Cooling (Cambridge, Series A, $16.3M) · WaHa (Fremont, Series A, $12M) · Maithri Aquatech (Secunderabad, Seed, $535K) · Aeronero (Chennai, Seed, $1.53M — local competitor)',
         'vd-peer-multiple': '',
         'vd-ipr-dd': 'in-progress',
         'vd-ipr-notes': 'Prof. Thalappil Pradeep holds 50+ patents from IIT Madras covering nanomaterials, water purification, and atmospheric moisture capture. Verify (1) which specific patents are formally assigned to VayuJal Technologies vs. retained by IIT Madras institution, (2) assignment deed terms (exclusive/non-exclusive, territory, field-of-use), (3) royalty or milestone payment obligations back to IIT Madras, and (4) any right-of-first-refusal or ownership-reversion clauses. This is the single most critical diligence item before equity engagement.',
         'vd-legal-dd': 'in-progress',
-        'vd-legal-notes': 'Negative equity (₹33.1L accumulated deficit) and total liabilities ₹1.6 Cr vs. assets ₹1.3 Cr — balance sheet is technically insolvent; verify no creditor enforcement or winding-up risk. Verify exact legal instrument by which the investor and HDFC Capital are investors (grant agreement vs. equity shares vs. convertible note) — Tracxn lists them as investors but the MCA cap table does not reflect equity stakes. Confirm MCA annual filing currency through FY24-25.',
+        'vd-legal-notes': 'Negative equity (₹33.1L accumulated deficit) and total liabilities ₹1.6 Cr vs. assets ₹1.3 Cr — balance sheet is technically insolvent; verify no creditor enforcement or winding-up risk. Verify exact legal instrument by which strategic investor and HDFC Capital are investors (grant agreement vs. equity shares vs. convertible note) — Tracxn lists them as investors but the MCA cap table does not reflect equity stakes. Confirm MCA annual filing currency through FY24-25.',
         'vd-reg-dd': 'not-started',
         'vd-reg-notes': 'AWG products intended for potable water must meet IS 10500 (Indian Standard for drinking water). Electrical/appliance safety compliance under IS 13252 / BIS scheme. If AWG output is packaged or supplied to consumers, FSSAI registration may apply. Confirm BIS product certification scope, model-level approvals, and any state-level pollution-board consent for Chennai manufacturing/assembly unit.',
         'vd-ehs-dd': 'not-started',
@@ -456,6 +456,7 @@
       if (lbl) lbl.textContent = 'Step ' + (n + 1) + ' of ' + (TOTAL_PAGES - 1);
     }
     updateMobileStepper(n);
+    updateMobileInsight();
   }
 
   /* ---------- mobile stepper + module sheet ---------- */
@@ -472,6 +473,38 @@
     document.querySelectorAll('.m-sheet-item').forEach((it) => {
       it.classList.toggle('active', parseInt(it.dataset.page, 10) === n);
     });
+  }
+  function pageScoreSummary(n) {
+    const dataRoomFilled = FIELD_IDS.filter((id) => id.indexOf('vd-') === 0)
+      .reduce((count, id) => {
+        const el = $(id);
+        return count + (el && String(el.value || '').trim() ? 1 : 0);
+      }, 0);
+    const map = [
+      { label: 'Profile', value: gs('p-name', '').trim() ? 'Started' : 'Ready' },
+      { label: 'Tech', value: techScore() + '/25' },
+      { label: 'IP', value: ipScore() + '/15' },
+      { label: 'Team', value: teamScore() + '/20' },
+      { label: 'Market', value: marketScore() + '/20' },
+      { label: 'Adoption', value: adoptScore() + '/15' },
+      { label: 'Business', value: bizScore() + '/15' },
+      { label: 'Strategic', value: eilScore() + '/10' },
+      { label: 'Valuation', value: 'Config' },
+      { label: 'Data Room', value: dataRoomFilled + ' filled' },
+      { label: 'Report', value: hasGeneratedReport ? 'Ready' : 'Pending' }
+    ];
+    return map[n] || map[0];
+  }
+  function updateMobileInsight() {
+    const crs = $('m-crs');
+    const label = $('m-page-score-label');
+    const score = $('m-page-score');
+    const action = $('m-save-shortcut');
+    const summary = pageScoreSummary(currentPage);
+    if (crs) crs.textContent = totalScore() + '/120';
+    if (label) label.textContent = summary.label;
+    if (score) score.textContent = summary.value;
+    if (action) action.hidden = currentPage !== 0;
   }
   function openSheet() {
     const sheet = $('m-sheet'), bd = $('m-sheet-backdrop'), trig = $('m-stepper');
@@ -510,7 +543,49 @@
     if (trig) trig.addEventListener('click', openSheet);
     if (bd) bd.addEventListener('click', closeSheet);
     if (close) close.addEventListener('click', closeSheet);
+    const saveShortcut = $('m-save-shortcut');
+    if (saveShortcut) saveShortcut.addEventListener('click', (e) => {
+      e.stopPropagation();
+      saveCurrent();
+      updateMobileInsight();
+    });
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeSheet(); });
+  }
+
+  function enhanceMobileAccordions() {
+    const cards = Array.from(document.querySelectorAll('#page-9 > .card'));
+    cards.forEach((card, idx) => {
+      const title = card.querySelector('.section-title');
+      if (!title) return;
+      card.classList.add('m-accordion');
+      if (idx > 1) card.classList.add('m-collapsed');
+      title.setAttribute('role', 'button');
+      title.setAttribute('tabindex', '0');
+      title.setAttribute('aria-expanded', idx > 1 ? 'false' : 'true');
+      if (!title.querySelector('.m-accordion-chevron')) {
+        const chev = document.createElement('span');
+        chev.className = 'm-accordion-chevron';
+        chev.setAttribute('aria-hidden', 'true');
+        chev.textContent = '▾';
+        title.appendChild(chev);
+      }
+      const toggle = () => {
+        card.classList.toggle('m-collapsed');
+        title.setAttribute('aria-expanded', card.classList.contains('m-collapsed') ? 'false' : 'true');
+      };
+      title.addEventListener('click', toggle);
+      title.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          toggle();
+        }
+      });
+    });
+  }
+
+  function bindLiveMobileRefresh() {
+    document.addEventListener('input', updateMobileInsight);
+    document.addEventListener('change', updateMobileInsight);
   }
 
   function go(d) {
@@ -1166,7 +1241,7 @@
     else if (_rw > 0 && _rw < 12) flags.push({ cls: 'risk-watch', txt: 'Cash runway under 12 months (' + _rw + 'm) — bridge financing may be required.' });
     const _lowConf = ['conf-m1','conf-m2','conf-m3','conf-m4','conf-m5','conf-m6','conf-m7'].filter((k) => gs(k, 'medium') === 'low');
     if (_lowConf.length) {
-      const modMap = { 'conf-m1': 'Tech', 'conf-m2': 'IP', 'conf-m3': 'Team', 'conf-m4': 'Market', 'conf-m5': 'Adoption', 'conf-m6': 'Business', 'conf-m7': 'EIL' };
+      const modMap = { 'conf-m1': 'Tech', 'conf-m2': 'IP', 'conf-m3': 'Team', 'conf-m4': 'Market', 'conf-m5': 'Adoption', 'conf-m6': 'Business', 'conf-m7': 'Strategic' };
       flags.push({ cls: 'risk-watch', txt: 'Low evidence confidence on: ' + _lowConf.map((k) => modMap[k]).join(', ') + '. Scores in these modules are founder-reported and require diligence before acting.' });
     }
     // Data Room-driven flags
@@ -1213,7 +1288,7 @@
     const valRows = [
       { k: 'dcf', l: 'Risk-adjusted DCF', v: dcf, n: `WACC ${dcfEff.base}%${dcfEff.autoTuned ? '' : '+TRL-risk'} · terminal ${dcfEff.terminalMult}× · 7-yr explicit · arr0→arr3→arr7 ramp${dcfNoteSuffix}`, warn: dcfWarn, warnLevel: dcfWarnLevel },
       { k: 'vc', l: 'VC Method', v: vc, n: `${cfg.vc.years}-yr exit · ${cfg.vc.irr}% IRR · sector multiple` },
-      { k: 'strategic', l: 'Strategic Value (the investor)', v: strat, n: 'DCF + the investor/IP/team uplift' },
+      { k: 'strategic', l: 'Strategic Value Uplift', v: strat, n: 'DCF + strategic fit/IP/team uplift' },
       { k: 'rev', l: 'Revenue Multiple', v: rev, n: `${cfg.rev.basis === 'arr7' ? 'Y7' : cfg.rev.basis === 'arr0' ? 'Current' : 'Y3'} ARR × sector mult · ${cfg.rev.basis === 'arr0' ? Math.min(cfg.rev.haircut, 20) : cfg.rev.haircut}% haircut` },
       { k: 'berkus', l: 'Berkus', v: berk, n: `Max ₹${cfg.berkus.max} Cr · early-stage` },
       { k: 'scorecard', l: 'Scorecard', v: score, n: `Base ₹${cfg.scorecard.base} Cr · delta ×${cfg.scorecard.unit}`, warn: scorecardWarn, warnLevel: scorecardUnanchored ? 'hard' : '' },
@@ -1494,7 +1569,7 @@
     renderPortfolioTable();
 
     // footer
-    $('report-footer').innerHTML = `DeepTechEval Platform · Evaluator: ${esc(gs('p-eval', 'the investor Strategy'))} · ${new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' })} · Confidential — internal use only`;
+    $('report-footer').innerHTML = `DeepTechEval Platform · Evaluator: ${esc(gs('p-eval', 'DeepTechEval Analyst'))} · ${new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' })} · Confidential — internal use only`;
 
     // commercial lock — blur the real report unless email captured
     applyReportLock();
@@ -1645,7 +1720,7 @@
       </tr>`;
     }).join('');
     holder.innerHTML = `<div style="font-size:11px;color:var(--text-tertiary);margin-bottom:8px">
-      Priority = CRS×40% + the investor×20% + Tech×15% + Market×15% + IP×10%. Ranked descending.
+      Priority = CRS×40% + Strategic Fit×20% + Tech×15% + Market×15% + IP×10%. Ranked descending.
     </div>
     <table class="portfolio-table">
       <thead><tr><th>Startup</th><th>Sector</th><th>CRS</th><th>Priority</th><th>Verdict</th><th>Decision</th></tr></thead>
@@ -2108,14 +2183,14 @@
   function exportAllStartups() {
     const payload = {
       schemaVersion: EXPORT_SCHEMA_VERSION,
-      tool: 'engsui-codex',
+      tool: 'deeptecheval',
       exportedAt: new Date().toISOString(),
       fieldIdsSnapshot: FIELD_IDS.slice(),
       savedStartups: savedStartups,
       archivedStartups: archivedStartups
     };
     const stamp = new Date().toISOString().slice(0, 10);
-    triggerDownload(`engsui-startups-${stamp}.json`, JSON.stringify(payload, null, 2));
+    triggerDownload(`deeptecheval-startups-${stamp}.json`, JSON.stringify(payload, null, 2));
     try { localStorage.setItem(LAST_EXPORT_KEY, payload.exportedAt); } catch (_) {}
     renderExportReminder();
     setStatus('Exported ' + savedStartups.length + ' active · ' + archivedStartups.length + ' archived');
@@ -2125,19 +2200,19 @@
     if (!s) return;
     const payload = {
       schemaVersion: EXPORT_SCHEMA_VERSION,
-      tool: 'engsui-codex',
+      tool: 'deeptecheval',
       exportedAt: new Date().toISOString(),
       fieldIdsSnapshot: FIELD_IDS.slice(),
       savedStartups: [s],
       archivedStartups: []
     };
     const safeName = (s.name || 'startup').replace(/[^a-z0-9]+/gi, '-').toLowerCase().slice(0, 40);
-    triggerDownload(`engsui-${safeName}.json`, JSON.stringify(payload, null, 2));
+    triggerDownload(`deeptecheval-${safeName}.json`, JSON.stringify(payload, null, 2));
     setStatus('Exported: ' + (s.name || 'Unnamed'));
   }
   function validateImportSchema(obj) {
     if (!obj || typeof obj !== 'object') return { ok: false, error: 'File is not a JSON object.' };
-    if (obj.tool && obj.tool !== 'engsui-codex') return { ok: false, error: 'This file is not an DeepTechEval export.' };
+    if (obj.tool && !['deeptecheval', 'engsui-codex'].includes(obj.tool)) return { ok: false, error: 'This file is not a DeepTechEval export.' };
     if (!Array.isArray(obj.savedStartups)) return { ok: false, error: 'Missing or invalid "savedStartups" array.' };
     if (obj.archivedStartups && !Array.isArray(obj.archivedStartups)) return { ok: false, error: 'Invalid "archivedStartups" field.' };
     const bad = obj.savedStartups.find((s) => !s || typeof s !== 'object' || !s.id || !s.form);
@@ -2338,6 +2413,8 @@
     bindNav();
     buildMobileSheet();
     bindMobileNav();
+    enhanceMobileAccordions();
+    bindLiveMobileRefresh();
     loadSavedList();
     renderSavedList();
     renderExportReminder();

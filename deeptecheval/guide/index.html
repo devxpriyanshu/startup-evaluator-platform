@@ -148,6 +148,60 @@
       color: var(--text-tertiary);
       font-size: 12px;
     }
+    @media (max-width: 760px) {
+      body {
+        background: #f7f9fc;
+      }
+      .doc {
+        margin: 0;
+        min-height: 100vh;
+        border: 0;
+        border-radius: 0;
+        box-shadow: none;
+      }
+      .doc-hdr {
+        padding: 18px 16px;
+        background: linear-gradient(135deg, #111827 0%, #174052 64%, #0f766e 100%);
+      }
+      .doc-hdr::after {
+        display: none;
+      }
+      .doc-ttl {
+        font-size: 20px;
+        line-height: 1.2;
+      }
+      .doc-sub {
+        font-size: 10px;
+        line-height: 1.4;
+      }
+      .doc-body {
+        padding: 18px 14px 28px;
+      }
+      .lead,
+      p,
+      li {
+        font-size: 14px;
+      }
+      h2 {
+        margin-top: 22px;
+        font-size: 12px;
+      }
+      h3 {
+        font-size: 15px;
+      }
+      .box {
+        padding: 12px;
+        border-radius: 8px;
+        box-shadow: none;
+      }
+      ul {
+        margin-left: 18px;
+      }
+      .mono {
+        white-space: normal;
+        overflow-wrap: anywhere;
+      }
+    }
     @media print {
       body { background: #fff; }
       .doc { max-width: none; margin: 0; border: none; border-radius: 0; box-shadow: none; }
@@ -275,8 +329,8 @@
       <li><strong>Reject</strong> — CRS &lt; 50, or Tech &lt; 10, or <strong>Strategic Fit &lt; 3</strong> (hard floor)</li>
     </ul>
     <div class="box">
-      <strong>the investor hard gate:</strong> A technology scoring below 3/10 on Investor Strategic Fit is rejected regardless of
-      how well it scores on the general framework. This enforces DeepTechEval's mandate — the investor is not a generalist
+      <strong>Strategic investor hard gate:</strong> A technology scoring below 3/10 on Investor Strategic Fit is rejected regardless of
+      how well it scores on the general framework. This enforces DeepTechEval's mandate — a strategic investor is not a generalist
       venture fund, and strategic alignment is a prerequisite, not a tie-breaker. License and Engineering
       recommendations additionally require Strategic Fit ≥ 5 and ≥ 4 respectively.
     </div>
@@ -331,15 +385,14 @@
       <li><strong>DWCS panel</strong> — Dynamic Weight Calibration showing stage-adjusted module weights</li>
       <li>Risk flags and risk matrix</li>
       <li>Valuation cards, comparison chart, and CRS-driven method recommendation</li>
-      <li>Engagement decision cards with the investor hard-gate status</li>
+      <li>Engagement decision cards with strategic investor hard-gate status</li>
       <li>Portfolio snapshot table sorted by <strong>Priority Score</strong></li>
     </ul>
 
     <h2>8) Saved Startups, Demo Data, and Delete Safety</h2>
     <ul>
       <li>Saved startups are stored in browser local storage under
-      <span class="mono">engsui.codex.v1</span>, with archived items under
-      <span class="mono">engsui.codex.v1.trash</span>.</li>
+      <span class="mono">deeptecheval</span> browser storage, with archived items kept in a local trash list.</li>
       <li>Demo startups are seeded on first run and marked with a Demo badge for quick exploration.</li>
       <li>Delete flow asks for confirmation and moves the item to trash rather than hard-deleting —
       so accidental deletes are always recoverable.</li>
@@ -388,7 +441,7 @@
     </p>
     <ul>
       <li><strong>Export all</strong> — downloads a single versioned document
-      (<span class="mono">engsui-startups-YYYY-MM-DD.json</span>) containing both the active list and trash.</li>
+      (<span class="mono">deeptecheval-startups-YYYY-MM-DD.json</span>) containing both the active list and trash.</li>
       <li><strong>Per-row export</strong> — a small <span class="mono">↓</span> icon on each saved row downloads just
       that one startup as its own JSON file, convenient for sharing a single evaluation with a colleague.</li>
       <li><strong>Import…</strong> — accepts a <span class="mono">.json</span> file, validates schema, and offers
@@ -402,7 +455,7 @@
     </div>
     <div class="box">
       <strong>Last-export reminder banner:</strong> The tool checks
-      <span class="mono">engsui.codex.v1.lastExport</span> on load. If the last export was &gt; 7 days ago an amber
+      the last-export timestamp on load. If the last export was &gt; 7 days ago an amber
       banner appears; &gt; 30 days ago (or never, with ≥ 1 saved startup) a red banner appears. The banner is
       dismissable per-session and re-appears on the next session until an export refreshes the timestamp.
     </div>
@@ -430,14 +483,13 @@
 
     <h2>12) Repository Folder Roles</h2>
     <ul>
-      <li><span class="mono">new-engsui-platform</span>: active implementation of the evaluation tool, including scoring, valuation, reporting, saved startups, and Data Room workflow</li>
+      <li><span class="mono">deeptecheval</span>: active commercial implementation of the evaluation tool, including scoring, valuation, reporting, saved startups, and Data Room workflow</li>
       <li><span class="mono">scoring-mechanism</span>: reference UI that explains the scoring hierarchy, point allocation, and module-level rationale</li>
       <li><span class="mono">platform-functioning-guide.html</span>: standalone functional documentation for the current static implementation</li>
     </ul>
     <div class="box">
-      <strong>Repository note:</strong> <span class="mono">new-engsui-platform</span> currently contains its own
-      <span class="mono">.git</span> directory. This usually means the app was originally developed as a standalone
-      project and then placed inside this parent repository while retaining its own Git history.
+      <strong>Repository note:</strong> the official deliverable lives separately from this commercial DeepTechEval surface.
+      Public UX changes should stay inside the <span class="mono">deeptecheval</span> folder.
     </div>
 
     <h2>13) Dynamic Weight Calibration (DWCS)</h2>

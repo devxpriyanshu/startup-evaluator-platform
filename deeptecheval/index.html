@@ -60,6 +60,18 @@
         <i class="m-prog" id="m-prog"></i>
       </button>
 
+      <section class="m-insight" id="m-insight" aria-live="polite">
+        <div class="m-insight-main">
+          <span>Current CRS</span>
+          <strong id="m-crs">0/120</strong>
+        </div>
+        <div class="m-insight-side">
+          <span id="m-page-score-label">Profile</span>
+          <strong id="m-page-score">Ready</strong>
+        </div>
+        <button class="m-insight-action" id="m-save-shortcut" type="button">Save</button>
+      </section>
+
       <main class="body">
         <section class="page active" id="page-0">
           <div class="page-title">Startup profile</div>
@@ -193,12 +205,12 @@
               <div class="weight-row"><span class="w-name">M1 · Technology readiness</span><span class="w-val">25</span><span class="w-why">Highest weight because a deep-tech startup without a working core technology has no investable thesis. TRL, pilot data, and engineering scalability drive all downstream value.</span></div>
               <div class="weight-row"><span class="w-name">M3 · Team</span><span class="w-val">20</span><span class="w-why">Deep-tech outcomes track founder capability 2×-3× more than any other variable. Weighted second-highest to reflect execution risk dominance at early stage.</span></div>
               <div class="weight-row"><span class="w-name">M4 · Market validation</span><span class="w-val">20</span><span class="w-why">Technology without demand is R&amp;D. LOIs, paying pilots, and market size establish whether the tech solves a commercial problem worth investing in.</span></div>
-              <div class="weight-row"><span class="w-name">M2 · IP &amp; patents</span><span class="w-val">15</span><span class="w-why">the investor's licensing and equity routes both require defensible IP. Weighted high enough to gate the licensing decision, but capped to avoid paper patents dominating.</span></div>
+              <div class="weight-row"><span class="w-name">M2 · IP &amp; patents</span><span class="w-val">15</span><span class="w-why">Licensing and equity routes both require defensible IP. Weighted high enough to gate the licensing decision, but capped to avoid paper patents dominating.</span></div>
               <div class="weight-row"><span class="w-name">M5 · Adoption feasibility</span><span class="w-val">15</span><span class="w-why">Even proven tech can fail at plant level (capex, integration, regulatory). Weighted to flag adoption friction that won't show up in lab TRL.</span></div>
               <div class="weight-row"><span class="w-name">M6 · Business model</span><span class="w-val">15</span><span class="w-why">Revenue model and unit economics determine whether a win at pilot scales to a business. Includes cash runway as a live-or-die signal.</span></div>
               <div class="weight-row"><span class="w-name">M7 · Strategic fit</span><span class="w-val">10</span><span class="w-why">Lowest weight — acts as a decision filter rather than a score driver. A startup can be excellent without strategic fit, but your firm will not engage without it (see hard gate below).</span></div>
             </div>
-            <div class="weight-note">Weights reflect deep-tech infrastructure investment thesis (capital-intensive, long-horizon, EPCM-leveraged). A different investor class (pure VC, sovereign fund) would reweight — this rubric is intentionally the investor-specific. <strong>Strategic fit &lt; 3 triggers rejection</strong> regardless of other module scores.</div>
+            <div class="weight-note">Weights reflect a deep-tech infrastructure investment thesis (capital-intensive, long-horizon, EPCM-leveraged). A different investor class (pure VC, sovereign fund) would reweight — this rubric is intentionally mandate-specific. <strong>Strategic fit &lt; 3 triggers rejection</strong> regardless of other module scores.</div>
           </details>
         </section>
 
@@ -856,7 +868,7 @@
                 <option value="2">Peripheral — specific project types only</option>
                 <option value="3">Integrable with standard portfolio operations</option>
                 <option value="4">Core to investor's renewable / green portfolio mandate</option>
-                <option value="5">Transforms the investor's position in a major sector</option>
+                <option value="5">Transforms a strategic investor's position in a major sector</option>
               </select>
             </div>
           </div>
@@ -873,7 +885,7 @@
               </select>
             </div>
             <div class="field-group">
-              <label class="field-label" for="e-lic">Licensing revenue potential for the investor</label>
+              <label class="field-label" for="e-lic">Licensing revenue potential for a strategic investor</label>
               <div class="slider-row">
                 <input id="e-lic" type="range" min="1" max="5" value="2" data-output="e-lic-out" />
                 <span class="slider-value" id="e-lic-out">2/5</span>
@@ -884,7 +896,7 @@
           <div class="field-group">
             <label class="field-label" for="e-ask">Engagement ask from startup</label>
             <select id="e-ask">
-              <option value="1">Wants capital only; no strategic role for the investor</option>
+              <option value="1">Wants capital only; no strategic investor role</option>
               <option value="2">Open to investor as minority investor</option>
               <option value="3">Wants investor as technology partner / co-developer</option>
               <option value="4">Actively seeking investor as anchor partner</option>
@@ -895,9 +907,9 @@
           <div class="confidence-row">
             <label for="conf-m7">Evidence confidence:</label>
             <select id="conf-m7" class="conf-select">
-              <option value="high">High — prior the investor engagement discussed / sector-desk confirmed</option>
+              <option value="high">High — prior strategic investor engagement discussed / sector-desk confirmed</option>
               <option value="medium" selected>Medium — fit assessed from founder materials</option>
-              <option value="low">Low — the investor strategic alignment not yet validated internally</option>
+              <option value="low">Low — strategic alignment not yet validated internally</option>
             </select>
             <span class="c-note">Low confidence flags this module in the final report.</span>
           </div>
@@ -1084,7 +1096,7 @@
         <section class="page" id="page-9">
           <div class="page-title">Valuation Data Room <span class="pill blue">Consultant inputs</span></div>
           <div class="page-subtitle">
-            Structured financial & governance inputs an the investor-appointed third-party valuer typically requests. Captured here so the report is audit-ready; these fields do not alter the 120-point CRS score.
+            Structured financial & governance inputs a third-party valuer typically requests. Captured here so the report is audit-ready; these fields do not alter the 120-point CRS score.
           </div>
 
           <div class="card">
@@ -1529,7 +1541,7 @@
             </div>
 
             <div class="card">
-              <div class="card-title">the investor engagement decision</div>
+              <div class="card-title">Strategic engagement decision</div>
               <div class="engagement-grid" id="report-engagement"></div>
             </div>
 
@@ -1539,7 +1551,7 @@
             </div>
 
             <div class="card">
-              <div class="card-title">Strategic recommendations for the investor investment committee</div>
+              <div class="card-title">Strategic recommendations for the investment committee</div>
               <div id="report-recommendations"></div>
             </div>
 
