@@ -588,6 +588,61 @@
     document.addEventListener('change', updateMobileInsight);
   }
 
+  function closeAnyMobileSheet() {
+    const sheet = $('m-sheet'), bd = $('m-sheet-backdrop'), trig = $('m-stepper');
+    if (sheet) {
+      sheet.classList.remove('open');
+      sheet.hidden = true;
+    }
+    if (bd) {
+      bd.classList.remove('open');
+      bd.hidden = true;
+    }
+    if (trig) trig.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
+  function enterEvaluator(page) {
+    document.body.classList.add('app-mode');
+    document.body.classList.remove('home-mode');
+    closeAnyMobileSheet();
+    if (typeof page === 'number') showPage(page);
+    if (window.location.hash !== '#evaluate') {
+      history.pushState(null, '', '#evaluate');
+    }
+    const app = $('evaluate');
+    if (app) app.scrollIntoView({ block: 'start' });
+  }
+
+  function showHome() {
+    document.body.classList.remove('app-mode');
+    document.body.classList.add('home-mode');
+    closeAnyMobileSheet();
+    if (window.location.hash) {
+      history.pushState(null, '', window.location.pathname + window.location.search);
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function bindHomeShell() {
+    document.querySelectorAll('.js-start-evaluation').forEach((el) => {
+      el.addEventListener('click', (e) => {
+        e.preventDefault();
+        enterEvaluator(0);
+      });
+    });
+    document.querySelectorAll('.js-show-home').forEach((el) => {
+      el.addEventListener('click', (e) => {
+        e.preventDefault();
+        showHome();
+      });
+    });
+    window.addEventListener('hashchange', () => {
+      if (window.location.hash === '#evaluate') enterEvaluator();
+      else if (!window.location.hash) showHome();
+    });
+  }
+
   function go(d) {
     const nx = currentPage + d;
     if (nx === REPORT_PAGE && d > 0) {
@@ -2413,6 +2468,7 @@
     bindNav();
     buildMobileSheet();
     bindMobileNav();
+    bindHomeShell();
     enhanceMobileAccordions();
     bindLiveMobileRefresh();
     loadSavedList();
@@ -2421,6 +2477,8 @@
     showReportPlaceholder();
     wireDialogs();
     showPage(0);
+    if (window.location.hash === '#evaluate') enterEvaluator(0);
+    else document.body.classList.add('home-mode');
   }
 
   if (document.readyState === 'loading') {
