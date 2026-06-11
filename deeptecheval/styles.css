@@ -3869,3 +3869,94 @@ body:not(.app-mode) .home-page {
   .m-sheet-backdrop[hidden],
   .m-sheet[hidden] { display: none !important; }
 }
+
+/* ============================================================================
+   SAVED STARTUPS COMPRESSION (mobile)
+   Card takes too much space + buttons too big. Collapse + shrink.
+   ============================================================================ */
+@media (max-width: 760px) {
+  /* Sidebar card padding tighter */
+  .sidebar-card {
+    padding: 8px 10px !important;
+    margin-top: 8px !important;
+  }
+  .sidebar-card .section-title {
+    font-size: 10px !important;
+    margin: 4px 0 6px !important;
+    padding-left: 6px !important;
+  }
+
+  /* Action rows tighter */
+  .sidebar-card .action-row {
+    gap: 5px !important;
+    margin-bottom: 5px !important;
+  }
+  .sidebar-card .action-row .button {
+    min-height: 30px !important;
+    padding: 5px 8px !important;
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    border-radius: 6px !important;
+    box-shadow: none !important;
+  }
+
+  /* Saved list scrollable, max height */
+  .saved-list {
+    max-height: 260px !important;
+    overflow-y: auto !important;
+    padding-right: 2px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Individual saved item compact */
+  .saved-item {
+    padding: 7px 9px !important;
+    margin-bottom: 5px !important;
+    border-radius: 7px !important;
+    box-shadow: none !important;
+  }
+  .saved-item-header { gap: 3px !important; }
+  .saved-item-name, .saved-item-title {
+    font-size: 11.5px !important;
+    line-height: 1.25 !important;
+    font-weight: 700 !important;
+  }
+  .saved-item-meta, .saved-item-sub {
+    font-size: 9.5px !important;
+    line-height: 1.3 !important;
+    color: var(--text-tertiary);
+  }
+  .saved-item .pill, .saved-item .badge {
+    font-size: 8.5px !important;
+    padding: 2px 6px !important;
+  }
+
+  /* Saved item load/delete buttons */
+  .saved-item-actions {
+    gap: 4px !important;
+    margin-top: 6px !important;
+    grid-template-columns: 1fr 1fr !important;
+  }
+  .saved-item-actions .button {
+    min-height: 28px !important;
+    padding: 4px 8px !important;
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    border-radius: 6px !important;
+    box-shadow: none !important;
+  }
+
+  /* Export reminder + import preview compact */
+  .export-reminder, .import-preview {
+    font-size: 10.5px !important;
+    padding: 8px 10px !important;
+    border-radius: 6px !important;
+    line-height: 1.35 !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .sidebar-card .action-row .button { font-size: 10.5px !important; min-height: 28px !important; }
+  .saved-item-actions .button { font-size: 10.5px !important; min-height: 26px !important; }
+  .saved-list { max-height: 220px !important; }
+}
