@@ -3601,3 +3601,92 @@ body:not(.app-mode) .home-page {
   .header-title { font-size: 13px !important; }
   .home-section-head h2 { font-size: 19px !important; }
 }
+
+/* ============================================================================
+   MOBILE COMPRESSION PASS — buttons smaller, fonts tighter, fix overflow
+   ============================================================================ */
+@media (max-width: 640px) {
+  /* m-insight: drop save action button, 2-col layout */
+  .m-insight {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 6px !important;
+    margin: 6px 0 8px !important;
+  }
+  .m-insight-action { display: none !important; }
+  .m-insight-main, .m-insight-side {
+    padding: 6px 9px !important;
+    min-height: 42px !important;
+    border-radius: 8px !important;
+  }
+  .m-insight span { font-size: 9px !important; }
+  .m-insight strong { font-size: 14px !important; }
+
+  /* Stepper: smaller padding */
+  .m-stepper {
+    padding: 9px 12px !important;
+    border-radius: 10px !important;
+  }
+  .m-stepper-step { font-size: 9px !important; }
+  .m-stepper-name { font-size: 14px !important; }
+
+  /* Buttons globally smaller */
+  .button, button.button {
+    font-size: 12px !important;
+    padding: 8px 12px !important;
+    min-height: 36px !important;
+    box-shadow: var(--shadow-sm) !important;
+    border-radius: 8px !important;
+  }
+
+  /* Action-row: 2-col always */
+  .action-row {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 8px !important;
+    margin-bottom: 6px !important;
+  }
+  .action-row .button { width: 100%; }
+
+  /* Saved item action buttons */
+  .saved-item-actions { gap: 6px !important; }
+  .saved-item-actions .button {
+    font-size: 11px !important;
+    padding: 7px 10px !important;
+    min-height: 32px !important;
+  }
+
+  /* Card compact */
+  .card, .sidebar-card { padding: 12px !important; }
+  .section-title { font-size: 11px !important; margin: 12px 0 8px !important; }
+  .page-title { font-size: 17px !important; }
+  .page-subtitle { font-size: 12px !important; margin-bottom: 12px !important; padding-bottom: 12px !important; }
+
+  /* Field labels + values tighter */
+  .field-label { font-size: 11px !important; margin-bottom: 4px !important; }
+  .field-group { margin-bottom: 10px !important; }
+
+  /* Bottom sticky nav: smaller "Next" button */
+  .bottom-nav { padding: 8px 12px calc(8px + env(safe-area-inset-bottom)) !important; }
+  #prev-page, #next-page {
+    min-height: 42px !important;
+    font-size: 13px !important;
+    padding: 8px 14px !important;
+  }
+
+  /* Sticky top z-index, ensure stepper always clickable above other elements */
+  .m-stepper { z-index: 50; position: sticky; top: 6px; }
+  .header { z-index: 10; position: relative; }
+
+  /* Tap target: ensure clickable */
+  button, .button, a, [role="button"] { cursor: pointer; }
+  body { -webkit-tap-highlight-color: transparent; }
+}
+
+/* Small phones */
+@media (max-width: 380px) {
+  .button, button.button { font-size: 11px !important; padding: 7px 10px !important; min-height: 34px !important; }
+  .m-insight strong { font-size: 13px !important; }
+  .m-stepper-name { font-size: 13px !important; }
+  .page-title { font-size: 16px !important; }
+  .action-row { grid-template-columns: 1fr 1fr !important; gap: 6px !important; }
+}
