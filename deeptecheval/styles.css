@@ -3965,3 +3965,27 @@ body:not(.app-mode) .home-page {
 @media (max-width: 760px) {
   .saved-item-export { display: none !important; }
 }
+
+/* ============================================================================
+   Saved-item actions: 3-col (Load / Delete / Export) on one line
+   ============================================================================ */
+.saved-item-actions {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr 1fr !important;
+  gap: 6px;
+}
+@media (max-width: 760px) {
+  .saved-item-export { display: inline-flex !important; }
+  .saved-item-actions {
+    grid-template-columns: 1fr 1fr 1fr !important;
+    gap: 4px !important;
+  }
+  .saved-item-actions .button {
+    font-size: 10.5px !important;
+    padding: 4px 6px !important;
+    min-height: 28px !important;
+  }
+}
+@media (max-width: 380px) {
+  .saved-item-actions .button { font-size: 9.5px !important; padding: 3px 4px !important; min-height: 26px !important; }
+}

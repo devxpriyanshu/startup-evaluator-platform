@@ -2192,7 +2192,7 @@
         <div class="saved-item-actions">
           <button class="button" data-load="${s.id}">Load</button>
           <button class="button" data-delete="${s.id}">Delete</button>
-          <button class="saved-item-export" data-export="${s.id}" title="Download this startup as JSON" aria-label="Export this startup">↓</button>
+          <button class="button saved-item-export" data-export="${s.id}" title="Download this startup as JSON" aria-label="Export this startup">Export</button>
         </div>
       </div>
     `).join('') + `
