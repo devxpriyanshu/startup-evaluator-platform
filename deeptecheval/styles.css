@@ -3853,3 +3853,19 @@ body:not(.app-mode) .home-page {
   .button, button.button { font-size: 12px !important; min-height: 36px !important; padding: 7px 10px !important; }
   .card, .module-body-card { padding: 9px 10px !important; }
 }
+
+/* ============================================================================
+   CRITICAL CLICK FIX
+   .m-sheet-backdrop & .m-sheet have display:block at full viewport on mobile;
+   opacity:0 hides them visually but they STILL catch all touch events.
+   Disable pointer-events unless .open class set OR hidden attr absent.
+   ============================================================================ */
+@media (max-width: 760px) {
+  .m-sheet-backdrop { pointer-events: none !important; }
+  .m-sheet-backdrop.open { pointer-events: auto !important; }
+  .m-sheet { pointer-events: none !important; }
+  .m-sheet.open { pointer-events: auto !important; }
+  /* Respect HTML hidden attribute on these too */
+  .m-sheet-backdrop[hidden],
+  .m-sheet[hidden] { display: none !important; }
+}
