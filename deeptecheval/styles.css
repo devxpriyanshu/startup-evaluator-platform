@@ -3960,3 +3960,8 @@ body:not(.app-mode) .home-page {
   .saved-item-actions .button { font-size: 10.5px !important; min-height: 26px !important; }
   .saved-list { max-height: 220px !important; }
 }
+
+/* Per-startup export arrow redundant on mobile — Export all covers it */
+@media (max-width: 760px) {
+  .saved-item-export { display: none !important; }
+}
