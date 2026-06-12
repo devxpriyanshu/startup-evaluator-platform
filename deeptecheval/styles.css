@@ -3989,3 +3989,25 @@ body:not(.app-mode) .home-page {
 @media (max-width: 380px) {
   .saved-item-actions .button { font-size: 9.5px !important; padding: 3px 4px !important; min-height: 26px !important; }
 }
+
+/* ============================================================================
+   H1 / section-head wrap fix — kill mid-word breaks (overflow-wrap: anywhere)
+   ============================================================================ */
+@media (max-width: 760px) {
+  .home-hero h1,
+  .home-section-head h2,
+  .home-hero p {
+    word-break: normal !important;
+    overflow-wrap: break-word !important;
+    hyphens: none !important;
+  }
+  .home-hero h1 { font-size: 26px !important; line-height: 1.12 !important; }
+  .home-section-head h2 { font-size: 20px !important; line-height: 1.18 !important; }
+}
+@media (max-width: 420px) {
+  .home-hero h1 { font-size: 23px !important; }
+  .home-section-head h2 { font-size: 18px !important; }
+}
+@media (max-width: 360px) {
+  .home-hero h1 { font-size: 21px !important; }
+}
